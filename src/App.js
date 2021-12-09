@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import WelcomePage from "./components/welcomePage/welcomePage";
+import UserArea from "./components/userArea/userArea";
+import "./app.module.css";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        localStorage.setItem("uid", JSON.stringify(user.uid));
+      } else {
+        localStorage.removeItem("uid");
+      }
+      setUser(user);
+    });
+  }, [user]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        exact
+        path="/"
+        element={<Navigate to={localStorage.uid ? "home" : "welcome"} />}
+      />
+      <Route path="home/*" element={<UserArea user={user} />} />
+      <Route path="welcome/*" element={<WelcomePage setUser={setUser} />} />
+    </Routes>
   );
 }
 

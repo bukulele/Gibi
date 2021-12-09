@@ -1,0 +1,15 @@
+.calendarButton {
+  border: none;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  background-color: indianred;
+  color: white;
+}
+
+.currentActionsButton {
+  border: none;
+  width: 1rem;
+  height: 1rem;
+  color: indianred;
+}

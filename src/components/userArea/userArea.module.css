@@ -1,0 +1,13 @@
+.userArea {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 3fr 1fr;
+  grid-template-rows: 1fr 3fr 3fr 3fr 2fr;
+  grid-template-areas:
+    "nav nav nav nav"
+    ". calendar smallActions ."
+    ". currentActions graph ."
+    " . futurePlans someshit ."
+    "footer footer footer footer";
+  grid-gap: 2rem;
+}

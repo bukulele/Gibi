@@ -1,0 +1,6 @@
+.smallActions {
+  grid-area: smallActions;
+  width: 100%;
+  height: 100%;
+  background-color: indianred;
+}

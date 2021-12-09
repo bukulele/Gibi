@@ -1,0 +1,43 @@
+.welcomePage {
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+  position: relative;
+  top: 0;
+  height: 10vh;
+  width: 100%;
+  border-bottom: 2px solid grey;
+}
+
+.menu {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navButton {
+  height: 100%;
+  width: 10%;
+  margin: 10px;
+  list-style-type: none;
+}
+
+.navButton a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navButton:hover {
+  background-color: gray;
+}
+
+.greetings {
+  font-size: 4rem;
+  font-weight: bold;
+}
