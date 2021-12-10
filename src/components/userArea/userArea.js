@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Calendar from "../../components/calendar/calendar";
 import CurrentActions from "../currentActions/currentActions";
@@ -35,22 +35,20 @@ function UserArea() {
 
   const changeMonth = (event) => {
     if (event.target.id === "decrease-month") {
-      setCurrentMonth((currentMonth) => {
-        if (currentMonth === 0) {
-          setCurrentYear((currentYear) => currentYear - 1);
-          return 11;
-        }
-        return currentMonth - 1;
-      });
+      if (currentMonth === 0) {
+        setCurrentMonth(11);
+        setCurrentYear((currentYear) => currentYear - 1);
+      } else {
+        setCurrentMonth((currentMonth) => currentMonth - 1);
+      }
     }
     if (event.target.id === "increase-month") {
-      setCurrentMonth((currentMonth) => {
-        if (currentMonth === 11) {
-          setCurrentYear((currentYear) => currentYear + 1);
-          return 0;
-        }
-        return currentMonth + 1;
-      });
+      if (currentMonth === 11) {
+        setCurrentMonth(0);
+        setCurrentYear((currentYear) => currentYear + 1);
+      } else {
+        setCurrentMonth((currentMonth) => currentMonth + 1);
+      }
     }
   };
 
@@ -67,6 +65,11 @@ function UserArea() {
     let today = new Date();
     return today;
   }
+
+  useEffect(() => {
+    console.log(`current month: ${currentMonth}
+    current year: ${currentYear}`);
+  }, [currentMonth, currentYear]);
 
   if (!localStorage.uid) {
     return <Navigate to="/welcome" />;
