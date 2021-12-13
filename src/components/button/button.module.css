@@ -1,9 +1,14 @@
 .calendarButton {
   border: none;
   border-radius: 50%;
-  width: 1rem;
-  height: 1rem;
-  background-color: indianred;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: indianred;
+  background-color: white;
+}
+
+.calendarButton:hover {
+  background-color: deepskyblue;
   color: white;
 }
 
@@ -12,4 +17,32 @@
   width: 1rem;
   height: 1rem;
   color: indianred;
+}
+
+.emodjiButton {
+  grid-area: emodji;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: yellow;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.emodjiButton:hover {
+  background-color: yellowgreen;
+}
+
+.submitButton {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: deepskyblue;
+}
+
+.submitButton:hover {
+  background-color: turquoise;
 }

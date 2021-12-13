@@ -1,5 +1,8 @@
+import { getDoc, doc } from "firebase/firestore";
+import { firestore } from "../../firebase/config";
+import { useState, useEffect } from "react";
 import styles from "./calendar.module.css";
-import CalendarDay from "./calendar-day/calendarDay";
+import CalendarDay from "../calendarDay/calendarDay";
 import Button from "../button/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,6 +11,9 @@ import {
   faAngleRight,
   faAngleDoubleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { Route, Routes } from "react-router-dom";
+import AddNewCalendarAction from "../addNewAction/addNewCalendarAction";
+import TodayAction from "../todayAction/todayAction";
 
 function Calendar({
   currentMonth,
@@ -16,7 +22,11 @@ function Calendar({
   months,
   changeMonth,
   changeYear,
+  uid,
 }) {
+  const [chosenDate, setChosenDate] = useState(null);
+  const [thisMonthEvents, setThisMonthsEvents] = useState({});
+
   let weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let rowCount = 1;
   let columnCount = 1;
@@ -27,6 +37,19 @@ function Calendar({
 
   let dayNumbersArray = [];
   let weekDayArray = [];
+
+  useEffect(() => {
+    const collectionRef = doc(firestore, "users", uid);
+
+    const docSnap = getDoc(collectionRef)
+      .then((response) => response.data())
+      .then((data) =>
+        setThisMonthsEvents({
+          ...data.calendarActions["" + currentYear + currentMonth],
+        })
+      )
+      .catch((error) => console.log(`error: ${error}`));
+  }, []);
 
   //Creating header of calendar with week days
   for (let i = 0; i < 7; i++) {
@@ -54,6 +77,11 @@ function Calendar({
     dayNumbersArray.push(
       <CalendarDay
         key={date}
+        todayEvent={
+          thisMonthEvents[day.toString()]
+            ? thisMonthEvents[day.toString()]["event"]
+            : null
+        }
         style={{
           gridColumnStart: columnCount,
           gridColumnEnd: columnCount + 1,
@@ -67,9 +95,14 @@ function Calendar({
               : "black"
             : "grey"
         }
-        thisDate={date.toString()}
+        thisDate={day}
+        setChosenDate={setChosenDate}
       >
-        {day}
+        {date.getMonth() === currentMonth && thisMonthEvents[day.toString()]
+          ? thisMonthEvents[day.toString()]["emodji"]
+            ? thisMonthEvents[day.toString()]["emodji"]["emoji"]
+            : day
+          : day}
       </CalendarDay>
     );
     if (columnCount === 7) {
@@ -91,34 +124,55 @@ function Calendar({
             <FontAwesomeIcon icon={faAngleDoubleLeft} pointerEvents="none" />
           }
           clickHandler={changeYear}
-          buttonType="calendarButton"
+          buttonStyle="calendarButton"
+          type="button"
         />
-        <Button
-          id="decrease-month"
-          content={<FontAwesomeIcon icon={faAngleLeft} pointerEvents="none" />}
-          clickHandler={changeMonth}
-          buttonType="calendarButton"
-        />
-        <div>{months[currentMonth]}</div>
         <div>{currentYear}</div>
-        <Button
-          id="increase-month"
-          content={<FontAwesomeIcon icon={faAngleRight} pointerEvents="none" />}
-          clickHandler={changeMonth}
-          buttonType="calendarButton"
-        />
         <Button
           id="increase-year"
           content={
             <FontAwesomeIcon icon={faAngleDoubleRight} pointerEvents="none" />
           }
           clickHandler={changeYear}
-          buttonType="calendarButton"
+          buttonStyle="calendarButton"
+          type="button"
+        />
+        <Button
+          id="decrease-month"
+          content={<FontAwesomeIcon icon={faAngleLeft} pointerEvents="none" />}
+          clickHandler={changeMonth}
+          buttonStyle="calendarButton"
+          type="button"
+        />
+        <div>{months[currentMonth]}</div>
+
+        <Button
+          id="increase-month"
+          content={<FontAwesomeIcon icon={faAngleRight} pointerEvents="none" />}
+          clickHandler={changeMonth}
+          buttonStyle="calendarButton"
+          type="button"
         />
       </div>
-
       <div className={styles.calendarWeekDays}>{weekDayArray}</div>
       <div className={styles.calendarDayNumbers}>{dayNumbersArray}</div>
+      <Routes>
+        <Route
+          path="addNewCalendarAction"
+          element={
+            <AddNewCalendarAction
+              chosenDate={chosenDate}
+              currentMonth={currentMonth}
+              currentYear={currentYear}
+              uid={uid}
+            />
+          }
+        />
+        <Route
+          path="todayaction"
+          element={<TodayAction actionObject={thisMonthEvents[chosenDate]} />}
+        />
+      </Routes>
     </div>
   );
 }

@@ -9,5 +9,7 @@
     ". currentActions graph ."
     " . futurePlans someshit ."
     "footer footer footer footer";
+  justify-items: center;
+  align-items: center;
   grid-gap: 2rem;
 }

@@ -1,25 +1,13 @@
-import { getDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { firestore } from "../../firebase/config";
 import Button from "../button/button";
 import styles from "./currentActions.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { Route, Routes, Link } from "react-router-dom";
-import AddNewAction from "../addNewAction/addNewAction";
+import AddNewAction from "../addNewAction/addNewCurrentAction";
 
-function CurrentActions({ uid }) {
-  const [currentDataArray, setCurrentDataArray] = useState([]);
+function CurrentActions({ uid, currentDataArray }) {
   const [currentDataList, setCurrentDataList] = useState([]);
-
-  useEffect(() => {
-    const docRef = doc(firestore, "users", uid);
-    const docSnap = getDoc(docRef)
-      .then((response) => response.data())
-      .then((data) => setCurrentDataArray([...data.currentActions]))
-      .catch((error) => console.log(`error: ${error}`));
-  }, []);
-
   useEffect(() => {
     let newCurrentDataArray = currentDataArray.map((object, index) => {
       let key = object.progress * object.total + object.action;
@@ -31,7 +19,7 @@ function CurrentActions({ uid }) {
             <div>{object.progress}</div>
             <div>out of</div>
             <div>{object.total}</div>
-            <div>{object.unitMeasure}</div>
+            <div>{object.units}</div>
             <div>{object.startDate}</div>
             <div>{object.endDate}</div>
             <Button
@@ -49,7 +37,7 @@ function CurrentActions({ uid }) {
       }
     });
     setCurrentDataList([...newCurrentDataArray]);
-  }, [currentDataArray]);
+  }, []);
 
   return (
     <div className={styles.currentActions}>

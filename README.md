@@ -1,8 +1,11 @@
 # ACTION TRACKER APP
 
-version 0.1.1
+### version 0.2.0:
 
-### Main functions:
+- calendar widget design updated
+- user can write event on exact day in calendar and add an emoji
+
+### version 0.1.1:
 
 - firestore database
 - user auth

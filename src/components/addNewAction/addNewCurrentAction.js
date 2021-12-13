@@ -1,12 +1,12 @@
 import styles from "./addNewAction.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
-import { getDoc, setDoc, doc } from "firebase/firestore";
+import { useState } from "react";
+import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { firestore } from "../../firebase/config";
 import { Link, Navigate } from "react-router-dom";
 
-function AddNewAction({ uid }) {
+function AddNewCurrentAction({ uid }) {
   const [category, setCategory] = useState("");
   const [action, setAction] = useState("");
   const [progress, setProgress] = useState(0);
@@ -15,12 +15,10 @@ function AddNewAction({ uid }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isDataSent, setIsDataSent] = useState(false);
-  const [currentDataFile, setCurrentDataFile] = useState({});
 
-  const addNewAction = (e) => {
-    e.preventDefault();
-    let data = { ...currentDataFile };
-    data.currentActions.push({
+  const addNewAction = (event) => {
+    event.preventDefault();
+    let data = {
       category: category,
       action: action,
       progress: progress,
@@ -28,20 +26,14 @@ function AddNewAction({ uid }) {
       units: units,
       startDate: startDate,
       endDate: endDate,
-    });
+    };
     let collectionRef = doc(firestore, "users", uid);
-    const docRef = setDoc(collectionRef, data, { merge: true }).then(() =>
-      setIsDataSent(true)
-    );
+    const docRef = updateDoc(
+      collectionRef,
+      "currentActions",
+      arrayUnion(data)
+    ).then(() => setIsDataSent(true));
   };
-
-  useEffect(() => {
-    const docRef = doc(firestore, "users", uid);
-    const docSnap = getDoc(docRef)
-      .then((response) => response.data())
-      .then((data) => setCurrentDataFile({ ...data }))
-      .catch((error) => console.log(`error: ${error}`));
-  }, []);
 
   if (isDataSent) return <Navigate to="/" />;
 
@@ -108,4 +100,4 @@ function AddNewAction({ uid }) {
   );
 }
 
-export default AddNewAction;
+export default AddNewCurrentAction;
