@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+### version 0.2.5:
+
+- calendar bug for new users fixed
+
 ### version 0.2.4:
 
 - calendar behaviour if try to set event on other month than is chosen as current, corrected

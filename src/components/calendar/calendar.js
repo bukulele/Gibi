@@ -54,16 +54,18 @@ function Calendar({
   }
 
   const calendarDateContent = (date, day) => {
-    return calendarActions["" + date.getFullYear() + date.getMonth()]
-      ? calendarActions["" + date.getFullYear() + date.getMonth()][
-          day.toString()
-        ]
+    return calendarActions
+      ? calendarActions["" + date.getFullYear() + date.getMonth()]
         ? calendarActions["" + date.getFullYear() + date.getMonth()][
             day.toString()
-          ]["emodji"]
+          ]
           ? calendarActions["" + date.getFullYear() + date.getMonth()][
               day.toString()
-            ]["emodji"]["emoji"]
+            ]["emodji"]
+            ? calendarActions["" + date.getFullYear() + date.getMonth()][
+                day.toString()
+              ]["emodji"]["emoji"]
+            : day
           : day
         : day
       : day;
@@ -82,9 +84,11 @@ function Calendar({
         month={month}
         day={day}
         todayEvent={
-          calendarActions["" + year + month]
-            ? calendarActions["" + year + month][day.toString()]
+          calendarActions
+            ? calendarActions["" + year + month]
               ? calendarActions["" + year + month][day.toString()]
+                ? calendarActions["" + year + month][day.toString()]
+                : null
               : null
             : null
         }

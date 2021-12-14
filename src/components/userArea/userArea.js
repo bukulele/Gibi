@@ -80,9 +80,15 @@ function UserArea() {
 
   useEffect(() => {
     if (userCollection) {
-      setThisMonthsEvents({
-        ...userCollection.calendarActions["" + currentYear + currentMonth],
-      });
+      setThisMonthsEvents(
+        userCollection.calendarActions
+          ? {
+              ...userCollection.calendarActions[
+                "" + currentYear + currentMonth
+              ],
+            }
+          : {}
+      );
     }
   }, [userCollection, currentYear, currentMonth]);
 
