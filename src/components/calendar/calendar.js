@@ -72,19 +72,19 @@ function Calendar({
   //Creating calendar body
   while (rowCount !== 7) {
     day = date.getDate();
-    let currentDate =
-      date.getFullYear() + " " + date.getMonth() + " " + date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let currentDate = year + " " + month + " " + day;
     dayNumbersArray.push(
       <CalendarDay
         key={date}
+        year={year}
+        month={month}
+        day={day}
         todayEvent={
-          calendarActions["" + date.getFullYear() + date.getMonth()]
-            ? calendarActions["" + date.getFullYear() + date.getMonth()][
-                day.toString()
-              ]
-              ? calendarActions["" + date.getFullYear() + date.getMonth()][
-                  day.toString()
-                ]
+          calendarActions["" + year + month]
+            ? calendarActions["" + year + month][day.toString()]
+              ? calendarActions["" + year + month][day.toString()]
               : null
             : null
         }
@@ -95,7 +95,7 @@ function Calendar({
           gridRowEnd: rowCount + 1,
         }}
         dayColor={
-          date.getMonth() === currentMonth
+          month === currentMonth
             ? currentDate === today
               ? "today"
               : "black"
@@ -103,7 +103,6 @@ function Calendar({
         }
         setObjectToShow={setObjectToShow}
         setChosenDate={setChosenDate}
-        day={day}
       >
         {calendarDateContent(date, day)}
       </CalendarDay>
@@ -162,14 +161,7 @@ function Calendar({
       <Routes>
         <Route
           path="addNewCalendarAction"
-          element={
-            <AddNewCalendarAction
-              chosenDate={chosenDate}
-              currentMonth={currentMonth}
-              currentYear={currentYear}
-              uid={uid}
-            />
-          }
+          element={<AddNewCalendarAction chosenDate={chosenDate} uid={uid} />}
         />
         <Route
           path="todayaction"

@@ -8,11 +8,13 @@ function CalendarDay({
   todayEvent,
   children,
   setChosenDate,
+  year,
+  month,
   day,
 }) {
   const handleClick = () => {
     setObjectToShow(todayEvent);
-    setChosenDate(day);
+    setChosenDate({ yearAndMonth: "" + year + month, day: day });
   };
   return (
     <div

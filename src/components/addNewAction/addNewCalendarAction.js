@@ -1,12 +1,12 @@
 import { setDoc, doc } from "firebase/firestore";
 import { firestore } from "../../firebase/config";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Button from "../button/button";
 import { Link, Navigate } from "react-router-dom";
 import styles from "./addNewAction.module.css";
 import Picker from "emoji-picker-react";
 
-function AddNewCalendarAction({ chosenDate, currentMonth, currentYear, uid }) {
+function AddNewCalendarAction({ chosenDate, uid }) {
   const [eventOfTheDay, setEventOfTheDay] = useState("");
   const [isDataSent, setIsDataSent] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState(null);
@@ -31,8 +31,8 @@ function AddNewCalendarAction({ chosenDate, currentMonth, currentYear, uid }) {
     event.preventDefault();
     let data = {
       calendarActions: {
-        ["" + currentYear + currentMonth]: {
-          [chosenDate]: { event: eventOfTheDay, emodji: chosenEmoji },
+        [chosenDate.yearAndMonth]: {
+          [chosenDate.day]: { event: eventOfTheDay, emodji: chosenEmoji },
         },
       },
     };

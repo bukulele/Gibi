@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+### version 0.2.4:
+
+- calendar behaviour if try to set event on other month than is chosen as current, corrected
+
 ### version 0.2.3:
 
 - calendar styling update (circles around the day if there is **event**)
