@@ -1,6 +1,4 @@
-import { getDoc, doc } from "firebase/firestore";
-import { firestore } from "../../firebase/config";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./calendar.module.css";
 import CalendarDay from "../calendarDay/calendarDay";
 import Button from "../button/button";
@@ -23,9 +21,10 @@ function Calendar({
   changeMonth,
   changeYear,
   uid,
+  calendarActions,
 }) {
   const [chosenDate, setChosenDate] = useState(null);
-  const [thisMonthEvents, setThisMonthsEvents] = useState({});
+  const [objectToShow, setObjectToShow] = useState({});
 
   let weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let rowCount = 1;
@@ -37,21 +36,6 @@ function Calendar({
 
   let dayNumbersArray = [];
   let weekDayArray = [];
-
-  useEffect(() => {
-    const collectionRef = doc(firestore, "users", uid);
-
-    const docSnap = getDoc(collectionRef)
-      .then((response) => response.data())
-      .then((data) =>
-        setThisMonthsEvents({
-          ...data.calendarActions["" + currentYear + currentMonth],
-        })
-      )
-      .catch((error) => console.log(`error: ${error}`));
-  }, []);
-
-  //Creating header of calendar with week days
   for (let i = 0; i < 7; i++) {
     weekDayArray.push(
       <div
@@ -69,6 +53,22 @@ function Calendar({
     );
   }
 
+  const calendarDateContent = (date, day) => {
+    return calendarActions["" + date.getFullYear() + date.getMonth()]
+      ? calendarActions["" + date.getFullYear() + date.getMonth()][
+          day.toString()
+        ]
+        ? calendarActions["" + date.getFullYear() + date.getMonth()][
+            day.toString()
+          ]["emodji"]
+          ? calendarActions["" + date.getFullYear() + date.getMonth()][
+              day.toString()
+            ]["emodji"]["emoji"]
+          : day
+        : day
+      : day;
+  };
+
   //Creating calendar body
   while (rowCount !== 7) {
     day = date.getDate();
@@ -78,8 +78,14 @@ function Calendar({
       <CalendarDay
         key={date}
         todayEvent={
-          thisMonthEvents[day.toString()]
-            ? thisMonthEvents[day.toString()]["event"]
+          calendarActions["" + date.getFullYear() + date.getMonth()]
+            ? calendarActions["" + date.getFullYear() + date.getMonth()][
+                day.toString()
+              ]
+              ? calendarActions["" + date.getFullYear() + date.getMonth()][
+                  day.toString()
+                ]
+              : null
             : null
         }
         style={{
@@ -95,14 +101,11 @@ function Calendar({
               : "black"
             : "grey"
         }
-        thisDate={day}
+        setObjectToShow={setObjectToShow}
         setChosenDate={setChosenDate}
+        day={day}
       >
-        {date.getMonth() === currentMonth && thisMonthEvents[day.toString()]
-          ? thisMonthEvents[day.toString()]["emodji"]
-            ? thisMonthEvents[day.toString()]["emodji"]["emoji"]
-            : day
-          : day}
+        {calendarDateContent(date, day)}
       </CalendarDay>
     );
     if (columnCount === 7) {
@@ -170,7 +173,7 @@ function Calendar({
         />
         <Route
           path="todayaction"
-          element={<TodayAction actionObject={thisMonthEvents[chosenDate]} />}
+          element={<TodayAction actionObject={objectToShow} />}
         />
       </Routes>
     </div>

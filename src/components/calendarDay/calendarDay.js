@@ -3,14 +3,16 @@ import styles from "./calendarDay.module.css";
 
 function CalendarDay({
   style,
-  children,
-  thisDate,
-  setChosenDate,
+  setObjectToShow,
   dayColor,
   todayEvent,
+  children,
+  setChosenDate,
+  day,
 }) {
   const handleClick = () => {
-    setChosenDate(thisDate);
+    setObjectToShow(todayEvent);
+    setChosenDate(day);
   };
   return (
     <div

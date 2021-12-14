@@ -1,5 +1,18 @@
 # ACTION TRACKER APP
 
+### version 0.2.3:
+
+- calendar styling update (circles around the day if there is **event**)
+- correct calendar actions shown on each month
+
+known problems:
+
+- incorrect behaviour if try to set event on other month than is chosen as current
+
+### version 0.2.2:
+
+- calendar styling update (circles around the day if there is text)
+
 ### version 0.2.1:
 
 - redirect on SignUp

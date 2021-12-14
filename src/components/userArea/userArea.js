@@ -12,6 +12,8 @@ function UserArea() {
   const [currentMonth, setCurrentMonth] = useState(todayIs().getMonth());
   const [currentYear, setCurrentYear] = useState(todayIs().getFullYear());
   const [userCollection, setUserCollection] = useState(null);
+  const [thisMonthEvents, setThisMonthsEvents] = useState({});
+
   const uid = JSON.parse(localStorage.getItem("uid"));
 
   const TODAY =
@@ -69,25 +71,20 @@ function UserArea() {
     return today;
   }
 
-  // useEffect(() => {
-  //   const docRef = doc(firestore, "users", uid);
-  //   const docSnap = getDoc(docRef)
-  //     .then((response) => response.data())
-  //     .then((data) => {
-  //       setUserCollection(data);
-  //     })
-  //     .catch((error) => console.log(`error: ${error}`));
-  // }, []);
-
-  useEffect(() => {
-    console.log(`user collection: ${JSON.stringify(userCollection)}`);
-  }, [userCollection]);
-
   useEffect(() => {
     const unsub = onSnapshot(doc(firestore, "users", uid), (doc) => {
       setUserCollection(doc.data());
     });
-  }, []);
+    return () => unsub();
+  }, [uid]);
+
+  useEffect(() => {
+    if (userCollection) {
+      setThisMonthsEvents({
+        ...userCollection.calendarActions["" + currentYear + currentMonth],
+      });
+    }
+  }, [userCollection, currentYear, currentMonth]);
 
   if (!localStorage.uid) {
     return <Navigate to="/welcome" />;
@@ -103,7 +100,8 @@ function UserArea() {
         changeMonth={changeMonth}
         changeYear={changeYear}
         uid={uid}
-        userCollection={userCollection.calendarActions}
+        thisMonthEvents={thisMonthEvents}
+        calendarActions={userCollection["calendarActions"]}
       />
       <CurrentActions
         uid={uid}
