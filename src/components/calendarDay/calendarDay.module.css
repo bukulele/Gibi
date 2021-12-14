@@ -34,3 +34,8 @@
   color: white;
   font-weight: bold;
 }
+
+.todayEvent {
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+}

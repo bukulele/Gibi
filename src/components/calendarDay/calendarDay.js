@@ -14,7 +14,11 @@ function CalendarDay({
   };
   return (
     <div
-      className={`${styles.calendarDay} ${styles[dayColor]}`}
+      className={
+        todayEvent
+          ? `${styles.calendarDay} ${styles[dayColor]} ${styles.todayEvent}`
+          : `${styles.calendarDay} ${styles[dayColor]}`
+      }
       style={style}
       onClick={handleClick}
     >
