@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+### version 0.2.1:
+
+- redirect on SignUp
+
 ### version 0.2.0:
 
 - calendar widget design updated

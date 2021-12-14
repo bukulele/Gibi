@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import userDataTemplate from "../../templates/userDataTemplate";
@@ -11,6 +11,7 @@ import styles from "./signupForm.module.css";
 function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSignedUp, setIsSignedUp] = useState(false);
 
   let userData = { ...userDataTemplate };
 
@@ -30,8 +31,11 @@ function SignupForm() {
         let collectionRef = doc(firestore, "users", uid);
         const docRef = setDoc(collectionRef, userData);
       })
+      .then(() => setIsSignedUp(true))
       .catch((error) => alert(error.message));
   };
+
+  if (isSignedUp) return <Navigate to="/welcome" />;
 
   return (
     <div className={styles.subsurface}>
