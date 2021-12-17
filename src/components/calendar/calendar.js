@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./calendar.module.css";
 import CalendarDay from "../calendarDay/calendarDay";
 import Button from "../button/button";
@@ -9,24 +9,70 @@ import {
   faAngleRight,
   faAngleDoubleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { Route, Routes } from "react-router-dom";
-import AddNewCalendarAction from "../addNewAction/addNewCalendarAction";
-import TodayAction from "../todayAction/todayAction";
+import UserDataContext from "../../context/UserDataContext";
 
-function Calendar({
-  currentMonth,
-  currentYear,
-  today,
-  months,
-  changeMonth,
-  changeYear,
-  uid,
-  calendarActions,
-}) {
-  const [chosenDate, setChosenDate] = useState(null);
-  const [objectToShow, setObjectToShow] = useState({});
+function Calendar() {
+  const [currentMonth, setCurrentMonth] = useState(todayIs().getMonth());
+  const [currentYear, setCurrentYear] = useState(todayIs().getFullYear());
 
-  let weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const TODAY =
+    todayIs().getFullYear() +
+    " " +
+    todayIs().getMonth() +
+    " " +
+    todayIs().getDate();
+
+  const MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const changeMonth = (event) => {
+    if (event.target.id === "decrease-month") {
+      if (currentMonth === 0) {
+        setCurrentMonth(11);
+        setCurrentYear((currentYear) => currentYear - 1);
+      } else {
+        setCurrentMonth((currentMonth) => currentMonth - 1);
+      }
+    }
+    if (event.target.id === "increase-month") {
+      if (currentMonth === 11) {
+        setCurrentMonth(0);
+        setCurrentYear((currentYear) => currentYear + 1);
+      } else {
+        setCurrentMonth((currentMonth) => currentMonth + 1);
+      }
+    }
+  };
+
+  const changeYear = (event) => {
+    if (event.target.id === "decrease-year") {
+      setCurrentYear((currentYear) => currentYear - 1);
+    }
+    if (event.target.id === "increase-year") {
+      setCurrentYear((currentYear) => currentYear + 1);
+    }
+  };
+
+  function todayIs() {
+    let today = new Date();
+    return today;
+  }
+
+  const userData = useContext(UserDataContext);
+
+  const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let rowCount = 1;
   let columnCount = 1;
   let day = 1;
@@ -53,23 +99,13 @@ function Calendar({
     );
   }
 
-  const calendarDateContent = (date, day) => {
-    return calendarActions
-      ? calendarActions["" + date.getFullYear() + date.getMonth()]
-        ? calendarActions["" + date.getFullYear() + date.getMonth()][
-            day.toString()
-          ]
-          ? calendarActions["" + date.getFullYear() + date.getMonth()][
-              day.toString()
-            ]["emodji"]
-            ? calendarActions["" + date.getFullYear() + date.getMonth()][
-                day.toString()
-              ]["emodji"]["emoji"]
-            : day
-          : day
-        : day
-      : day;
-  };
+  // const calendarDateContent = (date, day) => {
+  //   return (
+  //     userData?.calendarActions?.["" + date.getFullYear() + date.getMonth()]?.[
+  //       day.toString()
+  //     ]?.["emoji"] || day
+  //   );
+  // };
 
   //Creating calendar body
   while (rowCount !== 7) {
@@ -80,17 +116,11 @@ function Calendar({
     dayNumbersArray.push(
       <CalendarDay
         key={date}
-        year={year}
-        month={month}
         day={day}
-        todayEvent={
-          calendarActions
-            ? calendarActions["" + year + month]
-              ? calendarActions["" + year + month][day.toString()]
-                ? calendarActions["" + year + month][day.toString()]
-                : null
-              : null
-            : null
+        today={{ yearAndMonth: "" + year + month, day: day }}
+        todayEvents={
+          userData?.calendarActions?.["" + year + month]?.[day.toString()] ||
+          null
         }
         style={{
           gridColumnStart: columnCount,
@@ -100,16 +130,12 @@ function Calendar({
         }}
         dayColor={
           month === currentMonth
-            ? currentDate === today
+            ? currentDate === TODAY
               ? "today"
               : "black"
             : "grey"
         }
-        setObjectToShow={setObjectToShow}
-        setChosenDate={setChosenDate}
-      >
-        {calendarDateContent(date, day)}
-      </CalendarDay>
+      ></CalendarDay>
     );
     if (columnCount === 7) {
       columnCount = 1;
@@ -123,6 +149,17 @@ function Calendar({
 
   return (
     <div className={styles.calendar}>
+      <div className={styles.upperCalendarButtons}>
+        <Button
+          content="Today"
+          type="button"
+          buttonStyle="todayButton"
+          clickHandler={() => {
+            setCurrentMonth(todayIs().getMonth());
+            setCurrentYear(todayIs().getFullYear());
+          }}
+        />
+      </div>
       <div className={styles.calendarControlBlock}>
         <Button
           id="decrease-year"
@@ -150,7 +187,7 @@ function Calendar({
           buttonStyle="calendarButton"
           type="button"
         />
-        <div>{months[currentMonth]}</div>
+        <div>{MONTHS[currentMonth]}</div>
 
         <Button
           id="increase-month"
@@ -162,16 +199,6 @@ function Calendar({
       </div>
       <div className={styles.calendarWeekDays}>{weekDayArray}</div>
       <div className={styles.calendarDayNumbers}>{dayNumbersArray}</div>
-      <Routes>
-        <Route
-          path="addNewCalendarAction"
-          element={<AddNewCalendarAction chosenDate={chosenDate} uid={uid} />}
-        />
-        <Route
-          path="todayaction"
-          element={<TodayAction actionObject={objectToShow} />}
-        />
-      </Routes>
     </div>
   );
 }

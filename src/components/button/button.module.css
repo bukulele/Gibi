@@ -19,21 +19,21 @@
   color: indianred;
 }
 
-.emodjiButton {
+.emojiButton {
   grid-area: emodji;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: yellow;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  font-weight: bold;
+  color: deepskyblue;
 }
 
-.emodjiButton:hover {
-  background-color: yellowgreen;
+.emojiButton:hover {
+  color: indianred;
 }
 
 .submitButton {
@@ -46,3 +46,110 @@
 .submitButton:hover {
   background-color: turquoise;
 }
+
+.exitButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4rem;
+  height: 4rem;
+  color: #efefef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  background-color: rgba(239, 239, 239, 0.3);
+  border: none;
+  border-radius: 10px;
+}
+
+.exitButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: red;
+}
+
+.todayButton {
+  background-color: deepskyblue;
+  color: white;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.todayButton:hover {
+  background-color: indianred;
+}
+
+.removeEmoji {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  border: none;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 3px;
+  background-color: indianred;
+  font-weight: bold;
+  color: white;
+}
+.removeEmoji:hover {
+  background-color: deepskyblue;
+}
+
+.closeEmojiPickerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  color: indianred;
+  margin: 3px;
+}
+
+.closeEmojiPickerButton:hover {
+  background-color: indianred;
+  color: white;
+}
+
+.addCalendarAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  border: none;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 3px;
+  background-color: deepskyblue;
+  font-weight: bold;
+  color: white;
+}
+
+.addCalendarAction:hover {
+  background-color: indianred;
+}
+
+/* .changeViewButton {
+  background-color: indianred;
+  color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.changeViewButton:hover {
+  background-color: deepskyblue;
+} */

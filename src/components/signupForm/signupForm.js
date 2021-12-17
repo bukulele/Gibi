@@ -1,17 +1,19 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import userDataTemplate from "../../templates/userDataTemplate";
-import { firestore } from "../../firebase/config";
 import styles from "./signupForm.module.css";
+import FirestoreContext from "../../context/FirebaseContext";
 
 function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignedUp, setIsSignedUp] = useState(false);
+
+  const firestore = useContext(FirestoreContext);
 
   let userData = { ...userDataTemplate };
 

@@ -1,30 +1,25 @@
 import { setDoc, doc } from "firebase/firestore";
-import { firestore } from "../../firebase/config";
-import { useRef, useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import Button from "../button/button";
-import { Link, Navigate } from "react-router-dom";
 import styles from "./addNewAction.module.css";
-import Picker from "emoji-picker-react";
+import { Picker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
+import FirestoreContext from "../../context/FirebaseContext";
+import UserIdContext from "../../context/UserIdContext";
+import { Emoji } from "emoji-mart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSmileWink, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-function AddNewCalendarAction({ chosenDate, uid }) {
+function AddNewCalendarAction({ chosenDate, changeModalVisibility }) {
   const [eventOfTheDay, setEventOfTheDay] = useState("");
-  const [isDataSent, setIsDataSent] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [emodjiWindowIsVisible, setEmodjiWindowIsVisible] = useState(false);
 
-  const refEmodji = useRef();
-
-  const onEmojiClick = (event, emojiObject) => {
-    setChosenEmoji(emojiObject);
-  };
+  const firestore = useContext(FirestoreContext);
+  const uid = useContext(UserIdContext);
 
   const showEmodjiWindow = () => {
     setEmodjiWindowIsVisible(!emodjiWindowIsVisible);
-    if (!emodjiWindowIsVisible) {
-      refEmodji.current.style = "display: block";
-    } else {
-      refEmodji.current.style = "display: none";
-    }
   };
 
   const addNewCalendarAction = (event) => {
@@ -32,75 +27,74 @@ function AddNewCalendarAction({ chosenDate, uid }) {
     let data = {
       calendarActions: {
         [chosenDate.yearAndMonth]: {
-          [chosenDate.day]: { event: eventOfTheDay, emodji: chosenEmoji },
+          [chosenDate.day]: { event: eventOfTheDay, emoji: chosenEmoji },
         },
       },
     };
     let collectionRef = doc(firestore, "users", uid);
     const docRef = setDoc(collectionRef, data, { merge: true }).then(() =>
-      setIsDataSent(true)
+      changeModalVisibility(false)
     );
   };
 
-  if (isDataSent) return <Navigate to="/" />;
-
   return (
-    <div className={styles.calendarSubsurface}>
-      <form
-        onSubmit={addNewCalendarAction}
-        className={styles.addNewCalendarAction}
+    <form onSubmit={addNewCalendarAction} className={styles.addNewAction}>
+      <input
+        className={styles.eventInput}
+        type="text"
+        name="category"
+        placeholder="What is your event of the day?"
+        value={eventOfTheDay}
+        onChange={(event) => setEventOfTheDay(event.target.value)}
+      ></input>
+      <Button
+        id="addCalendarAction"
+        clickHandler={showEmodjiWindow}
+        content={
+          chosenEmoji ? (
+            <Emoji emoji={chosenEmoji} size={30} />
+          ) : (
+            <FontAwesomeIcon icon={faSmileWink} />
+          )
+        }
+        buttonStyle="emojiButton"
+        type="button"
+      />
+      <div
+        className={`${styles.emojiWindow} ${
+          emodjiWindowIsVisible
+            ? styles.emodjiWindowIsVisible
+            : styles.emodjiWindowIsHidden
+        }`}
       >
-        <input
-          className={styles.eventInput}
-          type="text"
-          name="category"
-          placeholder="What is your event of the day?"
-          value={eventOfTheDay}
-          onChange={(event) => setEventOfTheDay(event.target.value)}
-        ></input>
-        <Button
-          id="addCalendarAction"
-          clickHandler={showEmodjiWindow}
-          content={chosenEmoji ? chosenEmoji.emoji : " =| "}
-          buttonStyle="emodjiButton"
-          type="button"
-        />
-        <div className={styles.emojiWindow} ref={refEmodji}>
-          <div className={styles.chosenEmojiBlock}>
-            {chosenEmoji ? (
-              <span>You chose: {chosenEmoji.emoji}</span>
-            ) : (
-              <span>No emoji Chosen</span>
-            )}
-            <Button
-              id="addCalendarAction"
-              clickHandler={showEmodjiWindow}
-              content="X"
-              buttonStyle="emodjiButton"
-              type="button"
-            />
-          </div>
-
-          <Picker
-            onEmojiClick={onEmojiClick}
-            groupVisibility={{ recently_used: false }}
-            disableSearchBar={true}
-            pickerStyle={{ height: "100%" }}
-          />
-        </div>
-        <div className={styles.addButtonsBlock}>
-          <Link to="/home">
-            <div className={styles.cancelButton}>Cancel</div>
-          </Link>
+        <div className={styles.upperButtonsBlock}>
           <Button
-            id="addCalendarAction"
-            content="ADD"
-            buttonStyle="submitButton"
-            type="submit"
+            clickHandler={() => {
+              setChosenEmoji(null);
+              showEmodjiWindow();
+            }}
+            buttonStyle="removeEmoji"
+            type="button"
+            content="Remove emoji"
+          />
+          <Button
+            clickHandler={showEmodjiWindow}
+            buttonStyle="closeEmojiPickerButton"
+            type="button"
+            content={<FontAwesomeIcon icon={faTimes} pointerEvents="none" />}
           />
         </div>
-      </form>
-    </div>
+        <Picker
+          set="apple"
+          showPreview={false}
+          showSkinTones={false}
+          onSelect={(emoji) => {
+            setChosenEmoji(emoji);
+            setEmodjiWindowIsVisible(!emodjiWindowIsVisible);
+          }}
+        />
+      </div>
+    </form>
   );
 }
 

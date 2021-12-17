@@ -1,9 +1,17 @@
-import { Routes, Route, Link, Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { Routes, Route, Link, Outlet, Navigate } from "react-router-dom";
 import SigninForm from "../../components/signinForm/signinForm";
 import SignupForm from "../../components/signupForm/signupForm";
+import UserIdContext from "../../context/UserIdContext";
 import styles from "./welcomePage.module.css";
 
-function WelcomePage({ setUser }) {
+function WelcomePage({ setUid }) {
+  const uid = useContext(UserIdContext);
+
+  if (uid) {
+    return <Navigate to="/home" />;
+  }
+
   return (
     <div className={styles.welcomePage}>
       <nav className={styles.navbar}>
@@ -20,8 +28,8 @@ function WelcomePage({ setUser }) {
         Welcome to the only action tracker you should have!
       </div>
       <Routes>
-        <Route path="signup" element={<SignupForm onSuccess={setUser} />} />
-        <Route path="signin" element={<SigninForm onSuccess={setUser} />} />
+        <Route path="signup" element={<SignupForm onSuccess={setUid} />} />
+        <Route path="signin" element={<SigninForm onSuccess={setUid} />} />
       </Routes>
       <Outlet />
     </div>

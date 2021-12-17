@@ -4,9 +4,10 @@ import WelcomePage from "./components/welcomePage/welcomePage";
 import UserArea from "./components/userArea/userArea";
 import "./app.module.css";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import UserIdContext from "./context/UserIdContext";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [uid, setUid] = useState(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -16,20 +17,22 @@ function App() {
       } else {
         localStorage.removeItem("uid");
       }
-      setUser(user);
+      setUid(user.uid);
     });
-  }, [user]);
+  }, []);
 
   return (
-    <Routes>
-      <Route
-        exact
-        path="/"
-        element={<Navigate to={localStorage.uid ? "home" : "welcome"} />}
-      />
-      <Route path="home/*" element={<UserArea user={user} />} />
-      <Route path="welcome/*" element={<WelcomePage setUser={setUser} />} />
-    </Routes>
+    <UserIdContext.Provider value={uid}>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<Navigate to={uid ? "home" : "welcome"} />}
+        />
+        <Route path="home/*" element={<UserArea />} />
+        <Route path="welcome/*" element={<WelcomePage setUid={setUid} />} />
+      </Routes>
+    </UserIdContext.Provider>
   );
 }
 

@@ -1,5 +1,12 @@
 # ACTION TRACKER APP
 
+### version 0.2.6:
+
+- react context added with optimization of data flow
+- modal windows made with React Portal
+- emoji library changed to [emoji-mart](https://github.com/missive/emoji-mart). It gives the possibility not to use the system emoji, but the library's ones
+- user can create the list of actions for each day and add only one emoji
+
 ### version 0.2.5:
 
 - calendar bug for new users fixed

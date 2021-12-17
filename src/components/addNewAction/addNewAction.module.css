@@ -30,83 +30,34 @@
 }
 
 .addNewAction {
-  width: 50vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: white;
-}
-
-.calendarSubsurface {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(73, 73, 73, 0.5);
-  z-index: 99;
-}
-
-.addNewCalendarAction {
-  width: 80%;
-  display: grid;
-  grid-template-columns: 5% 70% 20% 5%;
-  grid-template-rows: 10% 40% 40% 10%;
-  grid-template-areas:
-    ". . . ."
-    ". event emodji ."
-    ". . . ."
-    ". buttons buttons .";
-  grid-row-gap: 10px;
-  justify-items: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 5px 10px #efefef;
 }
 
 .eventInput {
   width: 100%;
-  grid-area: event;
 }
 
-.addButtonsBlock {
-  grid-area: buttons;
+.upperButtonsBlock {
   width: 100%;
   display: flex;
-  justify-content: space-around;
-}
-
-.addButtonsBlock a,
-.addButtonsBlock a:visited {
-  text-decoration: none;
-  color: black;
-}
-
-.addButtonsBlock a:hover {
-  cursor: default;
-}
-
-.cancelButton {
-  background-color: darksalmon;
-  border-radius: 5px;
-  padding: 0.5rem;
-}
-
-.cancelButton:hover {
-  background-color: tomato;
+  justify-content: flex-end;
 }
 
 .emojiWindow {
-  display: none;
   position: absolute;
-  height: 50%;
+  flex-direction: column;
+}
+
+.emodjiWindowIsVisible {
+  display: flex;
+}
+
+.emodjiWindowIsHidden {
+  display: none;
 }
 
 .chosenEmojiBlock {

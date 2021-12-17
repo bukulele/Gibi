@@ -1,24 +1,17 @@
 .calendarDay {
   width: 100%;
   height: 100%;
-}
-
-.calendarDay a:hover {
-  background-color: deepskyblue;
-  color: white;
-  font-weight: bold;
-  cursor: default;
-}
-
-.calendarDay a {
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.calendarDay:hover {
+  background-color: deepskyblue;
+  color: white;
+  font-weight: bold;
+  cursor: default;
 }
 
 .black {
@@ -29,7 +22,7 @@
   color: grey;
 }
 
-.today a {
+.today {
   background-color: indianred;
   color: white;
   font-weight: bold;

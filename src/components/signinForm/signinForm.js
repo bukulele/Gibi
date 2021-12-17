@@ -16,7 +16,7 @@ function SigninForm({ onSuccess }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        onSuccess(user);
+        onSuccess(user.uid);
         setIsLoggedIn(true);
       })
       .catch((error) => {

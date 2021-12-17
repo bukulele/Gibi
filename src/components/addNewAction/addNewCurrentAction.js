@@ -1,12 +1,10 @@
 import styles from "./addNewAction.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
-import { firestore } from "../../firebase/config";
-import { Link, Navigate } from "react-router-dom";
+import FirestoreContext from "../../context/FirebaseContext";
+import UserIdContext from "../../context/UserIdContext";
 
-function AddNewCurrentAction({ uid }) {
+function AddNewCurrentAction() {
   const [category, setCategory] = useState("");
   const [action, setAction] = useState("");
   const [progress, setProgress] = useState(0);
@@ -15,6 +13,9 @@ function AddNewCurrentAction({ uid }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isDataSent, setIsDataSent] = useState(false);
+
+  const firestore = useContext(FirestoreContext);
+  const uid = useContext(UserIdContext);
 
   const addNewAction = (event) => {
     event.preventDefault();
@@ -35,68 +36,59 @@ function AddNewCurrentAction({ uid }) {
     ).then(() => setIsDataSent(true));
   };
 
-  if (isDataSent) return <Navigate to="/" />;
-
   return (
-    <div className={styles.subsurface}>
-      <Link to="/home">
-        <div className={styles.exitButton}>
-          <FontAwesomeIcon icon={faTimes} pointerEvents="none" />
-        </div>
-      </Link>
-      <form onSubmit={addNewAction} className={styles.addNewAction}>
-        <label htmlFor="category">Category:</label>
-        <input
-          type="text"
-          name="category"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-        ></input>
-        <label htmlFor="action">Action:</label>
-        <input
-          type="text"
-          name="action"
-          value={action}
-          onChange={(event) => setAction(event.target.value)}
-        ></input>
-        <label htmlFor="progress">Progress:</label>
-        <input
-          type="number"
-          name="progress"
-          value={progress}
-          onChange={(event) => setProgress(event.target.value)}
-        ></input>
-        <label htmlFor="total">Total:</label>
-        <input
-          type="number"
-          name="total"
-          value={total}
-          onChange={(event) => setTotal(event.target.value)}
-        ></input>
-        <label htmlFor="units">Units:</label>
-        <input
-          type="text"
-          name="units"
-          value={units}
-          onChange={(event) => setUnits(event.target.value)}
-        ></input>
-        <label htmlFor="startdate">Start Date:</label>
-        <input
-          type="text"
-          name="startdate"
-          value={startDate}
-          onChange={(event) => setStartDate(event.target.value)}
-        ></input>
-        <label htmlFor="enddate">End Date:</label>
-        <input
-          type="text"
-          name="enddate"
-          value={endDate}
-          onChange={(event) => setEndDate(event.target.value)}
-        ></input>
-        <button type="submit">Add data</button>
-      </form>
-    </div>
+    <form onSubmit={addNewAction} className={styles.addNewAction}>
+      <label htmlFor="category">Category:</label>
+      <input
+        type="text"
+        name="category"
+        value={category}
+        onChange={(event) => setCategory(event.target.value)}
+      ></input>
+      <label htmlFor="action">Action:</label>
+      <input
+        type="text"
+        name="action"
+        value={action}
+        onChange={(event) => setAction(event.target.value)}
+      ></input>
+      <label htmlFor="progress">Progress:</label>
+      <input
+        type="number"
+        name="progress"
+        value={progress}
+        onChange={(event) => setProgress(event.target.value)}
+      ></input>
+      <label htmlFor="total">Total:</label>
+      <input
+        type="number"
+        name="total"
+        value={total}
+        onChange={(event) => setTotal(event.target.value)}
+      ></input>
+      <label htmlFor="units">Units:</label>
+      <input
+        type="text"
+        name="units"
+        value={units}
+        onChange={(event) => setUnits(event.target.value)}
+      ></input>
+      <label htmlFor="startdate">Start Date:</label>
+      <input
+        type="text"
+        name="startdate"
+        value={startDate}
+        onChange={(event) => setStartDate(event.target.value)}
+      ></input>
+      <label htmlFor="enddate">End Date:</label>
+      <input
+        type="text"
+        name="enddate"
+        value={endDate}
+        onChange={(event) => setEndDate(event.target.value)}
+      ></input>
+      <button type="submit">Add data</button>
+    </form>
   );
 }
 

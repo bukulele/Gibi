@@ -8,6 +8,12 @@
   position: relative;
 }
 
+.upperCalendarButtons {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
 .calendarControlBlock {
   width: 280px;
   display: grid;
