@@ -17,7 +17,7 @@ function App() {
       } else {
         localStorage.removeItem("uid");
       }
-      setUid(user.uid);
+      if (user) setUid(user.uid);
     });
   }, []);
 

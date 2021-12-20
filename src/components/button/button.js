@@ -1,13 +1,6 @@
-import styles from "./button.module.css";
-
 function Button({ id, content, clickHandler, buttonStyle, type }) {
   return (
-    <button
-      id={id}
-      onClick={clickHandler}
-      type={type}
-      className={styles[buttonStyle]}
-    >
+    <button id={id} onClick={clickHandler} type={type} className={buttonStyle}>
       {content}
     </button>
   );

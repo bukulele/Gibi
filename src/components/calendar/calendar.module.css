@@ -43,3 +43,34 @@
   justify-content: center;
   align-items: center;
 }
+
+.calendarButton {
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: indianred;
+  background-color: white;
+}
+
+.calendarButton:hover {
+  background-color: deepskyblue;
+  color: white;
+}
+
+.todayButton {
+  background-color: deepskyblue;
+  color: white;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.todayButton:hover {
+  background-color: indianred;
+}

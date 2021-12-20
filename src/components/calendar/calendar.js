@@ -99,14 +99,6 @@ function Calendar() {
     );
   }
 
-  // const calendarDateContent = (date, day) => {
-  //   return (
-  //     userData?.calendarActions?.["" + date.getFullYear() + date.getMonth()]?.[
-  //       day.toString()
-  //     ]?.["emoji"] || day
-  //   );
-  // };
-
   //Creating calendar body
   while (rowCount !== 7) {
     day = date.getDate();
@@ -153,7 +145,7 @@ function Calendar() {
         <Button
           content="Today"
           type="button"
-          buttonStyle="todayButton"
+          buttonStyle={styles.todayButton}
           clickHandler={() => {
             setCurrentMonth(todayIs().getMonth());
             setCurrentYear(todayIs().getFullYear());
@@ -167,7 +159,7 @@ function Calendar() {
             <FontAwesomeIcon icon={faAngleDoubleLeft} pointerEvents="none" />
           }
           clickHandler={changeYear}
-          buttonStyle="calendarButton"
+          buttonStyle={styles.calendarButton}
           type="button"
         />
         <div>{currentYear}</div>
@@ -177,14 +169,14 @@ function Calendar() {
             <FontAwesomeIcon icon={faAngleDoubleRight} pointerEvents="none" />
           }
           clickHandler={changeYear}
-          buttonStyle="calendarButton"
+          buttonStyle={styles.calendarButton}
           type="button"
         />
         <Button
           id="decrease-month"
           content={<FontAwesomeIcon icon={faAngleLeft} pointerEvents="none" />}
           clickHandler={changeMonth}
-          buttonStyle="calendarButton"
+          buttonStyle={styles.calendarButton}
           type="button"
         />
         <div>{MONTHS[currentMonth]}</div>
@@ -193,7 +185,7 @@ function Calendar() {
           id="increase-month"
           content={<FontAwesomeIcon icon={faAngleRight} pointerEvents="none" />}
           clickHandler={changeMonth}
-          buttonStyle="calendarButton"
+          buttonStyle={styles.calendarButton}
           type="button"
         />
       </div>

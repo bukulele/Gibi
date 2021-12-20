@@ -14,7 +14,7 @@ function ModalWindow({ visibility, changeModalVisibility, children }) {
       >
         <Button
           clickHandler={changeModalVisibility}
-          buttonStyle="exitButton"
+          buttonStyle={styles.exitButton}
           type="button"
           content={<FontAwesomeIcon icon={faTimes} pointerEvents="none" />}
         />

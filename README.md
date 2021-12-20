@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+### version 0.2.7:
+
+- calendar actions can be managed (add, remove actions). done with useReducer.
+
 ### version 0.2.6:
 
 - react context added with optimization of data flow
