@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import Calendar from "../../components/calendar/calendar";
 import CurrentActions from "../currentActions/currentActions";
-import UserInfo from "../smallActions/smallActions";
+import SmallActions from "../smallActions/smallActions";
 import styles from "./userArea.module.css";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";
@@ -15,14 +15,16 @@ function UserArea() {
   const firestore = useContext(FirestoreContext);
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(firestore, "users", uid), (doc) => {
-      setUserData((userData) => {
-        userData = doc.data();
-        return userData;
+    if (uid) {
+      const unsub = onSnapshot(doc(firestore, "users", uid), (doc) => {
+        setUserData((userData) => {
+          userData = doc.data();
+          return userData;
+        });
       });
-    });
 
-    return () => unsub();
+      return () => unsub();
+    }
   }, [firestore, uid]);
 
   if (!uid) {
@@ -35,7 +37,7 @@ function UserArea() {
         <UserDataContext.Provider value={userData}>
           <Calendar />
           <CurrentActions />
-          <UserInfo />
+          <SmallActions />
         </UserDataContext.Provider>
       ) : null}
 

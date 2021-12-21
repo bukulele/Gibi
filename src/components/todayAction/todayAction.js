@@ -1,4 +1,4 @@
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, updateDoc, deleteField } from "firebase/firestore";
 import { useState, useContext, useEffect, useRef, useReducer } from "react";
 import Button from "../button/button";
 import { Picker } from "emoji-mart";
@@ -16,7 +16,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import currentActionsReducer from "../../reducer/currentActionsReducer";
 
-function TodayAction({ todayEvents, chosenDate }) {
+function TodayAction({ todayEvents, chosenDate, date }) {
+  const firestore = useContext(FirestoreContext);
+  const uid = useContext(UserIdContext);
+
   const eventRef = useRef();
   const newEventRef = useRef();
 
@@ -28,9 +31,8 @@ function TodayAction({ todayEvents, chosenDate }) {
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [emodjiWindowIsVisible, setEmodjiWindowIsVisible] = useState(false);
   const [showAddEventButton, setShowAddEventButton] = useState(false);
-
-  const firestore = useContext(FirestoreContext);
-  const uid = useContext(UserIdContext);
+  const [showConfirmChangesButton, setShowConfirmChangesButton] =
+    useState(false);
 
   const showEmojiWindow = () => {
     setEmodjiWindowIsVisible(!emodjiWindowIsVisible);
@@ -43,14 +45,23 @@ function TodayAction({ todayEvents, chosenDate }) {
           [chosenDate.day]: {
             events: [...todayEventsArray],
             emoji: chosenEmoji,
+            date: date,
           },
         },
       },
     };
     let collectionRef = doc(firestore, "users", uid);
-    const docRef = setDoc(collectionRef, data, { merge: true }).then(() => {
-      setEventOfTheDay("");
-    });
+    if (todayEventsArray.length === 0 && chosenEmoji === null) {
+      let pathToDelete =
+        "calendarActions." + chosenDate.yearAndMonth + "." + chosenDate.day;
+      updateDoc(collectionRef, {
+        [pathToDelete]: deleteField(),
+      });
+    } else {
+      setDoc(collectionRef, data, { merge: true }).then(() => {
+        setEventOfTheDay("");
+      });
+    }
   };
 
   const addNewAction = () => {
@@ -67,28 +78,21 @@ function TodayAction({ todayEvents, chosenDate }) {
     eventRef.current.lastChild.style = "display: none";
   };
 
-  const showConfirmChangesButton = () => {
+  useEffect(() => {
     if (
       todayEvents?.emoji?.id !== chosenEmoji?.id ||
-      eventOfTheDay !== "" ||
       (todayEventsArray.length > 0 &&
         todayEventsArray.length !== todayEvents?.events?.length) ||
+      todayEventsArray.length < todayEvents?.events?.length ||
       todayEventsArray.some(
         (element, index) => element !== todayEvents?.events[index]
       )
     ) {
-      return (
-        <Button
-          clickHandler={confirmChanges}
-          buttonStyle={styles.addCalendarAction}
-          type="button"
-          content="Confirm changes"
-        />
-      );
+      setShowConfirmChangesButton(true);
     } else {
-      return null;
+      setShowConfirmChangesButton(false);
     }
-  };
+  }, [chosenEmoji, todayEventsArray, todayEvents]);
 
   useEffect(() => {
     if (eventOfTheDay !== "") {
@@ -205,7 +209,16 @@ function TodayAction({ todayEvents, chosenDate }) {
           }}
         />
       </div>
-      {showConfirmChangesButton()}
+      <Button
+        clickHandler={confirmChanges}
+        buttonStyle={`${styles.confirmChanges} ${
+          showConfirmChangesButton
+            ? styles.confirmChangesShow
+            : styles.confirmChangesHide
+        }`}
+        type="button"
+        content="Confirm changes"
+      />
     </div>
   );
 }

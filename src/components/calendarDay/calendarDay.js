@@ -4,7 +4,7 @@ import ModalWindow from "../modalWindow/modalWindow";
 import styles from "./calendarDay.module.css";
 import { Emoji } from "emoji-mart";
 
-function CalendarDay({ style, dayColor, todayEvents, today, day }) {
+function CalendarDay({ style, dayColor, todayEvents, today, day, date }) {
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const changeModalVisibility = () => {
@@ -34,6 +34,7 @@ function CalendarDay({ style, dayColor, todayEvents, today, day }) {
       >
         {
           <TodayAction
+            date={date}
             todayEvents={todayEvents}
             chosenDate={today}
             changeModalVisibility={changeModalVisibility}

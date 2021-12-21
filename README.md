@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+### version 0.2.8:
+
+- widget with all calendar actions added
+
 ### version 0.2.7:
 
 - calendar actions can be managed (add, remove actions). done with useReducer.

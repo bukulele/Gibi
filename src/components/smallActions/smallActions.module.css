@@ -1,6 +1,64 @@
-.smallActions {
+.smallActionsWindow {
   grid-area: smallActions;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  height: 100%;
+  width: 100%;
+  font-size: 15px;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  box-shadow: 0px 0px 8px 3px rgba(128, 128, 128, 0.2);
+  border-radius: 10px;
+  padding: 1rem;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.smallActionsList {
   width: 100%;
   height: 100%;
-  background-color: indianred;
+  overflow-y: auto;
+}
+
+.oneDay {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "date list"
+    "emoji list";
+  width: 100%;
+  min-height: 30px;
+  list-style-type: none;
+  border-radius: 10px;
+  text-align: center;
+  margin: 5px 0;
+  padding: 5px;
+  position: relative;
+  line-height: 30px;
+  background-color: rgb(181, 227, 255);
+}
+
+.date {
+  grid-area: date;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.emoji {
+  grid-area: emoji;
+}
+
+.list {
+  grid-area: list;
+}
+
+.action {
+  width: 100%;
+  min-height: 30px;
+  border-radius: 25px;
+  background-color: coral;
+  text-align: center;
+  margin: 5px 0;
+  position: relative;
+  line-height: 30px;
 }

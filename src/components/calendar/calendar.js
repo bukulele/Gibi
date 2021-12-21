@@ -12,6 +12,7 @@ import {
 import UserDataContext from "../../context/UserDataContext";
 
 function Calendar() {
+  const userData = useContext(UserDataContext);
   const [currentMonth, setCurrentMonth] = useState(todayIs().getMonth());
   const [currentYear, setCurrentYear] = useState(todayIs().getFullYear());
 
@@ -23,18 +24,18 @@ function Calendar() {
     todayIs().getDate();
 
   const MONTHS = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   const changeMonth = (event) => {
@@ -69,8 +70,6 @@ function Calendar() {
     let today = new Date();
     return today;
   }
-
-  const userData = useContext(UserDataContext);
 
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let rowCount = 1;
@@ -109,6 +108,7 @@ function Calendar() {
       <CalendarDay
         key={date}
         day={day}
+        date={year + " " + MONTHS[month] + " " + day}
         today={{ yearAndMonth: "" + year + month, day: day }}
         todayEvents={
           userData?.calendarActions?.["" + year + month]?.[day.toString()] ||
