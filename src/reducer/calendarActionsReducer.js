@@ -1,4 +1,4 @@
-const currentActionsReducer = (state, action) => {
+const calendarActionsReducer = (state, action) => {
   let newState = [...state];
   switch (action.type) {
     case "ADD":
@@ -14,4 +14,4 @@ const currentActionsReducer = (state, action) => {
   }
 };
 
-export default currentActionsReducer;
+export default calendarActionsReducer;

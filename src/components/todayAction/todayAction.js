@@ -14,7 +14,7 @@ import {
   faMinusCircle,
   faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import currentActionsReducer from "../../reducer/currentActionsReducer";
+import calendarActionsReducer from "../../reducer/calendarActionsReducer";
 
 function TodayAction({ todayEvents, chosenDate, date }) {
   const firestore = useContext(FirestoreContext);
@@ -24,7 +24,7 @@ function TodayAction({ todayEvents, chosenDate, date }) {
   const newEventRef = useRef();
 
   const [todayEventsArray, changeTodayEventsArray] = useReducer(
-    currentActionsReducer,
+    calendarActionsReducer,
     []
   );
   const [eventOfTheDay, setEventOfTheDay] = useState("");

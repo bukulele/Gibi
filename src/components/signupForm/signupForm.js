@@ -19,7 +19,6 @@ function SignupForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // firebase
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((response) => {
@@ -31,7 +30,7 @@ function SignupForm() {
       .then((uid) => {
         userData.email = email;
         let collectionRef = doc(firestore, "users", uid);
-        const docRef = setDoc(collectionRef, userData);
+        setDoc(collectionRef, userData);
       })
       .then(() => setIsSignedUp(true))
       .catch((error) => alert(error.message));

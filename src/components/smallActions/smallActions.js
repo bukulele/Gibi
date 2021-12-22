@@ -5,7 +5,7 @@ import styles from "./smallActions.module.css";
 
 function SmallActions() {
   const userData = useContext(UserDataContext);
-  const [calendarActions, setCalendarActions] = useState([]);
+  const [calendarActions, setCalendarActions] = useState({});
 
   const calendarActionsList = Object.values(calendarActions)
     .reverse()

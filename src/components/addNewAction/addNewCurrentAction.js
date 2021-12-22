@@ -1,94 +1,81 @@
 import styles from "./addNewAction.module.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserIdContext from "../../context/UserIdContext";
+import Button from "../button/button";
 
-function AddNewCurrentAction() {
-  const [category, setCategory] = useState("");
+function AddNewCurrentAction({ changeModalVisibility }) {
+  const firestore = useContext(FirestoreContext);
+  const uid = useContext(UserIdContext);
   const [action, setAction] = useState("");
   const [progress, setProgress] = useState(0);
   const [total, setTotal] = useState(0);
-  const [units, setUnits] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [isDataSent, setIsDataSent] = useState(false);
+  const [showAddActionButton, setShowAddActionButton] = useState(false);
 
-  const firestore = useContext(FirestoreContext);
-  const uid = useContext(UserIdContext);
-
-  const addNewAction = (event) => {
-    event.preventDefault();
+  const addNewAction = () => {
     let data = {
-      category: category,
       action: action,
       progress: progress,
       total: total,
-      units: units,
-      startDate: startDate,
-      endDate: endDate,
+      dateModified: new Date(),
     };
     let collectionRef = doc(firestore, "users", uid);
-    const docRef = updateDoc(
-      collectionRef,
-      "currentActions",
-      arrayUnion(data)
-    ).then(() => setIsDataSent(true));
+    updateDoc(collectionRef, "currentActions", arrayUnion(data)).then(() =>
+      changeModalVisibility()
+    );
   };
 
+  useEffect(() => {
+    if (action !== "" && total > 0) {
+      setShowAddActionButton(true);
+    } else {
+      setShowAddActionButton(false);
+    }
+  }, [action, total]);
+
   return (
-    <form onSubmit={addNewAction} className={styles.addNewAction}>
-      <label htmlFor="category">Category:</label>
-      <input
-        type="text"
-        name="category"
-        value={category}
-        onChange={(event) => setCategory(event.target.value)}
-      ></input>
-      <label htmlFor="action">Action:</label>
-      <input
-        type="text"
-        name="action"
-        value={action}
-        onChange={(event) => setAction(event.target.value)}
-      ></input>
-      <label htmlFor="progress">Progress:</label>
-      <input
-        type="number"
-        name="progress"
-        value={progress}
-        onChange={(event) => setProgress(event.target.value)}
-      ></input>
-      <label htmlFor="total">Total:</label>
-      <input
-        type="number"
-        name="total"
-        value={total}
-        onChange={(event) => setTotal(event.target.value)}
-      ></input>
-      <label htmlFor="units">Units:</label>
-      <input
-        type="text"
-        name="units"
-        value={units}
-        onChange={(event) => setUnits(event.target.value)}
-      ></input>
-      <label htmlFor="startdate">Start Date:</label>
-      <input
-        type="text"
-        name="startdate"
-        value={startDate}
-        onChange={(event) => setStartDate(event.target.value)}
-      ></input>
-      <label htmlFor="enddate">End Date:</label>
-      <input
-        type="text"
-        name="enddate"
-        value={endDate}
-        onChange={(event) => setEndDate(event.target.value)}
-      ></input>
-      <button type="submit">Add data</button>
-    </form>
+    <div className={styles.addNewAction}>
+      <div className={styles.action}>
+        <h4>Write here your long-term goal:</h4>
+        <input
+          type="text"
+          name="action"
+          value={action}
+          onChange={(event) => setAction(event.target.value)}
+        ></input>
+      </div>
+      <div className={styles.progressBlock}>
+        <h4>And its progress:</h4>
+        <input
+          type="number"
+          name="progress"
+          min="0"
+          className={styles.progress}
+          value={progress}
+          onChange={(event) => setProgress(event.target.value)}
+        ></input>
+        <div className={styles.outOf}>out of</div>
+        <input
+          type="number"
+          name="total"
+          min="0"
+          className={styles.total}
+          value={total}
+          onChange={(event) => setTotal(event.target.value)}
+        ></input>
+      </div>
+      <Button
+        clickHandler={addNewAction}
+        content={"Add new action"}
+        buttonStyle={`${styles.addActionButton} ${
+          showAddActionButton
+            ? styles.addActionButtonShow
+            : styles.addActionButtonHide
+        }`}
+        type="button"
+      />
+    </div>
   );
 }
 

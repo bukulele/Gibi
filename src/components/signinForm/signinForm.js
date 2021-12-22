@@ -28,6 +28,7 @@ function SigninForm({ onSuccess }) {
   };
 
   if (isLoggedIn) return <Navigate to="/home" />;
+
   return (
     <div className={styles.subsurface}>
       <Link to="/welcome">

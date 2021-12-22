@@ -1,4 +1,4 @@
-.addNewAction {
+.changeAction {
   width: 100%;
   height: 100%;
   display: flex;
@@ -9,7 +9,7 @@
   padding: 5px;
 }
 
-.addNewAction input {
+.changeAction input {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid indianred;
@@ -18,12 +18,12 @@
   margin: 10px 0;
 }
 
-.addNewAction input[type="number"] {
+.changeAction input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.addNewAction input::-webkit-outer-spin-button,
-.addNewAction input::-webkit-inner-spin-button {
+.changeAction input::-webkit-outer-spin-button,
+.changeAction input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -59,7 +59,7 @@
   grid-area: total;
 }
 
-.addActionButton {
+.changeActionButton {
   justify-content: center;
   align-items: center;
   height: 20px;
@@ -72,14 +72,14 @@
   color: white;
 }
 
-.addActionButton:hover {
+.changeActionButton:hover {
   background-color: indianred;
 }
 
-.addActionButtonShow {
+.changeActionButtonShow {
   display: flex;
 }
 
-.addActionButtonHide {
+.changeActionButtonHide {
   display: none;
 }

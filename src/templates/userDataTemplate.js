@@ -1,14 +1,12 @@
 const userDataTemplate = {
   email: "",
+  calendarActions: {},
   currentActions: [
     {
-      category: "",
       action: "",
       progress: 0,
       total: 0,
-      unitMeasure: "",
-      startDate: "",
-      endDate: "",
+      dateModified: "",
     },
   ],
 };

@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+### version 0.2.9
+
+- widget with long-term actions added
+- infographics module added
+
 ### version 0.2.8:
 
 - widget with all calendar actions added

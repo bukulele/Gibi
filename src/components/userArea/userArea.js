@@ -36,8 +36,8 @@ function UserArea() {
       {userData ? (
         <UserDataContext.Provider value={userData}>
           <Calendar />
-          <CurrentActions />
           <SmallActions />
+          <CurrentActions />
         </UserDataContext.Provider>
       ) : null}
 

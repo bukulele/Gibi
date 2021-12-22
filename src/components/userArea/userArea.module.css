@@ -1,7 +1,7 @@
 .userArea {
   width: 100%;
   display: grid;
-  grid-template-columns: auto repeat(2, 400px) auto;
+  grid-template-columns: auto repeat(2, 600px) auto;
   grid-template-rows: auto repeat(3, 410px) auto;
   grid-template-areas:
     "nav nav nav nav"

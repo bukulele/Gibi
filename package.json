@@ -1,6 +1,6 @@
 {
   "name": "action-tracker",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -12,6 +12,9 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "@mui/icons-material": "^5.2.4",
     "@mui/material": "^5.2.4",
+    "@nivo/bar": "^0.75.0",
+    "@nivo/core": "^0.75.0",
+    "@nivo/radial-bar": "^0.75.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
