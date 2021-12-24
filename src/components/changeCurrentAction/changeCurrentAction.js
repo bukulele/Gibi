@@ -5,17 +5,25 @@ import UserIdContext from "../../context/UserIdContext";
 import UserDataContext from "../../context/UserDataContext";
 import Button from "../button/button";
 import styles from "./changeCurrentAction.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
-function ChangeCurrentAction({ id, changeModalVisibility }) {
+function ChangeCurrentAction({
+  id,
+  changeModalVisibility,
+  actionToChange,
+  progressToChange,
+  totalToChange,
+}) {
   const userData = useContext(UserDataContext);
   const [currentActions, setCurrentActions] = useState([]);
   const firestore = useContext(FirestoreContext);
   const uid = useContext(UserIdContext);
   const [sendData, setSendData] = useState(false);
-  const [action, setAction] = useState("");
-  const [progress, setProgress] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [showAddActionButton, setShowAddActionButton] = useState(true);
+  const [action, setAction] = useState(actionToChange);
+  const [progress, setProgress] = useState(progressToChange);
+  const [total, setTotal] = useState(totalToChange);
+  const [showChangeActionButton, setShowChangeActionButton] = useState(false);
 
   const changeAction = () => {
     setCurrentActions((currentActionsPrev) => {
@@ -26,6 +34,15 @@ function ChangeCurrentAction({ id, changeModalVisibility }) {
         total: total,
         dateModified: new Date(),
       };
+      setSendData(true);
+      return [...currentActionsNew];
+    });
+  };
+
+  const deleteAction = () => {
+    setCurrentActions((currentActionsPrev) => {
+      const currentActionsNew = [...currentActionsPrev];
+      currentActionsNew.splice(id, 1);
       setSendData(true);
       return [...currentActionsNew];
     });
@@ -44,29 +61,22 @@ function ChangeCurrentAction({ id, changeModalVisibility }) {
   }, [currentActions, sendData]);
 
   useEffect(() => {
-    if (currentActions[id]) {
-      if (
-        action !== currentActions[id].action ||
-        (progress !== currentActions[id].progress &&
-          total > 0 &&
-          total >= progress) ||
-        (total !== currentActions[id].total && total > 0 && total >= progress)
-      ) {
-        setShowAddActionButton(true);
-      } else {
-        setShowAddActionButton(false);
-      }
+    if (
+      action !== actionToChange ||
+      (+progress !== +progressToChange && +total > 0 && +total >= +progress) ||
+      (+total !== +totalToChange && +total > 0 && +total >= +progress)
+    ) {
+      setShowChangeActionButton(true);
+    } else {
+      setShowChangeActionButton(false);
     }
-  }, [action, total, progress, currentActions, id]);
+  }, [action, progress, total]);
 
   useEffect(() => {
     if (userData?.currentActions) {
       setCurrentActions([...userData.currentActions]);
-      setAction(userData.currentActions[id].action);
-      setProgress(userData.currentActions[id].progress);
-      setTotal(userData.currentActions[id].total);
     }
-  }, [userData]);
+  }, [userData, id]);
 
   return (
     <div className={styles.changeAction}>
@@ -100,10 +110,16 @@ function ChangeCurrentAction({ id, changeModalVisibility }) {
         ></input>
       </div>
       <Button
+        clickHandler={deleteAction}
+        content={<FontAwesomeIcon icon={faTrashAlt} pointerEvents="none" />}
+        buttonStyle={styles.deleteActionButton}
+        type="button"
+      />
+      <Button
         clickHandler={changeAction}
         content={"Confirm changes"}
         buttonStyle={`${styles.changeActionButton} ${
-          showAddActionButton
+          showChangeActionButton
             ? styles.changeActionButtonShow
             : styles.changeActionButtonHide
         }`}

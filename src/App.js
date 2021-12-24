@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import WelcomePage from "./components/welcomePage/welcomePage";
 import UserArea from "./components/userArea/userArea";
@@ -9,28 +9,21 @@ import UserIdContext from "./context/UserIdContext";
 function App() {
   const [uid, setUid] = useState(null);
 
-  useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        localStorage.setItem("uid", JSON.stringify(user.uid));
-      } else {
-        localStorage.removeItem("uid");
-      }
-      if (user) setUid(user.uid);
-    });
-  }, []);
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUid(user.uid);
+    } else {
+      setUid(null);
+    }
+  });
 
   return (
     <UserIdContext.Provider value={uid}>
       <Routes>
-        <Route
-          exact
-          path="/"
-          element={<Navigate to={uid ? "home" : "welcome"} />}
-        />
+        <Route exact path="/" element={<Navigate to="home" />} />
         <Route path="home/*" element={<UserArea />} />
-        <Route path="welcome/*" element={<WelcomePage setUid={setUid} />} />
+        <Route path="welcome/*" element={<WelcomePage />} />
       </Routes>
     </UserIdContext.Provider>
   );

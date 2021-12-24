@@ -53,7 +53,7 @@ function CurrentActions() {
           <AddNewCurrentAction changeModalVisibility={changeModalVisibility} />
         </ModalWindow>
       </div>
-      {newCurrentDataArray}
+      <ul className={styles.currentActionsList}>{newCurrentDataArray}</ul>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+.currentActionsInfographics {
+  grid-area: graph;
+  height: 100%;
+  width: 100%;
+  font-size: 15px;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  box-shadow: 0px 0px 8px 3px rgba(128, 128, 128, 0.2);
+  border-radius: 10px;
+  padding: 1rem;
+  position: relative;
+}

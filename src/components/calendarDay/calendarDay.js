@@ -6,6 +6,7 @@ import { Emoji } from "emoji-mart";
 
 function CalendarDay({ style, dayColor, todayEvents, today, day, date }) {
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [showDay, setShowDay] = useState(false);
 
   const changeModalVisibility = () => {
     setModalVisibility(!modalVisibility);
@@ -21,9 +22,15 @@ function CalendarDay({ style, dayColor, todayEvents, today, day, date }) {
         }
         style={style}
         onClick={changeModalVisibility}
+        onMouseEnter={() => setShowDay(true)}
+        onMouseLeave={() => setShowDay(false)}
       >
         {todayEvents?.emoji ? (
-          <Emoji emoji={todayEvents.emoji} size={25} />
+          showDay ? (
+            day
+          ) : (
+            <Emoji emoji={todayEvents.emoji} size={25} />
+          )
         ) : (
           day
         )}

@@ -1,14 +1,15 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import styles from "./signinForm.module.css";
+import { Navigate } from "react-router-dom";
 
-function SigninForm({ onSuccess }) {
+function SigninForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userSignInSuccess, setUserSignInSuccess] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,8 +17,7 @@ function SigninForm({ onSuccess }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        onSuccess(user.uid);
-        setIsLoggedIn(true);
+        setUserSignInSuccess(true);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -27,7 +27,7 @@ function SigninForm({ onSuccess }) {
     return;
   };
 
-  if (isLoggedIn) return <Navigate to="/home" />;
+  if (userSignInSuccess) return <Navigate to="/home" />;
 
   return (
     <div className={styles.subsurface}>

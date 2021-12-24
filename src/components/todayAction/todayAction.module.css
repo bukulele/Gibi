@@ -38,10 +38,11 @@
   width: 100%;
   min-height: 30px;
   list-style-type: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: coral;
   text-align: center;
   margin: 5px 0;
+  padding: 0 5px;
   position: relative;
   line-height: 30px;
 }

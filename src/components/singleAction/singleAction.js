@@ -26,7 +26,7 @@ function SingleAction({ action, total, progress, index }) {
   ];
 
   return (
-    <div className={styles.action}>
+    <li className={styles.action}>
       <div className={styles.chart}>
         <ResponsiveRadialBar
           data={chartData}
@@ -58,9 +58,12 @@ function SingleAction({ action, total, progress, index }) {
         <ChangeCurrentAction
           id={index}
           changeModalVisibility={changeModalVisibility}
+          actionToChange={action}
+          totalToChange={total}
+          progressToChange={progress}
         />
       </ModalWindow>
-    </div>
+    </li>
   );
 }
 

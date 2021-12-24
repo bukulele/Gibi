@@ -9,8 +9,8 @@ function AddNewCurrentAction({ changeModalVisibility }) {
   const firestore = useContext(FirestoreContext);
   const uid = useContext(UserIdContext);
   const [action, setAction] = useState("");
-  const [progress, setProgress] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [progress, setProgress] = useState("");
+  const [total, setTotal] = useState("");
   const [showAddActionButton, setShowAddActionButton] = useState(false);
 
   const addNewAction = () => {
@@ -27,12 +27,12 @@ function AddNewCurrentAction({ changeModalVisibility }) {
   };
 
   useEffect(() => {
-    if (action !== "" && total > 0) {
+    if (action !== "" && +total > 0 && +total >= +progress) {
       setShowAddActionButton(true);
     } else {
       setShowAddActionButton(false);
     }
-  }, [action, total]);
+  }, [action, total, progress]);
 
   return (
     <div className={styles.addNewAction}>
