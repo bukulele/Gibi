@@ -2,24 +2,13 @@
   width: 100%;
   height: 100vh;
   background-color: #fe504f;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100%;
-  grid-template-areas: "greetings signin";
-  justify-items: center;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.greetings {
-  grid-area: greetings;
-  font-size: 4rem;
-  font-weight: bold;
-  color: white;
-}
-
-.signInForm {
-  grid-area: signin;
-  width: 350px;
+.signUpForm {
+  width: 600px;
   height: 410px;
   background-color: white;
   border: 1px solid rgba(128, 128, 128, 0.5);
@@ -47,24 +36,19 @@
   outline: none;
 }
 
-.goHomeButton {
-  grid-area: signin;
+.userNameInput {
+  display: flex;
+  border-bottom: 2px solid #fe504f;
+  width: 100%;
+}
+
+.userNameInput input {
   border: none;
-  border-radius: 5px;
-  height: 50px;
-  width: 200px;
-  font-size: 25px;
-  font-weight: bold;
-  color: white;
-  background-color: #01afb0;
+  background-color: transparent;
+  outline: none;
 }
 
-.goHomeButton:hover {
-  background-color: white;
-  color: black;
-}
-
-.signInButton {
+.signUpButton {
   border: none;
   border-radius: 5px;
   height: 30px;
@@ -74,6 +58,16 @@
   background-color: #fe504f;
 }
 
-.signInButton:hover {
+.signUpButtonInactive {
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  padding: 0 10px;
+  font-weight: bold;
+  color: black;
+  background-color: #a1a1a1;
+}
+
+.signUpButton:hover {
   background-color: #01afb0;
 }

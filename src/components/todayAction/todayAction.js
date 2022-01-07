@@ -7,6 +7,7 @@ import { Emoji } from "emoji-mart";
 import styles from "./todayAction.module.css";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserIdContext from "../../context/UserIdContext";
+import HomePageContext from "../../context/HomePageContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSmileWink,
@@ -19,6 +20,7 @@ import calendarActionsReducer from "../../reducer/calendarActionsReducer";
 function TodayAction({ todayEvents, chosenDate, date }) {
   const firestore = useContext(FirestoreContext);
   const uid = useContext(UserIdContext);
+  const isItHomePage = useContext(HomePageContext);
 
   const eventRef = useRef();
   const newEventRef = useRef();
@@ -35,7 +37,7 @@ function TodayAction({ todayEvents, chosenDate, date }) {
     useState(false);
 
   const showEmojiWindow = () => {
-    setEmodjiWindowIsVisible(!emodjiWindowIsVisible);
+    if (isItHomePage) setEmodjiWindowIsVisible(!emodjiWindowIsVisible);
   };
 
   const confirmChanges = () => {
@@ -70,8 +72,10 @@ function TodayAction({ todayEvents, chosenDate, date }) {
   };
 
   const showDeleteButton = (event) => {
-    eventRef.current = event.target;
-    eventRef.current.lastChild.style = "display: flex";
+    if (isItHomePage) {
+      eventRef.current = event.target;
+      eventRef.current.lastChild.style = "display: flex";
+    }
   };
 
   const hideDeleteButton = () => {
@@ -152,29 +156,31 @@ function TodayAction({ todayEvents, chosenDate, date }) {
         type="button"
       />
       <ul className={styles.events}>{listArray}</ul>
-      <div className={styles.newInput}>
-        <input
-          ref={newEventRef}
-          className={styles.eventInput}
-          type="text"
-          name="event"
-          placeholder="Something interesting today?"
-          value={eventOfTheDay}
-          onChange={(event) => setEventOfTheDay(event.target.value)}
-        />
-        <Button
-          clickHandler={addNewAction}
-          content={
-            <FontAwesomeIcon icon={faCheckCircle} pointerEvents="none" />
-          }
-          buttonStyle={`${styles.addEventButton} ${
-            showAddEventButton
-              ? styles.addEventButtonShow
-              : styles.addEventButtonHide
-          }`}
-          type="button"
-        />
-      </div>
+      {isItHomePage ? (
+        <div className={styles.newInput}>
+          <input
+            ref={newEventRef}
+            className={styles.eventInput}
+            type="text"
+            name="event"
+            placeholder="Something interesting today?"
+            value={eventOfTheDay}
+            onChange={(event) => setEventOfTheDay(event.target.value)}
+          />
+          <Button
+            clickHandler={addNewAction}
+            content={
+              <FontAwesomeIcon icon={faCheckCircle} pointerEvents="none" />
+            }
+            buttonStyle={`${styles.addEventButton} ${
+              showAddEventButton
+                ? styles.addEventButtonShow
+                : styles.addEventButtonHide
+            }`}
+            type="button"
+          />
+        </div>
+      ) : null}
       <div
         className={`${styles.emojiWindow} ${
           emodjiWindowIsVisible

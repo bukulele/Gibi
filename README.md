@@ -1,5 +1,11 @@
 # ACTION TRACKER APP
 
+#### version 0.3.1
+
+- email verification added
+- username in url
+- all user pages are open for internet
+
 #### version 0.3.0
 
 - widget with aggregated infographics added

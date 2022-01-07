@@ -7,9 +7,11 @@ import AddNewCurrentAction from "../addNewAction/addNewCurrentAction";
 import SingleAction from "../singleAction/singleAction";
 import UserDataContext from "../../context/UserDataContext";
 import ModalWindow from "../modalWindow/modalWindow";
+import HomePageContext from "../../context/HomePageContext";
 
 function CurrentActions() {
   const userData = useContext(UserDataContext);
+  const isItHomePage = useContext(HomePageContext);
   const [currentActions, setCurrentActions] = useState([]);
   const [modalVisibility, setModalVisibility] = useState(false);
 
@@ -37,15 +39,25 @@ function CurrentActions() {
 
   return (
     <div className={styles.currentActions}>
-      <div className={styles.currentActionsHeader}>
+      <div
+        className={
+          isItHomePage
+            ? styles.currentActionsHeaderHome
+            : styles.currentActionsHeaderGuest
+        }
+      >
         <div>Progress</div>
         <div>Action</div>
-        <Button
-          clickHandler={changeModalVisibility}
-          buttonStyle={styles.addNewCurrentAction}
-          type="button"
-          content={<FontAwesomeIcon icon={faPlusCircle} pointerEvents="none" />}
-        />
+        {isItHomePage ? (
+          <Button
+            clickHandler={changeModalVisibility}
+            buttonStyle={styles.addNewCurrentAction}
+            type="button"
+            content={
+              <FontAwesomeIcon icon={faPlusCircle} pointerEvents="none" />
+            }
+          />
+        ) : null}
         <ModalWindow
           visibility={modalVisibility}
           changeModalVisibility={changeModalVisibility}

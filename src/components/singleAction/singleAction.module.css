@@ -1,6 +1,17 @@
-.action {
+.actionHome {
   display: grid;
   grid-template-columns: 2fr 4fr 1fr;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  border: 2px solid rgb(181, 227, 255);
+  border-radius: 10px;
+}
+
+.actionGuest {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
   justify-items: center;
   align-items: center;
   width: 100%;

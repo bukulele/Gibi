@@ -1,14 +1,11 @@
 const userDataTemplate = {
+  userName: "",
   email: "",
+  photoCursor: false,
+  accidentalCalendarColors: false,
   calendarActions: {},
-  currentActions: [
-    {
-      action: "",
-      progress: 0,
-      total: 0,
-      dateModified: "",
-    },
-  ],
+  currentActions: [],
+  friends: [],
 };
 
 export default userDataTemplate;

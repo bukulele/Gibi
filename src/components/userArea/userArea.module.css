@@ -5,9 +5,9 @@
   grid-template-rows: auto repeat(3, 410px) auto;
   grid-template-areas:
     "nav nav nav nav"
-    ". calendar smallActions ."
-    ". currentActions graph ."
-    " . futurePlans someshit ."
+    ". calendar smallActions friends"
+    ". currentActions graph friends"
+    " . futurePlans someshit friends"
     "footer footer footer footer";
   justify-items: center;
   align-items: center;

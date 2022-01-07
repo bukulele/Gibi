@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { ResponsiveRadialBar } from "@nivo/radial-bar";
@@ -6,8 +6,10 @@ import ChangeCurrentAction from "../changeCurrentAction/changeCurrentAction";
 import ModalWindow from "../modalWindow/modalWindow";
 import Button from "../button/button";
 import styles from "./singleAction.module.css";
+import HomePageContext from "../../context/HomePageContext";
 
 function SingleAction({ action, total, progress, index }) {
+  const isItHomePage = useContext(HomePageContext);
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const changeModalVisibility = () => {
@@ -26,7 +28,7 @@ function SingleAction({ action, total, progress, index }) {
   ];
 
   return (
-    <li className={styles.action}>
+    <li className={isItHomePage ? styles.actionHome : styles.actionGuest}>
       <div className={styles.chart}>
         <ResponsiveRadialBar
           data={chartData}
@@ -45,12 +47,14 @@ function SingleAction({ action, total, progress, index }) {
         />
       </div>
       <div>{action}</div>
-      <Button
-        clickHandler={changeModalVisibility}
-        content={<FontAwesomeIcon icon={faPencilAlt} pointerEvents="none" />}
-        buttonStyle={styles.correctAction}
-        type="button"
-      />
+      {isItHomePage ? (
+        <Button
+          clickHandler={changeModalVisibility}
+          content={<FontAwesomeIcon icon={faPencilAlt} pointerEvents="none" />}
+          buttonStyle={styles.correctAction}
+          type="button"
+        />
+      ) : null}
       <ModalWindow
         visibility={modalVisibility}
         changeModalVisibility={changeModalVisibility}
