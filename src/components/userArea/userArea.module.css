@@ -1,10 +1,11 @@
 .userArea {
   width: 100%;
   display: grid;
-  grid-template-columns: auto repeat(2, 600px) auto;
-  grid-template-rows: auto repeat(3, 410px) auto;
+  grid-template-columns: 1fr repeat(2, 550px) 1fr;
+  grid-template-rows: auto 50px repeat(3, 410px) auto;
   grid-template-areas:
     "nav nav nav nav"
+    ". . . ."
     ". calendar smallActions friends"
     ". currentActions graph friends"
     " . futurePlans someshit friends"

@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 300px;
 }
 
 .input {
@@ -46,6 +47,7 @@
   border: none;
   background-color: transparent;
   outline: none;
+  width: 100%;
 }
 
 .signUpButton {

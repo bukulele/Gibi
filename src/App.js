@@ -50,7 +50,6 @@ function App() {
           />
           <Route path="signup" element={<SignUpArea />} />
         </Routes>
-        <Outlet />
       </UserIdContext.Provider>
     </FirestoreContext.Provider>
   );

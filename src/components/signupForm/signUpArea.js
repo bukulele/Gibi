@@ -59,7 +59,7 @@ function SignUpArea() {
         setDoc(userDocsRef, userData);
         setDoc(userNamesRef, userRef);
       })
-      .then(() => navigate("/welcome"))
+      .then(() => navigate(`/${userName}`))
       .catch((error) => alert(error.message));
   };
 
@@ -89,7 +89,7 @@ function SignUpArea() {
 
   useEffect(() => {
     if (
-      userNameOk &&
+      userNameOk === true &&
       email.match(emailRegExp) &&
       password.match(passwordRegExp)
     ) {
@@ -135,6 +135,13 @@ function SignUpArea() {
                   : userNameOk === false
                   ? faTimes
                   : faEllipsisH
+              }
+              color={
+                userNameOk === true
+                  ? "#01afb0"
+                  : userNameOk === false
+                  ? "#fe504f"
+                  : "#a1a1a1"
               }
             />
           </div>

@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+#### version 0.3.2
+
+- user can add interesting pages to personal list
+- mobile version is broken
+
 #### version 0.3.1
 
 - email verification added

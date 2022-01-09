@@ -1,0 +1,52 @@
+.userMenu {
+  position: fixed;
+  top: 50px;
+  right: 0px;
+  width: 200px;
+  height: auto;
+  background-color: lightgrey;
+  flex-direction: column;
+  align-items: center;
+}
+
+.showUserMenu {
+  display: flex;
+}
+
+.hideUserMenu {
+  display: none;
+}
+
+.userMenu li {
+  height: 30px;
+  width: 100%;
+  list-style-type: none;
+}
+
+.userMenu li:hover {
+  background-color: wheat;
+}
+
+.userMenu li a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  line-height: 30px;
+  font-family: "Roboto", sans-serif;
+}
+
+.signOutButton {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+.signOutButton:hover {
+  background-color: wheat;
+}

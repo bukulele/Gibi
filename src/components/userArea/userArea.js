@@ -1,7 +1,7 @@
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useState, useEffect } from "react";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Calendar from "../../components/calendar/calendar";
 import CurrentActions from "../currentActions/currentActions";
 import SmallActions from "../smallActions/smallActions";
@@ -10,12 +10,12 @@ import styles from "./userArea.module.css";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";
 import NavBar from "../navBar/navBar";
+import Friends from "../friends/friends";
 import UserIdContext from "../../context/UserIdContext";
 import HomePageContext from "../../context/HomePageContext";
 
 function UserArea({ verificationRequired }) {
   const [userData, setUserData] = useState(null);
-  const [signingOutIsTrue, setSigningOutIsTrue] = useState(false);
   const [isItHomePage, setIsItHomePage] = useState(false);
   const [docName, setDocName] = useState(null);
 
@@ -23,15 +23,7 @@ function UserArea({ verificationRequired }) {
   const firestore = useContext(FirestoreContext);
 
   const auth = getAuth();
-
-  const navigate = useNavigate();
   const params = useParams();
-
-  getDoc(doc(firestore, "userNames", params.displayName))
-    .then((response) => {
-      return response.data();
-    })
-    .then((response) => setDocName(response.userId));
 
   const verifyEmail = () => {
     sendEmailVerification(auth.currentUser).then(() => {
@@ -58,16 +50,15 @@ function UserArea({ verificationRequired }) {
 
       return () => unsub();
     }
-  }, [firestore, params, docName]);
+  }, [docName]);
 
   useEffect(() => {
-    if (signingOutIsTrue) {
-      navigate("/welcome");
-    }
-    return () => {
-      setSigningOutIsTrue(false);
-    };
-  }, [signingOutIsTrue]);
+    getDoc(doc(firestore, "userNames", params.displayName))
+      .then((response) => {
+        return response.data();
+      })
+      .then((response) => setDocName(response.userId));
+  }, [params]);
 
   return (
     <div className={styles.userArea}>
@@ -75,9 +66,10 @@ function UserArea({ verificationRequired }) {
         <HomePageContext.Provider value={isItHomePage}>
           <UserDataContext.Provider value={userData}>
             <NavBar
+              displayName={params.displayName}
               verifyEmail={verificationRequired ? verifyEmail : null}
-              setSigningOutIsTrue={setSigningOutIsTrue}
             />
+            <Friends />
             <Calendar />
             <SmallActions />
             <CurrentActions />
@@ -85,8 +77,6 @@ function UserArea({ verificationRequired }) {
           </UserDataContext.Provider>
         </HomePageContext.Provider>
       ) : null}
-
-      <Outlet />
     </div>
   );
 }
