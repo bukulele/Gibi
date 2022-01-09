@@ -1,7 +1,10 @@
 .userArea {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr repeat(2, 550px) 1fr;
+  grid-template-columns: minmax(auto, 100px) repeat(2, 550px) minmax(
+      250px,
+      auto
+    );
   grid-template-rows: auto 50px repeat(3, 410px) auto;
   grid-template-areas:
     "nav nav nav nav"
@@ -17,7 +20,7 @@
 
 @media only screen and (max-width: 1300px) {
   .userArea {
-    grid-template-columns: auto repeat(2, 500px) auto;
+    grid-template-columns: auto repeat(2, 450px) auto;
   }
 }
 
