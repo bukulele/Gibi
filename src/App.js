@@ -35,7 +35,7 @@ function App() {
         setDisplayName(null);
       }
     });
-  }, []);
+  }, [auth]);
 
   return (
     <FirestoreContext.Provider value={firestore}>

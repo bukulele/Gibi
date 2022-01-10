@@ -32,7 +32,7 @@ function NavBar({ friendsList, verifyEmail, showingName }) {
 
   useEffect(() => {
     setFriendInList(friendsList.includes(showingName));
-  }, [userData]);
+  }, [userData, friendsList]);
 
   return (
     <div
