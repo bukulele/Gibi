@@ -11,15 +11,15 @@ import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";
 import NavBar from "../navBar/navBar";
 import Friends from "../friends/friends";
-import UserIdContext from "../../context/UserIdContext";
+import UserContext from "../../context/UserContext";
 import HomePageContext from "../../context/HomePageContext";
 
 function UserArea({ verificationRequired }) {
   const [userData, setUserData] = useState(null);
   const [isItHomePage, setIsItHomePage] = useState(false);
-  const [docName, setDocName] = useState(null);
+  const [friendsList, setFriendsList] = useState([]);
 
-  const uid = useContext(UserIdContext);
+  const user = useContext(UserContext);
   const firestore = useContext(FirestoreContext);
 
   const auth = getAuth();
@@ -32,33 +32,38 @@ function UserArea({ verificationRequired }) {
   };
 
   useEffect(() => {
-    if (uid === docName) {
+    if (user?.displayName === params.displayName) {
       if (!verificationRequired) setIsItHomePage(true);
     } else {
       setIsItHomePage(false);
     }
-  }, [docName, uid]);
+  }, [params, user]);
 
   useEffect(() => {
-    if (docName) {
-      const unsub = onSnapshot(doc(firestore, "users", docName), (doc) => {
+    const unsub = onSnapshot(
+      doc(firestore, "users", params.displayName),
+      (doc) => {
         setUserData((userData) => {
           userData = doc.data();
           return userData;
         });
-      });
+      }
+    );
 
-      return () => unsub();
-    }
-  }, [docName]);
+    return () => unsub();
+  }, [params]);
 
   useEffect(() => {
-    getDoc(doc(firestore, "userNames", params.displayName))
-      .then((response) => {
-        return response.data();
-      })
-      .then((response) => setDocName(response.userId));
-  }, [params]);
+    if (isItHomePage && userData) {
+      setFriendsList([...userData.friends]);
+    } else {
+      getDoc(doc(firestore, "users", params.displayName))
+        .then((doc) => doc.data())
+        .then((data) => {
+          setFriendsList([...data.friends]);
+        });
+    }
+  }, [isItHomePage, params, userData]);
 
   return (
     <div className={styles.userArea}>
@@ -66,10 +71,11 @@ function UserArea({ verificationRequired }) {
         <HomePageContext.Provider value={isItHomePage}>
           <UserDataContext.Provider value={userData}>
             <NavBar
-              displayName={params.displayName}
+              friendsList={friendsList}
+              showingName={params.displayName}
               verifyEmail={verificationRequired ? verifyEmail : null}
             />
-            <Friends />
+            {user ? <Friends friendsList={friendsList} /> : null}
             <Calendar />
             <SmallActions />
             <CurrentActions />

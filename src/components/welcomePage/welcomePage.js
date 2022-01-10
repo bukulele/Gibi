@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Button from "../button/button";
 import styles from "./welcomePage.module.css";
-import UserIdContext from "../../context/UserIdContext";
+import UserIdContext from "../../context/UserContext";
 
 function WelcomePage({ displayName }) {
   const [email, setEmail] = useState("");

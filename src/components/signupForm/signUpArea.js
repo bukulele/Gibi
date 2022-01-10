@@ -28,7 +28,6 @@ function SignUpArea() {
   const firestore = useContext(FirestoreContext);
 
   const userData = { ...userDataTemplate };
-  const userRef = {};
   const navigate = useNavigate();
 
   const emailRegExp =
@@ -40,24 +39,22 @@ function SignUpArea() {
   const signUp = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((response) => {
+      .then(() => {
         updateProfile(auth.currentUser, {
           displayName: userName,
         });
+      })
+      .then(() => {
+        userData.email = email;
+        userData.userName = userName;
+        const userDocsRef = doc(firestore, "users", userName);
+        setDoc(userDocsRef, userData);
+      })
+      .then(() => {
         setEmail("");
         setPassword("");
         setUserName("");
         alert("Authentication done!");
-        return response.user.uid;
-      })
-      .then((uid) => {
-        userData.email = email;
-        userData.userName = userName;
-        userRef.userId = uid;
-        const userDocsRef = doc(firestore, "users", uid);
-        const userNamesRef = doc(firestore, "userNames", userName);
-        setDoc(userDocsRef, userData);
-        setDoc(userNamesRef, userRef);
       })
       .then(() => navigate(`/${userName}`))
       .catch((error) => alert(error.message));
@@ -65,7 +62,7 @@ function SignUpArea() {
 
   const checkUserName = () => {
     if (userName.match(usernameRegExp) && userName.length >= 5) {
-      getDoc(doc(firestore, "userNames", userName)).then((docSnap) => {
+      getDoc(doc(firestore, "users", userName)).then((docSnap) => {
         if (docSnap.exists()) {
           setUserNameOk(false);
         } else {

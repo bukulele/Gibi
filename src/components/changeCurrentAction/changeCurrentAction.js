@@ -1,7 +1,7 @@
 import { setDoc, doc } from "firebase/firestore";
 import { useState, useEffect, useContext } from "react";
 import FirestoreContext from "../../context/FirebaseContext";
-import UserIdContext from "../../context/UserIdContext";
+import UserContext from "../../context/UserContext";
 import UserDataContext from "../../context/UserDataContext";
 import Button from "../button/button";
 import styles from "./changeCurrentAction.module.css";
@@ -18,7 +18,7 @@ function ChangeCurrentAction({
   const userData = useContext(UserDataContext);
   const [currentActions, setCurrentActions] = useState([]);
   const firestore = useContext(FirestoreContext);
-  const uid = useContext(UserIdContext);
+  const user = useContext(UserContext);
   const [sendData, setSendData] = useState(false);
   const [action, setAction] = useState(actionToChange);
   const [progress, setProgress] = useState(progressToChange);
@@ -53,7 +53,7 @@ function ChangeCurrentAction({
       const data = {
         currentActions: currentActions,
       };
-      const collectionRef = doc(firestore, "users", uid);
+      const collectionRef = doc(firestore, "users", user.displayName);
       setDoc(collectionRef, data, { merge: true });
       changeModalVisibility();
       setSendData(false);

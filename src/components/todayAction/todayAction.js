@@ -6,7 +6,7 @@ import "emoji-mart/css/emoji-mart.css";
 import { Emoji } from "emoji-mart";
 import styles from "./todayAction.module.css";
 import FirestoreContext from "../../context/FirebaseContext";
-import UserIdContext from "../../context/UserIdContext";
+import UserContext from "../../context/UserContext";
 import HomePageContext from "../../context/HomePageContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,7 +19,7 @@ import calendarActionsReducer from "../../reducer/calendarActionsReducer";
 
 function TodayAction({ todayEvents, chosenDate, date }) {
   const firestore = useContext(FirestoreContext);
-  const uid = useContext(UserIdContext);
+  const user = useContext(UserContext);
   const isItHomePage = useContext(HomePageContext);
 
   const eventRef = useRef();
@@ -52,7 +52,7 @@ function TodayAction({ todayEvents, chosenDate, date }) {
         },
       },
     };
-    let collectionRef = doc(firestore, "users", uid);
+    let collectionRef = doc(firestore, "users", user.displayName);
     if (todayEventsArray.length === 0 && chosenEmoji === null) {
       let pathToDelete =
         "calendarActions." + chosenDate.yearAndMonth + "." + chosenDate.day;

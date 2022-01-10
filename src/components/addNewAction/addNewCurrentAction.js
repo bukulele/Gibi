@@ -2,12 +2,12 @@ import styles from "./addNewAction.module.css";
 import { useContext, useEffect, useState } from "react";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import FirestoreContext from "../../context/FirebaseContext";
-import UserIdContext from "../../context/UserIdContext";
+import UserContext from "../../context/UserContext";
 import Button from "../button/button";
 
 function AddNewCurrentAction({ changeModalVisibility }) {
   const firestore = useContext(FirestoreContext);
-  const uid = useContext(UserIdContext);
+  const user = useContext(UserContext);
   const [action, setAction] = useState("");
   const [progress, setProgress] = useState("");
   const [total, setTotal] = useState("");
@@ -20,7 +20,7 @@ function AddNewCurrentAction({ changeModalVisibility }) {
       total: total,
       dateModified: new Date(),
     };
-    let collectionRef = doc(firestore, "users", uid);
+    let collectionRef = doc(firestore, "users", user.displayName);
     updateDoc(collectionRef, "currentActions", arrayUnion(data)).then(() =>
       changeModalVisibility()
     );

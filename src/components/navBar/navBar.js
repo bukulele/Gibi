@@ -1,20 +1,19 @@
 import Button from "../button/button";
 import UserMenu from "../userMenu/userMenu";
 import styles from "./navBar.module.css";
-import { updateDoc, doc, arrayUnion, getDoc } from "firebase/firestore";
+import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import HomePageContext from "../../context/HomePageContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import UserIdContext from "../../context/UserIdContext";
+import UserContext from "../../context/UserContext";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";
 
-function NavBar({ verifyEmail, displayName }) {
+function NavBar({ friendsList, verifyEmail, showingName }) {
   const isItHomePage = useContext(HomePageContext);
   const userData = useContext(UserDataContext);
-
-  const uid = useContext(UserIdContext);
+  const user = useContext(UserContext);
   const firestore = useContext(FirestoreContext);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [friendInList, setFriendInList] = useState(true);
@@ -24,24 +23,16 @@ function NavBar({ verifyEmail, displayName }) {
   };
 
   const addFriend = () => {
-    let collectionRef = doc(firestore, "users", uid);
-    updateDoc(collectionRef, "friends", arrayUnion(displayName)).then(() => {
+    let collectionRef = doc(firestore, "users", user.displayName);
+    updateDoc(collectionRef, "friends", arrayUnion(showingName)).then(() => {
       setFriendInList(true);
-      alert(`${displayName} added to friends list`);
+      alert(`${showingName} added to friends list`);
     });
   };
 
   useEffect(() => {
-    if (uid) {
-      getDoc(doc(firestore, "users", uid))
-        .then((response) => {
-          return response.data();
-        })
-        .then((response) =>
-          setFriendInList(response.friends.includes(displayName))
-        );
-    }
-  }, [uid, userData]);
+    setFriendInList(friendsList.includes(showingName));
+  }, [userData]);
 
   return (
     <div
@@ -49,7 +40,7 @@ function NavBar({ verifyEmail, displayName }) {
         isItHomePage ? styles.navHome : styles.navGuest
       }`}
     >
-      {!isItHomePage && !friendInList ? (
+      {!isItHomePage && !friendInList && !verifyEmail ? (
         <Button
           content={<FontAwesomeIcon icon={faUserPlus} pointerEvents="none" />}
           clickHandler={addFriend}
@@ -57,7 +48,7 @@ function NavBar({ verifyEmail, displayName }) {
           buttonStyle={styles.addFriendButton}
         />
       ) : null}
-      <div className={styles.displayName}>{displayName}</div>
+      <div className={styles.displayName}>{showingName}</div>
       {verifyEmail ? (
         <Button
           clickHandler={verifyEmail}

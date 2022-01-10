@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import WelcomePage from "./components/welcomePage/welcomePage";
 import UserArea from "./components/userArea/userArea";
 import SignUpArea from "./components/signupForm/signUpArea";
@@ -7,11 +7,11 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "./firebase/config";
-import UserIdContext from "./context/UserIdContext";
+import UserContext from "./context/UserContext";
 import FirestoreContext from "./context/FirebaseContext";
 
 function App() {
-  const [uid, setUid] = useState(null);
+  const [user, setUser] = useState(null);
   const [displayName, setDisplayName] = useState(null);
   const [verificationRequired, setVerificationRequired] = useState(false);
 
@@ -19,25 +19,27 @@ function App() {
   const firestore = getFirestore(firebase);
 
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      if (user.emailVerified) {
-        setUid(user.uid);
-        setDisplayName(user.displayName);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.emailVerified) {
+          setUser(user);
+          setDisplayName(user.displayName);
+        } else {
+          setVerificationRequired(true);
+          setUser(user);
+          setDisplayName(user.displayName);
+        }
       } else {
-        setVerificationRequired(true);
-        setUid(user.uid);
-        setDisplayName(user.displayName);
+        setUser(null);
+        setDisplayName(null);
       }
-    } else {
-      setUid(null);
-      setDisplayName(null);
-    }
-  });
+    });
+  }, []);
 
   return (
     <FirestoreContext.Provider value={firestore}>
-      <UserIdContext.Provider value={uid}>
+      <UserContext.Provider value={user}>
         <Routes>
           <Route path="/" element={<Navigate to="/welcome" />} />
           <Route
@@ -50,7 +52,7 @@ function App() {
           />
           <Route path="signup" element={<SignUpArea />} />
         </Routes>
-      </UserIdContext.Provider>
+      </UserContext.Provider>
     </FirestoreContext.Provider>
   );
 }

@@ -24,7 +24,7 @@ function UserMenu({ showUserMenu }) {
 
   useEffect(() => {
     if (signingOutIsTrue) {
-      navigate("/welcome");
+      navigate("/");
     }
     return () => {
       setSigningOutIsTrue(false);

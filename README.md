@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+#### version 0.3.3
+
+- database structure update
+
 #### version 0.3.2
 
 - user can add interesting pages to personal list
