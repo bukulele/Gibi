@@ -12,44 +12,29 @@ import FirestoreContext from "./context/FirebaseContext";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [displayName, setDisplayName] = useState(null);
-  const [verificationRequired, setVerificationRequired] = useState(false);
 
   const firebase = initializeApp(firebaseConfig);
   const firestore = getFirestore(firebase);
 
-  const auth = getAuth();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const auth = getAuth();
+    const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
-        if (user.emailVerified) {
-          setUser(user);
-          setDisplayName(user.displayName);
-        } else {
-          setVerificationRequired(true);
-          setUser(user);
-          setDisplayName(user.displayName);
-        }
+        setUser(user);
       } else {
         setUser(null);
-        setDisplayName(null);
       }
     });
-  }, [auth]);
+    return () => unsub();
+  }, []);
 
   return (
     <FirestoreContext.Provider value={firestore}>
       <UserContext.Provider value={user}>
         <Routes>
           <Route path="/" element={<Navigate to="/welcome" />} />
-          <Route
-            path="welcome/*"
-            element={<WelcomePage displayName={displayName} />}
-          />
-          <Route
-            path=":displayName/*"
-            element={<UserArea verificationRequired={verificationRequired} />}
-          />
+          <Route path="welcome/*" element={<WelcomePage />} />
+          <Route path=":displayName/*" element={<UserArea />} />
           <Route path="signup" element={<SignUpArea />} />
         </Routes>
       </UserContext.Provider>

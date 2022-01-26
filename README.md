@@ -1,5 +1,13 @@
 # ACTION TRACKER APP
 
+#### version 0.3.4
+
+- corrected the order of current actions
+- in calendar actions focusing on today's event or the next one
+- right infographics widget shows percents
+- units added for current actions
+- email verification process set
+
 #### version 0.3.3
 
 - database structure update

@@ -40,7 +40,7 @@ function NavBar({ friendsList, verifyEmail, showingName }) {
         isItHomePage ? styles.navHome : styles.navGuest
       }`}
     >
-      {!isItHomePage && !friendInList && !verifyEmail ? (
+      {user && !isItHomePage && !friendInList ? (
         <Button
           content={<FontAwesomeIcon icon={faUserPlus} pointerEvents="none" />}
           clickHandler={addFriend}
@@ -49,21 +49,15 @@ function NavBar({ friendsList, verifyEmail, showingName }) {
         />
       ) : null}
       <div className={styles.displayName}>{showingName}</div>
-      {verifyEmail ? (
+      {user ? (
         <Button
-          clickHandler={verifyEmail}
+          content={<FontAwesomeIcon icon={faUser} pointerEvents="none" />}
+          clickHandler={switchUserMenu}
           type="button"
-          buttonStyle={styles.goHomeButton}
-          content="Verify email"
+          buttonStyle={styles.userMenuButton}
         />
       ) : null}
-      <Button
-        content={<FontAwesomeIcon icon={faUser} pointerEvents="none" />}
-        clickHandler={switchUserMenu}
-        type="button"
-        buttonStyle={styles.userMenuButton}
-      />
-      <UserMenu showUserMenu={showUserMenu} />
+      {user ? <UserMenu showUserMenu={showUserMenu} /> : null}
     </div>
   );
 }

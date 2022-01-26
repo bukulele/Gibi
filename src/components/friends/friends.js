@@ -12,7 +12,7 @@ function Friends({ friendsList }) {
 
   return (
     <ul className={styles.friends}>
-      <h4>Subscription list</h4>
+      <h4>Subscriptions</h4>
       {friends}
     </ul>
   );

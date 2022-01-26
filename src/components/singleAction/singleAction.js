@@ -2,13 +2,14 @@ import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { ResponsiveRadialBar } from "@nivo/radial-bar";
+import { BasicTooltip } from "@nivo/tooltip";
 import ChangeCurrentAction from "../changeCurrentAction/changeCurrentAction";
 import ModalWindow from "../modalWindow/modalWindow";
 import Button from "../button/button";
 import styles from "./singleAction.module.css";
 import HomePageContext from "../../context/HomePageContext";
 
-function SingleAction({ action, total, progress, index }) {
+function SingleAction({ action, total, progress, index, units }) {
   const isItHomePage = useContext(HomePageContext);
   const [modalVisibility, setModalVisibility] = useState(false);
 
@@ -22,6 +23,7 @@ function SingleAction({ action, total, progress, index }) {
         {
           x: action,
           y: progress,
+          units: units,
         },
       ],
     },
@@ -43,6 +45,14 @@ function SingleAction({ action, total, progress, index }) {
           radialAxisStart={null}
           circularAxisOuter={null}
           legends={[]}
+          tooltip={({ bar }) => {
+            return (
+              <BasicTooltip
+                value={`${bar.value} ${bar.data.units}`}
+                id={<span>{bar.category}</span>}
+              />
+            );
+          }}
           colors={"rgb(0, 191, 255"}
         />
       </div>
@@ -65,6 +75,7 @@ function SingleAction({ action, total, progress, index }) {
           actionToChange={action}
           totalToChange={total}
           progressToChange={progress}
+          unitsToChange={units}
         />
       </ModalWindow>
     </li>

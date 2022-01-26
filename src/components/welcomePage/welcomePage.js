@@ -3,18 +3,18 @@ import { useNavigate, Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Button from "../button/button";
 import styles from "./welcomePage.module.css";
-import UserIdContext from "../../context/UserContext";
+import UserContext from "../../context/UserContext";
 
-function WelcomePage({ displayName }) {
+function WelcomePage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const uid = useContext(UserIdContext);
+  const user = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const goHome = () => {
-    navigate(`/${displayName}`);
+    navigate(`/${user.displayName}`);
   };
 
   const signIn = () => {
@@ -34,7 +34,7 @@ function WelcomePage({ displayName }) {
   return (
     <div className={styles.welcomePage}>
       <div className={styles.greetings}>Welcome to tracker!</div>
-      {uid ? (
+      {user ? (
         <Button
           clickHandler={goHome}
           type="button"

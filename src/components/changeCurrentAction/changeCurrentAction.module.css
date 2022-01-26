@@ -37,11 +37,12 @@
   width: 100%;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
-    "header header header"
-    "progress outof total";
+    "header header header header"
+    "progress outof total units";
   margin: 10px 0;
+  grid-gap: 10px;
 }
 
 .progressBlock h4 {
@@ -53,11 +54,17 @@
 }
 
 .outOf {
+  display: flex;
+  justify-content: center;
   grid-area: outof;
 }
 
 .total {
   grid-area: total;
+}
+
+.units {
+  grid-area: units;
 }
 
 .changeActionButton {

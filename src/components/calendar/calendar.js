@@ -109,10 +109,11 @@ function Calendar() {
         key={date}
         day={day}
         date={year + " " + MONTHS[month] + " " + day}
-        today={{ yearAndMonth: "" + year + month, day: day }}
+        today={{ year: year, month: month, day: day }}
         todayEvents={
-          userData?.calendarActions?.["" + year + month]?.[day.toString()] ||
-          null
+          userData?.calendarActions?.[year.toString()]?.[month.toString()]?.[
+            day.toString()
+          ] || null
         }
         style={{
           gridColumnStart: columnCount,

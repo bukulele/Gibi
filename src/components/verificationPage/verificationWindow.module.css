@@ -1,0 +1,50 @@
+.verificationWindow {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.verifyEmailButton {
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  width: 45%;
+  margin: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color: #01afb0;
+}
+
+.verifyEmailButton:hover {
+  background-color: #fe504f;
+  color: black;
+}
+
+.signOutButton {
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  width: 45%;
+  margin: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color: #fe504f;
+}
+
+.signOutButton:hover {
+  background-color: #01afb0;
+  color: black;
+}

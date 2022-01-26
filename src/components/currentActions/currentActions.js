@@ -28,6 +28,7 @@ function CurrentActions() {
         action={object.action}
         total={object.total}
         progress={object.progress}
+        units={object.units}
       />
     );
   });

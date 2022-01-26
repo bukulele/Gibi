@@ -43,11 +43,13 @@ function TodayAction({ todayEvents, chosenDate, date }) {
   const confirmChanges = () => {
     let data = {
       calendarActions: {
-        [chosenDate.yearAndMonth]: {
-          [chosenDate.day]: {
-            events: [...todayEventsArray],
-            emoji: chosenEmoji,
-            date: date,
+        [chosenDate.year]: {
+          [chosenDate.month]: {
+            [chosenDate.day]: {
+              events: [...todayEventsArray],
+              emoji: chosenEmoji,
+              date: date,
+            },
           },
         },
       },
@@ -55,7 +57,12 @@ function TodayAction({ todayEvents, chosenDate, date }) {
     let collectionRef = doc(firestore, "users", user.displayName);
     if (todayEventsArray.length === 0 && chosenEmoji === null) {
       let pathToDelete =
-        "calendarActions." + chosenDate.yearAndMonth + "." + chosenDate.day;
+        "calendarActions." +
+        chosenDate.year +
+        "." +
+        chosenDate.month +
+        "." +
+        chosenDate.day;
       updateDoc(collectionRef, {
         [pathToDelete]: deleteField(),
       });

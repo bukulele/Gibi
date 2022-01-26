@@ -14,6 +14,7 @@ function ChangeCurrentAction({
   actionToChange,
   progressToChange,
   totalToChange,
+  unitsToChange,
 }) {
   const userData = useContext(UserDataContext);
   const [currentActions, setCurrentActions] = useState([]);
@@ -23,6 +24,7 @@ function ChangeCurrentAction({
   const [action, setAction] = useState(actionToChange);
   const [progress, setProgress] = useState(progressToChange);
   const [total, setTotal] = useState(totalToChange);
+  const [units, setUnits] = useState(unitsToChange);
   const [showChangeActionButton, setShowChangeActionButton] = useState(false);
 
   const changeAction = () => {
@@ -32,6 +34,7 @@ function ChangeCurrentAction({
         action: action,
         progress: progress,
         total: total,
+        units: units,
         dateModified: new Date(),
       };
       setSendData(true);
@@ -63,8 +66,14 @@ function ChangeCurrentAction({
   useEffect(() => {
     if (
       action !== actionToChange ||
-      (+progress !== +progressToChange && +total > 0 && +total >= +progress) ||
-      (+total !== +totalToChange && +total > 0 && +total >= +progress)
+      (+progress !== +progressToChange &&
+        +progress >= 0 &&
+        +total > 0 &&
+        +total >= +progress) ||
+      (+total !== +totalToChange &&
+        +progress >= 0 &&
+        +total > 0 &&
+        +total >= +progress)
     ) {
       setShowChangeActionButton(true);
     } else {
@@ -107,6 +116,14 @@ function ChangeCurrentAction({
           className={styles.total}
           value={total}
           onChange={(event) => setTotal(event.target.value)}
+        ></input>
+        <input
+          type="text"
+          name="units"
+          value={units}
+          placeholder="units"
+          onChange={(event) => setUnits(event.target.value)}
+          className={styles.units}
         ></input>
       </div>
       <Button

@@ -11,6 +11,7 @@ function AddNewCurrentAction({ changeModalVisibility }) {
   const [action, setAction] = useState("");
   const [progress, setProgress] = useState("");
   const [total, setTotal] = useState("");
+  const [units, setUnits] = useState("");
   const [showAddActionButton, setShowAddActionButton] = useState(false);
 
   const addNewAction = () => {
@@ -18,6 +19,7 @@ function AddNewCurrentAction({ changeModalVisibility }) {
       action: action,
       progress: progress,
       total: total,
+      units: units,
       dateModified: new Date(),
     };
     let collectionRef = doc(firestore, "users", user.displayName);
@@ -63,6 +65,14 @@ function AddNewCurrentAction({ changeModalVisibility }) {
           className={styles.total}
           value={total}
           onChange={(event) => setTotal(event.target.value)}
+        ></input>
+        <input
+          type="text"
+          name="units"
+          value={units}
+          placeholder="units"
+          onChange={(event) => setUnits(event.target.value)}
+          className={styles.units}
         ></input>
       </div>
       <Button

@@ -1,10 +1,7 @@
 .userArea {
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(auto, 100px) repeat(2, 550px) minmax(
-      250px,
-      auto
-    );
+  grid-template-columns: 1fr repeat(2, 600px) 1fr;
   grid-template-rows: auto 50px repeat(3, 410px) auto;
   grid-template-areas:
     "nav nav nav nav"
@@ -41,7 +38,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 350px 1fr;
-    grid-template-rows: auto repeat(6, 410px) auto;
+    grid-template-rows: 50px repeat(6, 410px) auto;
     grid-template-areas:
       "nav nav nav"
       ". calendar ."

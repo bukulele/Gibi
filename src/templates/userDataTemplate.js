@@ -6,6 +6,7 @@ const userDataTemplate = {
   calendarActions: {},
   currentActions: [],
   friends: [],
+  tutorialIsDone: false,
 };
 
 export default userDataTemplate;

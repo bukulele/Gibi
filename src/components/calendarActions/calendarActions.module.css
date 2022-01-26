@@ -1,7 +1,7 @@
 .smallActionsWindow {
   grid-area: smallActions;
   display: grid;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 10% 80% auto;
   height: 100%;
   width: 100%;
   font-size: 15px;
@@ -11,6 +11,7 @@
   padding: 1rem;
   position: relative;
   overflow-y: hidden;
+  grid-gap: 5px;
 }
 
 .smallActionsList {

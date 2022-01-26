@@ -56,7 +56,7 @@ function SignUpArea() {
         setUserName("");
         alert("Authentication done!");
       })
-      .then(() => navigate(`/${userName}`))
+      .then(() => navigate("/"))
       .catch((error) => alert(error.message));
   };
 
