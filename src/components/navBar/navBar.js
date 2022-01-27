@@ -10,7 +10,7 @@ import UserContext from "../../context/UserContext";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";
 
-function NavBar({ friendsList, verifyEmail, showingName }) {
+function NavBar({ friendsList, showingName }) {
   const isItHomePage = useContext(HomePageContext);
   const userData = useContext(UserDataContext);
   const user = useContext(UserContext);

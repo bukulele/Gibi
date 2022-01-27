@@ -5,7 +5,7 @@ function Footer() {
     <footer className={styles.footer}>
       <p>
         Created by{" "}
-        <a href="https://bukulele.site" target="_blank">
+        <a href="https://bukulele.site" target="_blank" rel="noreferrer">
           {" "}
           bukulele
         </a>

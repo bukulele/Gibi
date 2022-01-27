@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+#### version 0.3.7
+
+- tooltips on radial bars fixed
+- closing modal windows by outside click fixed
+
 #### version 0.3.6
 
 - new footer
