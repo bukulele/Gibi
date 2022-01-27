@@ -4,9 +4,19 @@
   right: 0px;
   width: 200px;
   height: auto;
-  background-color: lightgrey;
+  background-color: white;
   flex-direction: column;
   align-items: center;
+}
+
+.userMenuWrapper {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: rgba(73, 73, 73, 0.5);
+  z-index: 99;
 }
 
 .showUserMenu {

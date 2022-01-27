@@ -9,17 +9,19 @@ import styles from "./userArea.module.css";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";
 import NavBar from "../navBar/navBar";
-import Friends from "../friends/friends";
+import Subscriptions from "../subscriptions/subscriptions";
 import UserContext from "../../context/UserContext";
 import HomePageContext from "../../context/HomePageContext";
 import ModalWindow from "../modalWindow/modalWindow";
 import VerificationWindow from "../verificationPage/verificationWindow";
+import Button from "../button/button";
 
 function UserArea() {
   const [userData, setUserData] = useState(null);
   const [isItHomePage, setIsItHomePage] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
   const [showVerificationModal, setShowVerificationModal] = useState(false);
+  const [showSubscriptionsList, setShowSubscriptionsList] = useState(false);
 
   const user = useContext(UserContext);
   const firestore = useContext(FirestoreContext);
@@ -28,6 +30,10 @@ function UserArea() {
 
   const closeVerificationModal = () => {
     if (user.emailVerified) setShowVerificationModal(false);
+  };
+
+  const changeSubscriptionsVisibility = () => {
+    setShowSubscriptionsList(!showSubscriptionsList);
   };
 
   useEffect(() => {
@@ -67,7 +73,19 @@ function UserArea() {
               friendsList={friendsList}
               showingName={params.displayName}
             />
-            {user ? <Friends friendsList={friendsList} /> : null}
+            <Button
+              clickHandler={changeSubscriptionsVisibility}
+              buttonStyle={styles.callSubscriptionsButton}
+              type="button"
+              content="Subscriptions"
+            />
+            {user ? (
+              <Subscriptions
+                changeSubscriptionsVisibility={changeSubscriptionsVisibility}
+                showSubscriptionsList={showSubscriptionsList}
+                friendsList={friendsList}
+              />
+            ) : null}
             <Calendar />
             <CalendarActions />
             <CurrentActions />

@@ -1,5 +1,12 @@
 # ACTION TRACKER APP
 
+#### version 0.3.5
+
+- adaptive design came back
+- list of subscriptions updated with adaptive design
+- closing of modal windows and menu corrected: you can click just outside modal window
+- "go to my page" behaviour from user menu corrected
+
 #### version 0.3.4
 
 - corrected the order of current actions

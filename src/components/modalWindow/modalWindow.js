@@ -8,6 +8,7 @@ function ModalWindow({ visibility, changeModalVisibility, children }) {
   return ReactDOM.createPortal(
     visibility ? (
       <div
+        onClick={changeModalVisibility}
         className={`${styles.modalSubsurface} ${
           visibility ? styles.modalVisible : styles.modalInvisible
         }`}

@@ -57,7 +57,9 @@ function NavBar({ friendsList, verifyEmail, showingName }) {
           buttonStyle={styles.userMenuButton}
         />
       ) : null}
-      {user ? <UserMenu showUserMenu={showUserMenu} /> : null}
+      {user ? (
+        <UserMenu switchUserMenu={switchUserMenu} showUserMenu={showUserMenu} />
+      ) : null}
     </div>
   );
 }
