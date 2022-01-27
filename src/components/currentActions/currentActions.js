@@ -20,7 +20,7 @@ function CurrentActions() {
   };
 
   const newCurrentDataArray = currentActions.map((object, index) => {
-    let key = object.progress * object.total + object.action;
+    let key = index + object.progress + object.total + object.action;
     return (
       <SingleAction
         key={key}

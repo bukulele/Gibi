@@ -9,7 +9,7 @@
     ". calendar smallActions subscriptions"
     ". currentActions graph subscriptions"
     " . futurePlans someshit subscriptions"
-    "footer footer footer subscriptions";
+    ". . . subscriptions";
   justify-items: center;
   align-items: center;
   grid-gap: 2rem;
@@ -39,10 +39,6 @@
   .userArea {
     grid-template-columns: auto repeat(2, minmax(350px, 600px)) 200px;
   }
-
-  .callSubscriptionsButton {
-    display: block;
-  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -54,7 +50,11 @@
       ". calendar smallActions ."
       ". currentActions graph ."
       " . futurePlans someshit ."
-      "footer footer footer footer";
+      ". . . .";
+  }
+
+  .callSubscriptionsButton {
+    display: block;
   }
 }
 
@@ -73,7 +73,7 @@
       ". graph ."
       " . futurePlans ."
       ". someshit ."
-      "footer footer footer";
+      ". . .";
     justify-items: center;
     align-items: center;
     grid-gap: 20px;

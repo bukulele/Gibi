@@ -50,6 +50,7 @@ function SingleAction({ action, total, progress, index, units }) {
               <BasicTooltip
                 value={`${bar.value} ${bar.data.units}`}
                 id={<span>{bar.category}</span>}
+                color={bar.color}
               />
             );
           }}

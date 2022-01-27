@@ -15,6 +15,7 @@ import HomePageContext from "../../context/HomePageContext";
 import ModalWindow from "../modalWindow/modalWindow";
 import VerificationWindow from "../verificationPage/verificationWindow";
 import Button from "../button/button";
+import Footer from "../footer/footer";
 
 function UserArea() {
   const [userData, setUserData] = useState(null);
@@ -96,6 +97,7 @@ function UserArea() {
             >
               <VerificationWindow />
             </ModalWindow>
+            <Footer />
           </UserDataContext.Provider>
         </HomePageContext.Provider>
       ) : null}

@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+#### version 0.3.6
+
+- new footer
+- closing modal windows again only on X button. Need to solve the problem with bubbling
+
 #### version 0.3.5
 
 - adaptive design came back

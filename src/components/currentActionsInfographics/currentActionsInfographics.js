@@ -52,6 +52,7 @@ function CurrentActionsInfographics() {
             <BasicTooltip
               value={`${bar.value}%`}
               id={<span>{bar.groupId}</span>}
+              color={bar.color}
             />
           );
         }}
