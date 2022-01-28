@@ -56,7 +56,7 @@ function CurrentActionsInfographics() {
             />
           );
         }}
-        colors={{ scheme: "set3" }}
+        colors={{ scheme: "purpleRed_green" }}
       />
     </div>
   );

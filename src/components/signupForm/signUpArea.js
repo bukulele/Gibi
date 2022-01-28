@@ -135,9 +135,9 @@ function SignUpArea() {
               }
               color={
                 userNameOk === true
-                  ? "#01afb0"
+                  ? "rgb(137, 142, 111)"
                   : userNameOk === false
-                  ? "#fe504f"
+                  ? "rgb(116, 111, 142)"
                   : "#a1a1a1"
               }
             />

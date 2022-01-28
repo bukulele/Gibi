@@ -8,6 +8,7 @@
   border-radius: 10px;
   padding: 1rem;
   position: relative;
+  background-color: white;
 }
 
 .upperCalendarButtons {
@@ -56,18 +57,18 @@
   border-radius: 50%;
   width: 1.5rem;
   height: 1.5rem;
-  color: indianred;
-  background-color: white;
+  color: rgb(137, 142, 111);
+  background-color: transparent;
 }
 
 .calendarButton:hover {
-  background-color: deepskyblue;
+  background-color: rgb(137, 142, 111);
   color: white;
 }
 
 .todayButton {
-  background-color: deepskyblue;
-  color: white;
+  background-color: transparent;
+  color: rgb(137, 142, 111);
   font-weight: bold;
   border: none;
   display: flex;
@@ -79,5 +80,6 @@
 }
 
 .todayButton:hover {
-  background-color: indianred;
+  background-color: rgb(137, 142, 111);
+  color: white;
 }

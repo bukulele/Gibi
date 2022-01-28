@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Button from "../button/button";
 import styles from "./welcomePage.module.css";
 import UserContext from "../../context/UserContext";
+import logo from "../../misc/gibi_face.png";
 
 function WelcomePage() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,10 @@ function WelcomePage() {
 
   return (
     <div className={styles.welcomePage}>
-      <div className={styles.greetings}>Welcome to tracker!</div>
+      <div className={styles.greetings}>
+        <img className={styles.logo} src={logo} alt="logo" />
+        <h1>Welcome, Gibi!</h1>
+      </div>
       {user ? (
         <Button
           clickHandler={goHome}
@@ -69,7 +73,7 @@ function WelcomePage() {
                 clickHandler={signIn}
                 type="button"
                 buttonStyle={styles.signInButton}
-                content="SignIn"
+                content="Sign in"
               />
             </div>
             <Link to="/signup">Create account</Link>

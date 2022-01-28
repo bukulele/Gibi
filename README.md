@@ -1,5 +1,11 @@
 # ACTION TRACKER APP
 
+#### version 0.4.0
+
+- new colors
+- new name
+- new font
+
 #### version 0.3.7
 
 - tooltips on radial bars fixed

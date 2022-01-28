@@ -13,7 +13,7 @@
 .changeAction input {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid indianred;
+  border-bottom: 1px solid rgb(137, 142, 111);
   outline: none;
   width: 100%;
   margin: 10px 0;
@@ -75,13 +75,13 @@
   border-radius: 25px;
   padding: 5px;
   margin: 3px;
-  background-color: deepskyblue;
+  background-color: rgb(137, 142, 111);
   font-weight: bold;
   color: white;
 }
 
 .changeActionButton:hover {
-  background-color: indianred;
+  background-color: rgb(116, 111, 142);
 }
 
 .changeActionButtonShow {
@@ -100,7 +100,7 @@
   width: 15px;
   border: none;
   border-radius: 50%;
-  color: deepskyblue;
+  color: rgb(137, 142, 111);
   background-color: transparent;
   position: absolute;
   bottom: 0;
@@ -108,5 +108,5 @@
 }
 
 .deleteActionButton:hover {
-  color: indianred;
+  color: rgb(116, 111, 142);
 }

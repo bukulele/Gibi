@@ -9,6 +9,7 @@ import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";
+import logo from "../../misc/gibi_face.png";
 
 function NavBar({ friendsList, showingName }) {
   const isItHomePage = useContext(HomePageContext);
@@ -51,7 +52,7 @@ function NavBar({ friendsList, showingName }) {
       <div className={styles.displayName}>{showingName}</div>
       {user ? (
         <Button
-          content={<FontAwesomeIcon icon={faUser} pointerEvents="none" />}
+          content={<img className={styles.logo} src={logo} alt="logo" />}
           clickHandler={switchUserMenu}
           type="button"
           buttonStyle={styles.userMenuButton}

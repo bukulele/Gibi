@@ -14,19 +14,19 @@
 }
 
 .navHome {
-  background-color: #fe504f;
+  background-color: rgb(137, 142, 111);
 }
 
 .navGuest {
-  background-color: #287777;
+  background-color: rgb(116, 111, 142);
 }
 
 .displayName {
   grid-area: displayName;
+  font-family: "Sneakerhead", sans-serif;
   color: white;
   line-height: 50px;
   text-align: center;
-  font-weight: bold;
 }
 
 .userMenuButton {
@@ -39,12 +39,15 @@
   width: 40px;
   height: 40px;
   font-size: 25px;
-  background-color: #ccfe4f;
-  color: #287777;
+  background-color: rgb(234, 217, 190);
+}
+
+.logo {
+  width: 70%;
 }
 
 .userMenuButton:hover {
-  color: #85c4c4;
+  background-color: white;
 }
 
 .addFriendButton {
@@ -57,10 +60,10 @@
   width: 30px;
   height: 30px;
   font-size: 15px;
-  background-color: #f0ffc9;
-  color: #0d2e2e;
+  background-color: rgb(234, 217, 190);
+  color: rgb(137, 142, 111);
 }
 
 .addFriendButton:hover {
-  color: #85c4c4;
+  background-color: white;
 }

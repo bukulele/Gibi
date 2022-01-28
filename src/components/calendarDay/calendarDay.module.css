@@ -8,7 +8,7 @@
 }
 
 .calendarDay:hover {
-  background-color: deepskyblue;
+  background-color: rgb(137, 142, 111);
   color: white;
   font-weight: bold;
   cursor: default;
@@ -23,7 +23,7 @@
 }
 
 .today {
-  background-color: indianred;
+  background-color: rgb(116, 111, 142);
   color: white;
   font-weight: bold;
 }

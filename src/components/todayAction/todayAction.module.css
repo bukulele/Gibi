@@ -22,12 +22,12 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  color: deepskyblue;
+  color: rgb(137, 142, 111);
 }
 
 .emojiButton:hover {
   background-color: transparent;
-  color: indianred;
+  color: rgb(116, 111, 142);
 }
 
 .events {
@@ -39,17 +39,18 @@
   min-height: 30px;
   list-style-type: none;
   border-radius: 10px;
-  background-color: coral;
+  background-color: rgb(137, 142, 111);
   text-align: center;
   margin: 5px 0;
   padding: 0 5px;
   position: relative;
   line-height: 30px;
+  color: white;
 }
 
 .newInput {
   width: 100%;
-  border-bottom: 2px solid indianred;
+  border-bottom: 2px solid rgb(137, 142, 111);
   display: flex;
   justify-content: space-between;
 }
@@ -61,7 +62,7 @@
 }
 
 .addEventButton {
-  color: lightgreen;
+  color: rgb(137, 142, 111);
   border: none;
   background-color: white;
   border-radius: 50%;
@@ -74,7 +75,7 @@
 }
 
 .addEventButton:hover {
-  color: green;
+  color: rgb(116, 111, 142);
 }
 
 .addEventButtonShow {
@@ -113,12 +114,12 @@
   border-radius: 25px;
   padding: 5px;
   margin: 3px;
-  background-color: indianred;
+  background-color: rgb(137, 142, 111);
   font-weight: bold;
   color: white;
 }
 .removeEmoji:hover {
-  background-color: deepskyblue;
+  background-color: rgb(116, 111, 142);
 }
 
 .closeEmojiPickerButton {
@@ -130,12 +131,12 @@
   border: none;
   border-radius: 50%;
   background-color: white;
-  color: indianred;
+  color: rgb(137, 142, 111);
   margin: 3px;
 }
 
 .closeEmojiPickerButton:hover {
-  background-color: indianred;
+  background-color: rgb(137, 142, 111);
   color: white;
 }
 
@@ -147,13 +148,13 @@
   border-radius: 25px;
   padding: 5px;
   margin: 3px;
-  background-color: deepskyblue;
+  background-color: rgb(137, 142, 111);
   font-weight: bold;
   color: white;
 }
 
 .confirmChanges:hover {
-  background-color: indianred;
+  background-color: rgb(116, 111, 142);
 }
 
 .confirmChangesShow {
@@ -174,10 +175,10 @@
   width: 20px;
   height: 20px;
   font-size: 20px;
-  border: 1px solid indianred;
+  border: 1px solid rgb(116, 111, 142);
   border-radius: 50%;
   background-color: white;
-  color: indianred;
+  color: rgb(116, 111, 142);
 }
 
 .deleteEvent:hover {

@@ -13,6 +13,7 @@
   justify-items: center;
   align-items: center;
   grid-gap: 2rem;
+  background-color: rgb(234, 217, 190);
 }
 
 .callSubscriptionsButton {
@@ -27,12 +28,11 @@
   font-size: 15px;
   font-weight: bold;
   color: white;
-  background-color: #01afb0;
+  background-color: rgb(137, 142, 111);
 }
 
 .callSubscriptionsButton:hover {
-  background-color: #fe504f;
-  color: black;
+  background-color: rgb(116, 111, 142);
 }
 
 @media only screen and (max-width: 1200px) {

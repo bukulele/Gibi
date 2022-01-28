@@ -12,6 +12,7 @@
   position: relative;
   overflow-y: hidden;
   grid-gap: 5px;
+  background-color: white;
 }
 
 .smallActionsList {
@@ -36,7 +37,7 @@
   padding: 5px;
   position: relative;
   line-height: 30px;
-  background-color: rgb(181, 227, 255);
+  background-color: rgb(234, 222, 206);
 }
 
 .date {
@@ -57,10 +58,11 @@
   width: 100%;
   min-height: 30px;
   border-radius: 10px;
-  background-color: coral;
+  background-color: rgb(137, 142, 111);
   text-align: center;
   margin: 5px 0;
   padding: 0 5px;
   position: relative;
   line-height: 30px;
+  color: white;
 }

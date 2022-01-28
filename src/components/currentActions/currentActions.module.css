@@ -12,6 +12,7 @@
   padding: 1rem;
   position: relative;
   overflow: hidden;
+  background-color: white;
 }
 .currentActionsHeaderHome {
   display: grid;
@@ -39,7 +40,7 @@
 }
 
 .addNewCurrentAction {
-  color: deepskyblue;
+  color: rgb(137, 142, 111);
   border: none;
   background-color: white;
   border-radius: 50%;
@@ -52,7 +53,7 @@
 }
 
 .addNewCurrentAction:hover {
-  color: indianred;
+  color: rgb(116, 111, 142);
 }
 
 .currentActionsList {

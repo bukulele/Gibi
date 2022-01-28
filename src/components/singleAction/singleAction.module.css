@@ -5,7 +5,7 @@
   align-items: center;
   width: 100%;
   margin: 5px 0;
-  border: 2px solid rgb(181, 227, 255);
+  border: 2px solid rgb(137, 142, 111);
   border-radius: 10px;
 }
 
@@ -16,7 +16,7 @@
   align-items: center;
   width: 100%;
   margin: 5px 0;
-  border: 2px solid rgb(181, 227, 255);
+  border: 2px solid rgb(137, 142, 111);
   border-radius: 10px;
 }
 
@@ -39,5 +39,5 @@
 }
 
 .correctAction:hover {
-  color: indianred;
+  color: rgb(116, 111, 142);
 }

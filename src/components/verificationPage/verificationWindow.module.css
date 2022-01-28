@@ -24,11 +24,11 @@
   font-size: 15px;
   font-weight: bold;
   color: white;
-  background-color: #01afb0;
+  background-color: rgb(137, 142, 111);
 }
 
 .verifyEmailButton:hover {
-  background-color: #fe504f;
+  background-color: rgb(116, 111, 142);
   color: black;
 }
 
@@ -41,10 +41,10 @@
   font-size: 15px;
   font-weight: bold;
   color: white;
-  background-color: #fe504f;
+  background-color: rgb(116, 111, 142);
 }
 
 .signOutButton:hover {
-  background-color: #01afb0;
+  background-color: rgb(137, 142, 111);
   color: black;
 }

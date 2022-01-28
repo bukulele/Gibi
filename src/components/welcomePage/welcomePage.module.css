@@ -1,7 +1,7 @@
 .welcomePage {
   width: 100%;
   height: 100vh;
-  background-color: #fe504f;
+  background-color: rgb(234, 217, 190);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 100%;
@@ -12,9 +12,20 @@
 
 .greetings {
   grid-area: greetings;
-  font-size: 4rem;
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Sneakerhead", sans-serif;
   color: white;
+}
+
+.logo {
+  width: 50%;
+}
+
+.greetings h1 {
+  font-size: 70px;
 }
 
 .signInForm {
@@ -47,7 +58,7 @@
 
 .signInForm a:hover {
   background-color: white;
-  color: #fe504f;
+  color: rgb(137, 142, 111);
 }
 
 .inputBlock {
@@ -60,7 +71,7 @@
   margin: 10px auto;
   width: 100%;
   border: none;
-  border-bottom: 2px solid #fe504f;
+  border-bottom: 2px solid rgb(137, 142, 111);
   background-color: transparent;
   outline: none;
 }
@@ -74,12 +85,11 @@
   font-size: 25px;
   font-weight: bold;
   color: white;
-  background-color: #01afb0;
+  background-color: rgb(137, 142, 111);
 }
 
 .goHomeButton:hover {
-  background-color: white;
-  color: black;
+  background-color: rgb(116, 111, 142);
 }
 
 .signInButton {
@@ -89,9 +99,9 @@
   padding: 0 10px;
   font-weight: bold;
   color: white;
-  background-color: #fe504f;
+  background-color: rgb(137, 142, 111);
 }
 
 .signInButton:hover {
-  background-color: #01afb0;
+  background-color: rgb(116, 111, 142);
 }

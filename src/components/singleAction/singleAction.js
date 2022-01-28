@@ -54,7 +54,7 @@ function SingleAction({ action, total, progress, index, units }) {
               />
             );
           }}
-          colors={"rgb(0, 191, 255"}
+          colors={"rgb(137, 142, 111)"}
         />
       </div>
       <div>{action}</div>
