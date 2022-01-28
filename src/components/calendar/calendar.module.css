@@ -8,13 +8,15 @@
   border-radius: 10px;
   padding: 1rem;
   position: relative;
-  background-color: white;
+  background-color: rgb(243, 237, 223);
 }
 
-.upperCalendarButtons {
+.calendarHeader {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  justify-content: flex-end;
+  height: 35px;
 }
 
 .calendarControlBlock {
@@ -67,6 +69,8 @@
 }
 
 .todayButton {
+  position: absolute;
+  right: 1rem;
   background-color: transparent;
   color: rgb(137, 142, 111);
   font-weight: bold;
@@ -76,7 +80,6 @@
   align-items: center;
   border-radius: 25px;
   padding: 5px;
-  margin: 5px;
 }
 
 .todayButton:hover {

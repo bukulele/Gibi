@@ -32,7 +32,7 @@
   grid-area: signin;
   width: 350px;
   height: 410px;
-  background-color: white;
+  background-color: rgb(243, 237, 223);
   border: 1px solid rgba(128, 128, 128, 0.5);
   box-shadow: 0px 0px 8px 3px rgba(128, 128, 128, 0.2);
   border-radius: 10px;
@@ -57,7 +57,7 @@
 }
 
 .signInForm a:hover {
-  background-color: white;
+  background-color: rgb(243, 237, 223);
   color: rgb(137, 142, 111);
 }
 
@@ -104,4 +104,33 @@
 
 .signInButton:hover {
   background-color: rgb(116, 111, 142);
+}
+
+@media only screen and (max-width: 1200px) {
+  .greetings h1 {
+    font-size: 50px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .greetings h1 {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .welcomePage {
+    min-height: 100%;
+    height: fit-content;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "greetings"
+      "signin";
+    grid-gap: 10px;
+    padding: 50px 0;
+  }
+  .logo {
+    height: 50%;
+  }
 }

@@ -2,9 +2,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import UserDataContext from "../../context/UserDataContext";
 import { Emoji } from "emoji-mart";
 import styles from "./calendarActions.module.css";
+import HomePageContext from "../../context/HomePageContext";
 
 function CalendarActions() {
   const userData = useContext(UserDataContext);
+  const isItHomePage = useContext(HomePageContext);
   const [calendarActions, setCalendarActions] = useState({});
   const [indexToFocus, setIndexToFocus] = useState(0);
 
@@ -66,12 +68,17 @@ function CalendarActions() {
   }, [datesArray]);
 
   useEffect(() => {
-    if (refsArr.current.length > 0) refsArr.current[indexToFocus].focus();
+    if (refsArr.current[indexToFocus]) refsArr.current[indexToFocus].focus();
   }, [indexToFocus]);
 
   return (
     <div className={styles.smallActionsWindow}>
-      <h3>Here are all the actions you added to calendar</h3>
+      <div className={styles.calendarActionsHeader}>
+        <h4>
+          {isItHomePage ? "Your" : `${userData.userName}'s`} plans (detailed)
+        </h4>
+      </div>
+
       <ul className={styles.smallActionsList}>{calendarActionsList}</ul>
     </div>
   );

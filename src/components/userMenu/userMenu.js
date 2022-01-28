@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import HomePageContext from "../../context/HomePageContext";
 import { getAuth, signOut } from "firebase/auth";
@@ -9,6 +9,8 @@ import UserContext from "../../context/UserContext";
 function UserMenu({ showUserMenu, switchUserMenu }) {
   const user = useContext(UserContext);
   const isItHomePage = useContext(HomePageContext);
+
+  const menuWrapperRef = useRef();
 
   const navigate = useNavigate();
 
@@ -23,14 +25,19 @@ function UserMenu({ showUserMenu, switchUserMenu }) {
       });
   };
 
+  const clickHandler = (event) => {
+    if (event.target === menuWrapperRef.current) switchUserMenu();
+  };
+
   return (
     <div
-      onClick={switchUserMenu}
+      ref={menuWrapperRef}
+      onClick={clickHandler}
       className={`${styles.userMenuWrapper} ${
         showUserMenu ? styles.showUserMenu : styles.hideUserMenu
       }`}
     >
-      <ul className={styles.userMenu}>
+      <ul className={styles.userMenu} onClick={switchUserMenu}>
         {isItHomePage ? null : (
           <li>
             <Link to={`/${user.displayName}`}>Go to my page</Link>

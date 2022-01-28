@@ -10,9 +10,11 @@ import {
   faAngleDoubleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import UserDataContext from "../../context/UserDataContext";
+import HomePageContext from "../../context/HomePageContext";
 
 function Calendar() {
   const userData = useContext(UserDataContext);
+  const isItHomePage = useContext(HomePageContext);
   const [currentMonth, setCurrentMonth] = useState(todayIs().getMonth());
   const [currentYear, setCurrentYear] = useState(todayIs().getFullYear());
 
@@ -142,7 +144,10 @@ function Calendar() {
 
   return (
     <div className={styles.calendar}>
-      <div className={styles.upperCalendarButtons}>
+      <div className={styles.calendarHeader}>
+        <h4>
+          What are {isItHomePage ? "your" : `${userData.userName}'s`} plans?
+        </h4>
         <Button
           content="Today"
           type="button"

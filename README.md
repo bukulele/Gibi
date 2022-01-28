@@ -1,5 +1,13 @@
 # ACTION TRACKER APP
 
+#### version 0.4.1
+
+- bug with focusing on calendar action fixed
+- closing modal windows behaviour improved
+- color scheme changed
+- personalized headers added to widgets
+- welcome page adopted for mobile screen
+
 #### version 0.4.0
 
 - new colors

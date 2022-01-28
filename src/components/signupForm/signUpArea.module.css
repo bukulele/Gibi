@@ -10,7 +10,7 @@
 .signUpForm {
   width: 600px;
   height: 410px;
-  background-color: white;
+  background-color: rgb(243, 237, 223);
   border: 1px solid rgba(128, 128, 128, 0.5);
   box-shadow: 0px 0px 8px 3px rgba(128, 128, 128, 0.2);
   border-radius: 10px;

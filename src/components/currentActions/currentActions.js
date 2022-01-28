@@ -40,6 +40,11 @@ function CurrentActions() {
 
   return (
     <div className={styles.currentActions}>
+      <div className={styles.currentActionsHeader}>
+        <h4>
+          What {isItHomePage ? "are you" : `is ${userData.userName}`} doing?
+        </h4>
+      </div>
       <div
         className={
           isItHomePage
