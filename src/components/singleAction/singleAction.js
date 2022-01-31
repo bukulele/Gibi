@@ -1,13 +1,19 @@
 import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { ResponsiveRadialBar } from "@nivo/radial-bar";
-import { BasicTooltip } from "@nivo/tooltip";
 import ChangeCurrentAction from "../changeCurrentAction/changeCurrentAction";
 import ModalWindow from "../modalWindow/modalWindow";
 import Button from "../button/button";
 import styles from "./singleAction.module.css";
 import HomePageContext from "../../context/HomePageContext";
+import {
+  RadialBarChart,
+  RadialBar,
+  Tooltip,
+  ResponsiveContainer,
+  PolarAngleAxis,
+} from "recharts";
+import CustomTooltip from "../customTooltip/customTooltip";
 
 function SingleAction({ action, total, progress, index, units }) {
   const isItHomePage = useContext(HomePageContext);
@@ -19,43 +25,36 @@ function SingleAction({ action, total, progress, index, units }) {
 
   const chartData = [
     {
-      data: [
-        {
-          x: action,
-          y: progress,
-          units: units,
-        },
-      ],
+      action: action,
+      percentage: Math.round((progress / total) * 100),
+      progress: progress,
+      total: total,
+      units: units,
+      fill: "rgb(137, 142, 111)",
     },
   ];
 
   return (
     <li className={isItHomePage ? styles.actionHome : styles.actionGuest}>
       <div className={styles.chart}>
-        <ResponsiveRadialBar
-          data={chartData}
-          maxValue={total}
-          endAngle={360}
-          innerRadius={0.2}
-          padding={0.4}
-          cornerRadius={0}
-          margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-          enableRadialGrid={false}
-          enableCircularGrid={false}
-          radialAxisStart={null}
-          circularAxisOuter={null}
-          legends={[]}
-          tooltip={({ bar }) => {
-            return (
-              <BasicTooltip
-                value={`${bar.value} ${bar.data.units}`}
-                id={<span>{bar.category}</span>}
-                color={bar.color}
-              />
-            );
-          }}
-          colors={"rgb(137, 142, 111)"}
-        />
+        <ResponsiveContainer>
+          <RadialBarChart
+            data={chartData}
+            startAngle={90}
+            endAngle={-360}
+            margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
+            innerRadius={"55%"}
+            outerRadius={"100%"}
+          >
+            <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
+            <RadialBar
+              background={{ fill: "rgb(220, 220, 220)" }}
+              dataKey="percentage"
+              data={chartData}
+            />
+            <Tooltip content={<CustomTooltip />} />
+          </RadialBarChart>
+        </ResponsiveContainer>
       </div>
       <div>{action}</div>
       {isItHomePage ? (

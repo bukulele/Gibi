@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+#### version 0.4.2
+
+- Charts library changed to [Recharts](https://recharts.org/en-US)
+- impossibility to change units in "What are you doing" section fixed
+
 #### version 0.4.1
 
 - bug with focusing on calendar action fixed

@@ -73,13 +73,14 @@ function ChangeCurrentAction({
       (+total !== +totalToChange &&
         +progress >= 0 &&
         +total > 0 &&
-        +total >= +progress)
+        +total >= +progress) ||
+      units !== unitsToChange
     ) {
       setShowChangeActionButton(true);
     } else {
       setShowChangeActionButton(false);
     }
-  }, [action, progress, total]);
+  }, [action, progress, total, units]);
 
   useEffect(() => {
     if (userData?.currentActions) {
