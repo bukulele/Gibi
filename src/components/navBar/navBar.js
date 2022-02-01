@@ -5,7 +5,7 @@ import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import HomePageContext from "../../context/HomePageContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserDataContext from "../../context/UserDataContext";

@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+#### version 0.5.0
+
+- new feature: small widgets for some small but important information!
+
 #### version 0.4.2
 
 - Charts library changed to [Recharts](https://recharts.org/en-US)

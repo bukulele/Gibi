@@ -9,7 +9,7 @@ function Footer() {
           {" "}
           bukulele
         </a>
-        &copy; 2021
+        &copy; 2021 - 2022
       </p>
     </footer>
   );

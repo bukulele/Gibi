@@ -20,6 +20,7 @@ function AddNewCurrentAction({ changeModalVisibility }) {
       progress: progress,
       total: total,
       units: units,
+      dateCreated: new Date(),
       dateModified: new Date(),
     };
     let collectionRef = doc(firestore, "users", user.displayName);

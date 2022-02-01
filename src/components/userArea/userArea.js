@@ -16,6 +16,7 @@ import ModalWindow from "../modalWindow/modalWindow";
 import VerificationWindow from "../verificationPage/verificationWindow";
 import Button from "../button/button";
 import Footer from "../footer/footer";
+import SmallWidgetsArea from "../smallWidgetsArea/smallWidgetsArea";
 
 function UserArea() {
   const [userData, setUserData] = useState(null);
@@ -91,6 +92,7 @@ function UserArea() {
             <CalendarActions />
             <CurrentActions />
             <CurrentActionsInfographics />
+            <SmallWidgetsArea />
             <ModalWindow
               visibility={showVerificationModal}
               changeModalVisibility={closeVerificationModal}

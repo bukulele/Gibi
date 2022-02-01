@@ -2,17 +2,17 @@
   width: 100%;
   display: grid;
   grid-template-columns: 200px repeat(2, minmax(350px, 600px)) 200px;
-  grid-template-rows: 50px 30px repeat(3, 410px) auto;
+  grid-template-rows: 50px 30px repeat(2, 410px) auto auto;
   grid-template-areas:
     "nav nav nav nav"
     ". . . ."
     ". calendar smallActions subscriptions"
     ". currentActions graph subscriptions"
-    " . futurePlans someshit subscriptions"
+    " . smallWidgets smallWidgets subscriptions"
     ". . . subscriptions";
   justify-items: center;
   align-items: center;
-  grid-gap: 2rem;
+  grid-gap: 25px;
   background-color: rgb(234, 217, 190);
 }
 
@@ -49,7 +49,7 @@
       ". . callSubscriptions ."
       ". calendar smallActions ."
       ". currentActions graph ."
-      " . futurePlans someshit ."
+      " . smallWidgets smallWidgets ."
       ". . . .";
   }
 
@@ -63,7 +63,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 350px 1fr;
-    grid-template-rows: 50px 30px repeat(6, 410px) auto;
+    grid-template-rows: 50px 30px repeat(4, 410px) auto auto;
     grid-template-areas:
       "nav nav nav"
       ". callSubscriptions callSubscriptions"
@@ -71,8 +71,7 @@
       ". smallActions ."
       ". currentActions ."
       ". graph ."
-      " . futurePlans ."
-      ". someshit ."
+      " . smallWidgets ."
       ". . .";
     justify-items: center;
     align-items: center;

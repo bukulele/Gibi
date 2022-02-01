@@ -1,0 +1,53 @@
+.addSmallWidget {
+  width: 90%;
+  height: 90%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr 2fr 1fr;
+  place-items: center;
+  grid-gap: 10px;
+}
+
+.addSmallWidget input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(137, 142, 111);
+  outline: none;
+  width: 100%;
+}
+
+.addSmallWidget textarea {
+  resize: none;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid rgb(137, 142, 111);
+  outline: none;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+
+.addWidgetButton {
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  border: none;
+  border-radius: 25px;
+  padding: 5px;
+  margin: 3px;
+  background-color: rgb(137, 142, 111);
+  font-weight: bold;
+  color: white;
+}
+
+.addWidgetButton:hover {
+  background-color: rgb(116, 111, 142);
+}
+
+.addWidgetButtonShow {
+  display: flex;
+}
+
+.addWidgetButtonHide {
+  display: none;
+}

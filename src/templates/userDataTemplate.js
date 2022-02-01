@@ -7,6 +7,7 @@ const userDataTemplate = {
   currentActions: [],
   friends: [],
   tutorialIsDone: false,
+  smallWidgets: [],
 };
 
 export default userDataTemplate;
