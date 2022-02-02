@@ -8,15 +8,30 @@ import SmallWidget from "../smallWidget/smallWidget";
 import ModalWindow from "../modalWindow/modalWindow";
 import AddSmallWidget from "../smallWidget/addSmallWidget";
 import styles from "./smallWidgetsArea.module.css";
+import WarningModal from "../modalWindow/warningModal";
 
 function SmallWidgetsArea() {
   const isItHomePage = useContext(HomePageContext);
   const userData = useContext(UserDataContext);
   const [smallWidgetsArray, setSmallWidgetsArray] = useState([]);
   const [showNewWidgetModal, setshowNewWidgetModal] = useState(false);
+  const [warningModalVisibility, setWarningModalVisibility] = useState(false);
+  const [hasUnsavedData, setHasUnsavedData] = useState(false);
 
-  const changeModalVisibility = () => {
-    setshowNewWidgetModal(!showNewWidgetModal);
+  const closeModal = () => {
+    if (showNewWidgetModal && hasUnsavedData) {
+      showWarning();
+    } else {
+      setshowNewWidgetModal(false);
+    }
+  };
+
+  const showWarning = () => {
+    setWarningModalVisibility(true);
+  };
+
+  const hideWarning = () => {
+    setWarningModalVisibility(false);
   };
 
   useEffect(() => {
@@ -43,7 +58,7 @@ function SmallWidgetsArea() {
             content={
               <FontAwesomeIcon icon={faPlusCircle} pointerEvents="none" />
             }
-            clickHandler={changeModalVisibility}
+            clickHandler={() => setshowNewWidgetModal(true)}
             buttonStyle={styles.addWidgetButton}
             type="button"
           />
@@ -52,10 +67,19 @@ function SmallWidgetsArea() {
       </div>
       <ModalWindow
         visibility={showNewWidgetModal}
-        changeModalVisibility={changeModalVisibility}
+        changeModalVisibility={closeModal}
       >
-        <AddSmallWidget changeModalVisibility={changeModalVisibility} />
+        <AddSmallWidget
+          setHasUnsavedData={setHasUnsavedData}
+          changeModalVisibility={closeModal}
+        />
       </ModalWindow>
+      <WarningModal
+        setModalVisibility={setshowNewWidgetModal}
+        setHasUnsavedData={setHasUnsavedData}
+        hideWarning={hideWarning}
+        warningModalVisibility={warningModalVisibility}
+      />
     </>
   );
 }

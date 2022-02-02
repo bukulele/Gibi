@@ -17,6 +17,13 @@
   background-color: rgb(234, 222, 206);
 }
 
-.smallWidget h4 {
+.header {
   text-align: center;
+}
+
+.content {
+  max-width: 100%;
+  max-height: 100%;
+  inline-size: auto;
+  overflow-wrap: break-word;
 }

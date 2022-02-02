@@ -18,7 +18,7 @@
   margin: 10px 0;
 }
 
-.addNewAction input[type="number"] {
+/* .addNewAction input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -26,7 +26,7 @@
 .addNewAction input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} */
 
 .action {
   width: 100%;

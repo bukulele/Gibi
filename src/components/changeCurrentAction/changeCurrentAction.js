@@ -15,6 +15,7 @@ function ChangeCurrentAction({
   progressToChange,
   totalToChange,
   unitsToChange,
+  setHasUnsavedData,
 }) {
   const userData = useContext(UserDataContext);
   const [currentActions, setCurrentActions] = useState([]);
@@ -88,6 +89,14 @@ function ChangeCurrentAction({
     }
   }, [userData, id]);
 
+  useEffect(() => {
+    if (showChangeActionButton) {
+      setHasUnsavedData(true);
+    } else {
+      setHasUnsavedData(false);
+    }
+  }, [showChangeActionButton]);
+
   return (
     <div className={styles.changeAction}>
       <div className={styles.action}>
@@ -97,6 +106,7 @@ function ChangeCurrentAction({
           name="action"
           value={action}
           onChange={(event) => setAction(event.target.value)}
+          maxLength={100}
         ></input>
       </div>
       <div className={styles.progressBlock}>

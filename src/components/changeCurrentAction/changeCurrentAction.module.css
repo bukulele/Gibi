@@ -1,13 +1,12 @@
 .changeAction {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   overflow-y: auto;
   padding: 5px;
-  position: relative;
 }
 
 .changeAction input {
@@ -19,7 +18,7 @@
   margin: 10px 0;
 }
 
-.changeAction input[type="number"] {
+/* .changeAction input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -27,7 +26,7 @@
 .changeAction input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} */
 
 .action {
   width: 100%;
@@ -103,8 +102,8 @@
   color: rgb(137, 142, 111);
   background-color: transparent;
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 5px;
+  left: 5px;
 }
 
 .deleteActionButton:hover {

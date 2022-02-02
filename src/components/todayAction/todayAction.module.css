@@ -93,7 +93,7 @@
 }
 
 .emojiWindow {
-  position: absolute;
+  position: fixed;
   flex-direction: column;
 }
 

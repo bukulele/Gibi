@@ -17,7 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import calendarActionsReducer from "../../reducer/calendarActionsReducer";
 
-function TodayAction({ todayEvents, chosenDate, date }) {
+function TodayAction({ todayEvents, chosenDate, date, setHasUnsavedData }) {
   const firestore = useContext(FirestoreContext);
   const user = useContext(UserContext);
   const isItHomePage = useContext(HomePageContext);
@@ -65,10 +65,11 @@ function TodayAction({ todayEvents, chosenDate, date }) {
         chosenDate.day;
       updateDoc(collectionRef, {
         [pathToDelete]: deleteField(),
-      });
+      }).then(() => setHasUnsavedData(false));
     } else {
       setDoc(collectionRef, data, { merge: true }).then(() => {
         setEventOfTheDay("");
+        setHasUnsavedData(false);
       });
     }
   };
@@ -124,6 +125,14 @@ function TodayAction({ todayEvents, chosenDate, date }) {
       );
     }
   }, [todayEvents]);
+
+  useEffect(() => {
+    if (showAddEventButton || showConfirmChangesButton) {
+      setHasUnsavedData(true);
+    } else {
+      setHasUnsavedData(false);
+    }
+  }, [showAddEventButton, showConfirmChangesButton]);
 
   const listArray = todayEventsArray.map((event, index) => (
     <li

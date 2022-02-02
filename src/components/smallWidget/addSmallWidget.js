@@ -6,7 +6,7 @@ import UserContext from "../../context/UserContext";
 import Button from "../button/button";
 import styles from "./addSmallWidget.module.css";
 
-function AddSmallWidget({ changeModalVisibility }) {
+function AddSmallWidget({ setHasUnsavedData, changeModalVisibility }) {
   const user = useContext(UserContext);
   const firestore = useContext(FirestoreContext);
   const [header, setHeader] = useState("");
@@ -36,6 +36,14 @@ function AddSmallWidget({ changeModalVisibility }) {
     }
   }, [header, content]);
 
+  useEffect(() => {
+    if (showAddWidgetButton) {
+      setHasUnsavedData(true);
+    } else {
+      setHasUnsavedData(false);
+    }
+  }, [showAddWidgetButton]);
+
   return (
     <div className={styles.addSmallWidget}>
       <input
@@ -44,9 +52,10 @@ function AddSmallWidget({ changeModalVisibility }) {
         value={header}
         onChange={(event) => setHeader(event.target.value)}
         placeholder="Just one interesting thing"
+        maxLength={50}
       ></input>
       <textarea
-        maxLength={200}
+        maxLength={150}
         value={content}
         onChange={(event) => setContent(event.target.value)}
         placeholder="Specify it here!"

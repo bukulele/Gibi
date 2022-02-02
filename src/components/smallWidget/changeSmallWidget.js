@@ -13,6 +13,7 @@ function ChangeSmallWidget({
   contentToChange,
   changeModalVisibility,
   index,
+  setHasUnsavedData,
 }) {
   const user = useContext(UserContext);
   const firestore = useContext(FirestoreContext);
@@ -70,6 +71,14 @@ function ChangeSmallWidget({
     return () => setReadyToUpdate(false);
   }, [readyToUpdate]);
 
+  useEffect(() => {
+    if (showChangeWidgetButton) {
+      setHasUnsavedData(true);
+    } else {
+      setHasUnsavedData(false);
+    }
+  }, [showChangeWidgetButton]);
+
   return (
     <div className={styles.changeSmallWidget}>
       <input
@@ -78,9 +87,10 @@ function ChangeSmallWidget({
         value={header}
         onChange={(event) => setHeader(event.target.value)}
         placeholder="Just one interesting thing"
+        maxLength={150}
       ></input>
       <textarea
-        maxLength={200}
+        maxLength={150}
         value={content}
         onChange={(event) => setContent(event.target.value)}
         placeholder="Specify it here!"

@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+#### version 0.5.1
+
+- style corrections
+- warnings on try close modal window without saving added
+
 #### version 0.5.0
 
 - new feature: small widgets for some small but important information!

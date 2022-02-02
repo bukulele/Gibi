@@ -5,7 +5,7 @@ import FirestoreContext from "../../context/FirebaseContext";
 import UserContext from "../../context/UserContext";
 import Button from "../button/button";
 
-function AddNewCurrentAction({ changeModalVisibility }) {
+function AddNewCurrentAction({ setHasUnsavedData, changeModalVisibility }) {
   const firestore = useContext(FirestoreContext);
   const user = useContext(UserContext);
   const [action, setAction] = useState("");
@@ -37,6 +37,14 @@ function AddNewCurrentAction({ changeModalVisibility }) {
     }
   }, [action, total, progress]);
 
+  useEffect(() => {
+    if (showAddActionButton) {
+      setHasUnsavedData(true);
+    } else {
+      setHasUnsavedData(false);
+    }
+  }, [showAddActionButton]);
+
   return (
     <div className={styles.addNewAction}>
       <div className={styles.action}>
@@ -46,6 +54,7 @@ function AddNewCurrentAction({ changeModalVisibility }) {
           name="action"
           value={action}
           onChange={(event) => setAction(event.target.value)}
+          maxLength={150}
         ></input>
       </div>
       <div className={styles.progressBlock}>

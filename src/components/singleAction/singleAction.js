@@ -14,13 +14,28 @@ import {
   PolarAngleAxis,
 } from "recharts";
 import CustomTooltip from "../customTooltip/customTooltip";
+import WarningModal from "../modalWindow/warningModal";
 
 function SingleAction({ action, total, progress, index, units }) {
   const isItHomePage = useContext(HomePageContext);
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [warningModalVisibility, setWarningModalVisibility] = useState(false);
+  const [hasUnsavedData, setHasUnsavedData] = useState(false);
 
-  const changeModalVisibility = () => {
-    setModalVisibility(!modalVisibility);
+  const closeModal = () => {
+    if (modalVisibility && hasUnsavedData) {
+      showWarning();
+    } else {
+      setModalVisibility(false);
+    }
+  };
+
+  const showWarning = () => {
+    setWarningModalVisibility(true);
+  };
+
+  const hideWarning = () => {
+    setWarningModalVisibility(false);
   };
 
   const chartData = [
@@ -59,7 +74,7 @@ function SingleAction({ action, total, progress, index, units }) {
       <div>{action}</div>
       {isItHomePage ? (
         <Button
-          clickHandler={changeModalVisibility}
+          clickHandler={() => setModalVisibility(true)}
           content={<FontAwesomeIcon icon={faPencilAlt} pointerEvents="none" />}
           buttonStyle={styles.correctAction}
           type="button"
@@ -67,17 +82,24 @@ function SingleAction({ action, total, progress, index, units }) {
       ) : null}
       <ModalWindow
         visibility={modalVisibility}
-        changeModalVisibility={changeModalVisibility}
+        changeModalVisibility={closeModal}
       >
         <ChangeCurrentAction
           id={index}
-          changeModalVisibility={changeModalVisibility}
+          setHasUnsavedData={setHasUnsavedData}
+          changeModalVisibility={closeModal}
           actionToChange={action}
           totalToChange={total}
           progressToChange={progress}
           unitsToChange={units}
         />
       </ModalWindow>
+      <WarningModal
+        setModalVisibility={setModalVisibility}
+        setHasUnsavedData={setHasUnsavedData}
+        hideWarning={hideWarning}
+        warningModalVisibility={warningModalVisibility}
+      />
     </li>
   );
 }

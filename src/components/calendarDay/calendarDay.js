@@ -3,13 +3,28 @@ import TodayAction from "../todayAction/todayAction";
 import ModalWindow from "../modalWindow/modalWindow";
 import styles from "./calendarDay.module.css";
 import { Emoji } from "emoji-mart";
+import WarningModal from "../modalWindow/warningModal";
 
 function CalendarDay({ style, dayColor, todayEvents, today, day, date }) {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [showDay, setShowDay] = useState(false);
+  const [warningModalVisibility, setWarningModalVisibility] = useState(false);
+  const [hasUnsavedData, setHasUnsavedData] = useState(false);
 
-  const changeModalVisibility = () => {
-    setModalVisibility(!modalVisibility);
+  const closeModal = () => {
+    if (modalVisibility && hasUnsavedData) {
+      showWarning();
+    } else {
+      setModalVisibility(false);
+    }
+  };
+
+  const showWarning = () => {
+    setWarningModalVisibility(true);
+  };
+
+  const hideWarning = () => {
+    setWarningModalVisibility(false);
   };
 
   return (
@@ -21,7 +36,7 @@ function CalendarDay({ style, dayColor, todayEvents, today, day, date }) {
             : `${styles.calendarDay} ${styles[dayColor]}`
         }
         style={style}
-        onClick={changeModalVisibility}
+        onClick={() => setModalVisibility(true)}
         onMouseEnter={() => setShowDay(true)}
         onMouseLeave={() => setShowDay(false)}
       >
@@ -37,17 +52,24 @@ function CalendarDay({ style, dayColor, todayEvents, today, day, date }) {
       </div>
       <ModalWindow
         visibility={modalVisibility}
-        changeModalVisibility={changeModalVisibility}
+        changeModalVisibility={closeModal}
       >
         {
           <TodayAction
+            setHasUnsavedData={setHasUnsavedData}
             date={date}
             todayEvents={todayEvents}
             chosenDate={today}
-            changeModalVisibility={changeModalVisibility}
+            changeModalVisibility={closeModal}
           />
         }
       </ModalWindow>
+      <WarningModal
+        setModalVisibility={setModalVisibility}
+        setHasUnsavedData={setHasUnsavedData}
+        hideWarning={hideWarning}
+        warningModalVisibility={warningModalVisibility}
+      />
     </>
   );
 }

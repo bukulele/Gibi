@@ -7,6 +7,7 @@ import AddNewCurrentAction from "../addNewAction/addNewCurrentAction";
 import SingleAction from "../singleAction/singleAction";
 import UserDataContext from "../../context/UserDataContext";
 import ModalWindow from "../modalWindow/modalWindow";
+import WarningModal from "../modalWindow/warningModal";
 import HomePageContext from "../../context/HomePageContext";
 
 function CurrentActions() {
@@ -14,9 +15,23 @@ function CurrentActions() {
   const isItHomePage = useContext(HomePageContext);
   const [currentActions, setCurrentActions] = useState([]);
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [warningModalVisibility, setWarningModalVisibility] = useState(false);
+  const [hasUnsavedData, setHasUnsavedData] = useState(false);
 
-  const changeModalVisibility = () => {
-    setModalVisibility(!modalVisibility);
+  const closeModal = () => {
+    if (modalVisibility && hasUnsavedData) {
+      showWarning();
+    } else {
+      setModalVisibility(false);
+    }
+  };
+
+  const showWarning = () => {
+    setWarningModalVisibility(true);
+  };
+
+  const hideWarning = () => {
+    setWarningModalVisibility(false);
   };
 
   const newCurrentDataArray = currentActions.map((object, index) => {
@@ -56,7 +71,7 @@ function CurrentActions() {
         <div>Action</div>
         {isItHomePage ? (
           <Button
-            clickHandler={changeModalVisibility}
+            clickHandler={() => setModalVisibility(true)}
             buttonStyle={styles.addNewCurrentAction}
             type="button"
             content={
@@ -66,12 +81,21 @@ function CurrentActions() {
         ) : null}
         <ModalWindow
           visibility={modalVisibility}
-          changeModalVisibility={changeModalVisibility}
+          changeModalVisibility={closeModal}
         >
-          <AddNewCurrentAction changeModalVisibility={changeModalVisibility} />
+          <AddNewCurrentAction
+            setHasUnsavedData={setHasUnsavedData}
+            changeModalVisibility={closeModal}
+          />
         </ModalWindow>
       </div>
       <ul className={styles.currentActionsList}>{newCurrentDataArray}</ul>
+      <WarningModal
+        setModalVisibility={setModalVisibility}
+        setHasUnsavedData={setHasUnsavedData}
+        hideWarning={hideWarning}
+        warningModalVisibility={warningModalVisibility}
+      />
     </div>
   );
 }
