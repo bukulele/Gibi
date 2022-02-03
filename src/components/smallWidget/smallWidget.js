@@ -38,6 +38,7 @@ function SmallWidget({ header, content, index }) {
       </div>
       <ModalWindow visibility={showModal} changeModalVisibility={closeModal}>
         <ChangeSmallWidget
+          hasUnsavedData={hasUnsavedData}
           setHasUnsavedData={setHasUnsavedData}
           changeModalVisibility={closeModal}
           headerToChange={header}

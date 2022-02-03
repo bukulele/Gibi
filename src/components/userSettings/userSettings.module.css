@@ -1,0 +1,69 @@
+.userSettingsBackground {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(234, 217, 190);
+}
+
+.userSettingsWindow {
+  min-width: 350px;
+  max-width: 700px;
+  height: fit-content;
+  padding: 20px;
+  background-color: rgb(243, 237, 223);
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  box-shadow: 0px 0px 8px 3px rgba(128, 128, 128, 0.2);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr repeat(2, 2fr) repeat(4, 1fr) 2fr;
+  grid-gap: 10px;
+  grid-template-areas:
+    ". header header ."
+    "photo photo username username"
+    "photo photo useremail useremail"
+    "changesubscriptions changesubscriptions changesubscriptions changesubscriptions"
+    "changelanguage changelanguage changelanguage changelanguage"
+    "changecursor changecursor changecursor changecursor"
+    "changepassword changepassword changepassword changepassword"
+    ". buttons buttons .";
+  place-items: center;
+}
+
+.header {
+  grid-area: header;
+}
+
+.userPhoto {
+  grid-area: photo;
+}
+
+.userName {
+  grid-area: username;
+}
+
+.userEmail {
+  grid-area: useremail;
+}
+
+.userSubscriptions {
+  grid-area: changesubscriptions;
+}
+
+.userLanguage {
+  grid-area: changelanguage;
+}
+
+.userCursor {
+  grid-area: changecursor;
+}
+
+.userPassword {
+  grid-area: changepassword;
+}
+
+.buttons {
+  grid-area: buttons;
+}

@@ -6,12 +6,17 @@ import UserContext from "../../context/UserContext";
 import Button from "../button/button";
 import styles from "./addSmallWidget.module.css";
 
-function AddSmallWidget({ setHasUnsavedData, changeModalVisibility }) {
+function AddSmallWidget({
+  hasUnsavedData,
+  setHasUnsavedData,
+  changeModalVisibility,
+}) {
   const user = useContext(UserContext);
   const firestore = useContext(FirestoreContext);
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
   const [showAddWidgetButton, setShowAddWidgetButton] = useState(false);
+  const [widgetIsAdded, setWidgetIsAdded] = useState(false);
 
   const addNewWidget = () => {
     let data = {
@@ -23,7 +28,8 @@ function AddSmallWidget({ setHasUnsavedData, changeModalVisibility }) {
     let collectionRef = doc(firestore, "users", user.displayName);
     updateDoc(collectionRef, "smallWidgets", arrayUnion(data))
       .then(() => {
-        changeModalVisibility();
+        setWidgetIsAdded(true);
+        setHasUnsavedData(false);
       })
       .catch((error) => alert(error.message));
   };
@@ -43,6 +49,13 @@ function AddSmallWidget({ setHasUnsavedData, changeModalVisibility }) {
       setHasUnsavedData(false);
     }
   }, [showAddWidgetButton]);
+
+  useEffect(() => {
+    if (widgetIsAdded && !hasUnsavedData) {
+      changeModalVisibility();
+      return () => setWidgetIsAdded(false);
+    }
+  }, [widgetIsAdded, hasUnsavedData]);
 
   return (
     <div className={styles.addSmallWidget}>

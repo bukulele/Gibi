@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import WelcomePage from "./components/welcomePage/welcomePage";
 import UserArea from "./components/userArea/userArea";
 import SignUpArea from "./components/signupForm/signUpArea";
+import UserSettings from "./components/userSettings/userSettings";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -36,6 +37,7 @@ function App() {
           <Route path="welcome/*" element={<WelcomePage />} />
           <Route path=":displayName/*" element={<UserArea />} />
           <Route path="signup" element={<SignUpArea />} />
+          <Route path="settings" element={<UserSettings />} />
         </Routes>
       </UserContext.Provider>
     </FirestoreContext.Provider>

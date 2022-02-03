@@ -5,7 +5,11 @@ import FirestoreContext from "../../context/FirebaseContext";
 import UserContext from "../../context/UserContext";
 import Button from "../button/button";
 
-function AddNewCurrentAction({ setHasUnsavedData, changeModalVisibility }) {
+function AddNewCurrentAction({
+  hasUnsavedData,
+  setHasUnsavedData,
+  changeModalVisibility,
+}) {
   const firestore = useContext(FirestoreContext);
   const user = useContext(UserContext);
   const [action, setAction] = useState("");
@@ -13,21 +17,7 @@ function AddNewCurrentAction({ setHasUnsavedData, changeModalVisibility }) {
   const [total, setTotal] = useState("");
   const [units, setUnits] = useState("");
   const [showAddActionButton, setShowAddActionButton] = useState(false);
-
-  const addNewAction = () => {
-    let data = {
-      action: action,
-      progress: progress,
-      total: total,
-      units: units,
-      dateCreated: new Date(),
-      dateModified: new Date(),
-    };
-    let collectionRef = doc(firestore, "users", user.displayName);
-    updateDoc(collectionRef, "currentActions", arrayUnion(data)).then(() =>
-      changeModalVisibility()
-    );
-  };
+  const [actionIsAdded, setActionIsAdded] = useState(false);
 
   useEffect(() => {
     if (action !== "" && +total > 0 && +total >= +progress) {
@@ -44,6 +34,31 @@ function AddNewCurrentAction({ setHasUnsavedData, changeModalVisibility }) {
       setHasUnsavedData(false);
     }
   }, [showAddActionButton]);
+
+  const addNewAction = () => {
+    const data = {
+      action: action,
+      progress: progress,
+      total: total,
+      units: units,
+      dateCreated: new Date(),
+      dateModified: new Date(),
+    };
+    const collectionRef = doc(firestore, "users", user.displayName);
+    updateDoc(collectionRef, "currentActions", arrayUnion(data))
+      .then(() => {
+        setActionIsAdded(true);
+        setHasUnsavedData(false);
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  useEffect(() => {
+    if (actionIsAdded && !hasUnsavedData) {
+      changeModalVisibility();
+      return () => setActionIsAdded(false);
+    }
+  }, [actionIsAdded, hasUnsavedData]);
 
   return (
     <div className={styles.addNewAction}>

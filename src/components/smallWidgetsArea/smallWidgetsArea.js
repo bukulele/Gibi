@@ -70,6 +70,7 @@ function SmallWidgetsArea() {
         changeModalVisibility={closeModal}
       >
         <AddSmallWidget
+          hasUnsavedData={hasUnsavedData}
           setHasUnsavedData={setHasUnsavedData}
           changeModalVisibility={closeModal}
         />

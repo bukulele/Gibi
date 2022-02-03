@@ -14,6 +14,7 @@ function ChangeSmallWidget({
   changeModalVisibility,
   index,
   setHasUnsavedData,
+  hasUnsavedData,
 }) {
   const user = useContext(UserContext);
   const firestore = useContext(FirestoreContext);
@@ -31,6 +32,7 @@ function ChangeSmallWidget({
       prevArray[index].dateModified = new Date();
       return prevArray;
     });
+    setHasUnsavedData(false);
     setReadyToUpdate(true);
   };
 
@@ -39,6 +41,7 @@ function ChangeSmallWidget({
       prevArray.splice(index, 1);
       return prevArray;
     });
+    setHasUnsavedData(false);
     setReadyToUpdate(true);
   };
 
@@ -58,7 +61,7 @@ function ChangeSmallWidget({
   }, [header, content]);
 
   useEffect(() => {
-    if (readyToUpdate) {
+    if (readyToUpdate && !hasUnsavedData) {
       const data = {
         smallWidgets: widgetsArray,
       };
@@ -69,7 +72,7 @@ function ChangeSmallWidget({
       changeModalVisibility();
     }
     return () => setReadyToUpdate(false);
-  }, [readyToUpdate]);
+  }, [readyToUpdate, hasUnsavedData]);
 
   useEffect(() => {
     if (showChangeWidgetButton) {

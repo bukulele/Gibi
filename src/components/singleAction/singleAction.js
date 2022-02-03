@@ -86,6 +86,7 @@ function SingleAction({ action, total, progress, index, units }) {
       >
         <ChangeCurrentAction
           id={index}
+          hasUnsavedData={hasUnsavedData}
           setHasUnsavedData={setHasUnsavedData}
           changeModalVisibility={closeModal}
           actionToChange={action}

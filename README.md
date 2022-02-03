@@ -1,5 +1,9 @@
 # ACTION TRACKER APP
 
+#### version 0.5.2
+
+- bug with warning modal windows fixed
+
 #### version 0.5.1
 
 - style corrections

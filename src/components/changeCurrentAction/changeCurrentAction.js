@@ -16,6 +16,7 @@ function ChangeCurrentAction({
   totalToChange,
   unitsToChange,
   setHasUnsavedData,
+  hasUnsavedData,
 }) {
   const userData = useContext(UserDataContext);
   const [currentActions, setCurrentActions] = useState([]);
@@ -38,6 +39,7 @@ function ChangeCurrentAction({
         units: units,
         dateModified: new Date(),
       };
+      setHasUnsavedData(false);
       setSendData(true);
       return [...currentActionsNew];
     });
@@ -47,22 +49,25 @@ function ChangeCurrentAction({
     setCurrentActions((currentActionsPrev) => {
       const currentActionsNew = [...currentActionsPrev];
       currentActionsNew.splice(id, 1);
-      setSendData(true);
       return [...currentActionsNew];
     });
+    setHasUnsavedData(false);
+    setSendData(true);
   };
 
   useEffect(() => {
-    if (sendData) {
+    if (sendData && !hasUnsavedData) {
       const data = {
         currentActions: currentActions,
       };
       const collectionRef = doc(firestore, "users", user.displayName);
       setDoc(collectionRef, data, { merge: true });
       changeModalVisibility();
-      setSendData(false);
+      return () => {
+        setSendData(false);
+      };
     }
-  }, [currentActions, sendData]);
+  }, [sendData, hasUnsavedData]);
 
   useEffect(() => {
     if (

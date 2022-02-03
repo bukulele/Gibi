@@ -84,6 +84,7 @@ function CurrentActions() {
           changeModalVisibility={closeModal}
         >
           <AddNewCurrentAction
+            hasUnsavedData={hasUnsavedData}
             setHasUnsavedData={setHasUnsavedData}
             changeModalVisibility={closeModal}
           />
