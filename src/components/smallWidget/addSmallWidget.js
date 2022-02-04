@@ -1,6 +1,7 @@
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { useContext } from "react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserContext from "../../context/UserContext";
 import Button from "../button/button";
@@ -17,6 +18,8 @@ function AddSmallWidget({
   const [content, setContent] = useState("");
   const [showAddWidgetButton, setShowAddWidgetButton] = useState(false);
   const [widgetIsAdded, setWidgetIsAdded] = useState(false);
+
+  const { t } = useTranslation();
 
   const addNewWidget = () => {
     let data = {
@@ -64,18 +67,18 @@ function AddSmallWidget({
         name="header"
         value={header}
         onChange={(event) => setHeader(event.target.value)}
-        placeholder="Just one interesting thing"
+        placeholder={t("userArea.smallWidgetsArea.addSmallWidget.header")}
         maxLength={50}
       ></input>
       <textarea
         maxLength={150}
         value={content}
         onChange={(event) => setContent(event.target.value)}
-        placeholder="Specify it here!"
+        placeholder={t("userArea.smallWidgetsArea.addSmallWidget.textArea")}
       ></textarea>
       <Button
         clickHandler={addNewWidget}
-        content={"Add new widget"}
+        content={t("userArea.smallWidgetsArea.addSmallWidget.addWidgetButton")}
         buttonStyle={`${styles.addWidgetButton} ${
           showAddWidgetButton
             ? styles.addWidgetButtonShow

@@ -8,6 +8,7 @@ const userDataTemplate = {
   friends: [],
   tutorialIsDone: false,
   smallWidgets: [],
+  language: "",
 };
 
 export default userDataTemplate;

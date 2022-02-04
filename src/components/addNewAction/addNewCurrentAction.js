@@ -4,6 +4,7 @@ import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import FirestoreContext from "../../context/FirebaseContext";
 import UserContext from "../../context/UserContext";
 import Button from "../button/button";
+import { useTranslation } from "react-i18next";
 
 function AddNewCurrentAction({
   hasUnsavedData,
@@ -18,6 +19,8 @@ function AddNewCurrentAction({
   const [units, setUnits] = useState("");
   const [showAddActionButton, setShowAddActionButton] = useState(false);
   const [actionIsAdded, setActionIsAdded] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (action !== "" && +total > 0 && +total >= +progress) {
@@ -63,7 +66,7 @@ function AddNewCurrentAction({
   return (
     <div className={styles.addNewAction}>
       <div className={styles.action}>
-        <h4>Write here your long-term goal:</h4>
+        <h4>{t("userArea.currentActions.changeAction.header")}</h4>
         <input
           type="text"
           name="action"
@@ -73,7 +76,7 @@ function AddNewCurrentAction({
         ></input>
       </div>
       <div className={styles.progressBlock}>
-        <h4>And its progress:</h4>
+        <h4>{t("userArea.currentActions.changeAction.secondHeader")}</h4>
         <input
           type="number"
           name="progress"
@@ -82,7 +85,9 @@ function AddNewCurrentAction({
           value={progress}
           onChange={(event) => setProgress(event.target.value)}
         ></input>
-        <div className={styles.outOf}>out of</div>
+        <div className={styles.outOf}>
+          {t("userArea.currentActions.changeAction.outOf")}
+        </div>
         <input
           type="number"
           name="total"
@@ -95,14 +100,14 @@ function AddNewCurrentAction({
           type="text"
           name="units"
           value={units}
-          placeholder="units"
+          placeholder={t("userArea.currentActions.changeAction.units")}
           onChange={(event) => setUnits(event.target.value)}
           className={styles.units}
         ></input>
       </div>
       <Button
         clickHandler={addNewAction}
-        content={"Add new action"}
+        content={t("userArea.currentActions.changeAction.addNewActionButton")}
         buttonStyle={`${styles.addActionButton} ${
           showAddActionButton
             ? styles.addActionButtonShow

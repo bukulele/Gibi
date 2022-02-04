@@ -1,0 +1,101 @@
+{
+  "welcomePage": {
+    "greetings": "Welcome",
+    "enterButton": "Go to my page",
+    "email": "email",
+    "password": "password",
+    "signIn": "Sign In",
+    "signOutButton": "Sign Out",
+    "createAccount": "Create account"
+  },
+  "signUpArea": {
+    "email": "email",
+    "emailMessage": "please enter a valid email, as we will send you a confirmation letter",
+    "userName": "user name",
+    "userNameMessage": "user name must be at least 5 symbols long and contain only letters and numbers",
+    "password": "password",
+    "passwordMessage": "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
+    "signUp": "Sign Up"
+  },
+  "userArea": {
+    "navBar": {
+      "userMenu": {
+        "myPage": "Go to my page",
+        "settings": "Settings",
+        "signOut": "Sign Out"
+      }
+    },
+    "calendar": {
+      "months": {
+        "0": "Jan",
+        "1": "Feb",
+        "2": "Mar",
+        "3": "Apr",
+        "4": "May",
+        "5": "Jun",
+        "6": "Jul",
+        "7": "Aug",
+        "8": "Sep",
+        "9": "Oct",
+        "10": "Nov",
+        "11": "Dec"
+      },
+      "weekDays": {
+        "0": "Mon",
+        "1": "Tue",
+        "2": "Wed",
+        "3": "Thu",
+        "4": "Fr",
+        "5": "Sat",
+        "6": "Sun"
+      },
+      "headerHome": "What are your plans?",
+      "headerGuest": "What are {{user}}'s plans?",
+      "inputAction": "Something interesting today?",
+      "removeEmojiButton": "Remove emoji",
+      "confirmButton": "Confirm changes"
+    },
+    "calendarActions": {
+      "headerHome": "Your plans (detailed)",
+      "headerGuest": "{{user}}'s plans (detailed)"
+    },
+    "subscriptions": {
+      "header": "Following"
+    },
+    "currentActions": {
+      "headerHome": "What are you doing?",
+      "headerGuest": "What is {{user}} doing?",
+      "progress": "Progress",
+      "action": "Action",
+      "changeAction": {
+        "header": "Write here your long-term goal:",
+        "secondHeader": "And its progress:",
+        "outOf": "out of",
+        "units": "units",
+        "addNewActionButton": "Add new action",
+        "confirmChangesButton": "Confirm changes"
+      }
+    },
+    "currentActionsInfographics": {
+      "headerHome": "What are you doing (but pretty)",
+      "headerGuest": "What is {{user}} doing (but pretty)"
+    },
+    "smallWidgetsArea": {
+      "addSmallWidget": {
+        "header": "Just one interesting thing...",
+        "textArea": "Specify it here!",
+        "addWidgetButton": "Add new widget"
+      },
+      "changeSmallWidget": {
+        "header": "Just one interesting thing",
+        "textArea": "Specify it here!",
+        "changeWidgetButton": "Change"
+      }
+    }
+  },
+  "warningModal": {
+    "text": "Be careful!\nYou have unsaved data.",
+    "comebackButton": "Comeback",
+    "closeAnywayButton": "Close anyway"
+  }
+}

@@ -17,6 +17,7 @@ import VerificationWindow from "../verificationPage/verificationWindow";
 import Button from "../button/button";
 import Footer from "../footer/footer";
 import SmallWidgetsArea from "../smallWidgetsArea/smallWidgetsArea";
+import { useTranslation } from "react-i18next";
 
 function UserArea() {
   const [userData, setUserData] = useState(null);
@@ -29,6 +30,8 @@ function UserArea() {
   const firestore = useContext(FirestoreContext);
 
   const params = useParams();
+
+  const { t } = useTranslation();
 
   const closeVerificationModal = () => {
     if (user.emailVerified) setShowVerificationModal(false);
@@ -75,18 +78,20 @@ function UserArea() {
               friendsList={friendsList}
               showingName={params.displayName}
             />
-            <Button
-              clickHandler={changeSubscriptionsVisibility}
-              buttonStyle={styles.callSubscriptionsButton}
-              type="button"
-              content="Subscriptions"
-            />
             {user ? (
-              <Subscriptions
-                changeSubscriptionsVisibility={changeSubscriptionsVisibility}
-                showSubscriptionsList={showSubscriptionsList}
-                friendsList={friendsList}
-              />
+              <>
+                <Button
+                  clickHandler={changeSubscriptionsVisibility}
+                  buttonStyle={styles.callSubscriptionsButton}
+                  type="button"
+                  content={t("userArea.subscriptions.header")}
+                />
+                <Subscriptions
+                  changeSubscriptionsVisibility={changeSubscriptionsVisibility}
+                  showSubscriptionsList={showSubscriptionsList}
+                  friendsList={friendsList}
+                />
+              </>
             ) : null}
             <Calendar />
             <CalendarActions />

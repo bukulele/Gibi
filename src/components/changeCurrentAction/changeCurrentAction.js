@@ -7,6 +7,7 @@ import Button from "../button/button";
 import styles from "./changeCurrentAction.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 function ChangeCurrentAction({
   id,
@@ -28,6 +29,8 @@ function ChangeCurrentAction({
   const [total, setTotal] = useState(totalToChange);
   const [units, setUnits] = useState(unitsToChange);
   const [showChangeActionButton, setShowChangeActionButton] = useState(false);
+
+  const { t } = useTranslation();
 
   const changeAction = () => {
     setCurrentActions((currentActionsPrev) => {
@@ -105,7 +108,7 @@ function ChangeCurrentAction({
   return (
     <div className={styles.changeAction}>
       <div className={styles.action}>
-        <h4>Write here your long-term goal:</h4>
+        <h4>{t("userArea.currentActions.changeAction.header")}</h4>
         <input
           type="text"
           name="action"
@@ -115,7 +118,7 @@ function ChangeCurrentAction({
         ></input>
       </div>
       <div className={styles.progressBlock}>
-        <h4>And its progress:</h4>
+        <h4>{t("userArea.currentActions.changeAction.secondHeader")}</h4>
         <input
           type="number"
           name="progress"
@@ -124,7 +127,9 @@ function ChangeCurrentAction({
           value={progress}
           onChange={(event) => setProgress(event.target.value)}
         ></input>
-        <div className={styles.outOf}>out of</div>
+        <div className={styles.outOf}>
+          {t("userArea.currentActions.changeAction.outOf")}
+        </div>
         <input
           type="number"
           name="total"
@@ -137,7 +142,7 @@ function ChangeCurrentAction({
           type="text"
           name="units"
           value={units}
-          placeholder="units"
+          placeholder={t("userArea.currentActions.changeAction.units")}
           onChange={(event) => setUnits(event.target.value)}
           className={styles.units}
         ></input>
@@ -150,7 +155,7 @@ function ChangeCurrentAction({
       />
       <Button
         clickHandler={changeAction}
-        content={"Confirm changes"}
+        content={t("userArea.currentActions.changeAction.confirmChangesButton")}
         buttonStyle={`${styles.changeActionButton} ${
           showChangeActionButton
             ? styles.changeActionButtonShow

@@ -1,16 +1,18 @@
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import Button from "../button/button";
 import styles from "./welcomePage.module.css";
 import UserContext from "../../context/UserContext";
 import logo from "../../misc/gibi_face.png";
+import { useTranslation } from "react-i18next";
 
 function WelcomePage() {
+  const user = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const user = useContext(UserContext);
+  const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -32,24 +34,66 @@ function WelcomePage() {
     return;
   };
 
+  const userSignOut = () => {
+    const auth = getAuth();
+    signOut(auth).catch((error) => {
+      alert(error);
+    });
+  };
+
   return (
     <div className={styles.welcomePage}>
+      <div className={styles.langButtons}>
+        <Button
+          clickHandler={() => {
+            i18n.changeLanguage("en");
+          }}
+          type="button"
+          buttonStyle={`${styles.chooseLangButton} ${
+            i18n.resolvedLanguage === "en"
+              ? styles.chosenLang
+              : styles.otherLang
+          }`}
+          content="Eng"
+        />
+        /
+        <Button
+          clickHandler={() => {
+            i18n.changeLanguage("ru");
+          }}
+          type="button"
+          buttonStyle={`${styles.chooseLangButton} ${
+            i18n.resolvedLanguage === "ru"
+              ? styles.chosenLang
+              : styles.otherLang
+          }`}
+          content="Рус"
+        />
+      </div>
       <div className={styles.greetings}>
         <img className={styles.logo} src={logo} alt="logo" />
-        <h1>Welcome, Gibi!</h1>
+        <h1>{t("welcomePage.greetings")}, Gibi!</h1>
       </div>
       {user ? (
-        <Button
-          clickHandler={goHome}
-          type="button"
-          buttonStyle={styles.goHomeButton}
-          content="Go to my page"
-        />
+        <div className={styles.buttons}>
+          <Button
+            clickHandler={goHome}
+            type="button"
+            buttonStyle={styles.goHomeButton}
+            content={t("welcomePage.enterButton")}
+          />
+          <Button
+            clickHandler={userSignOut}
+            type="button"
+            buttonStyle={styles.signOutButton}
+            content={t("welcomePage.signOutButton")}
+          />
+        </div>
       ) : (
         <>
           <div className={styles.signInForm}>
             <div className={styles.inputBlock}>
-              <label htmlFor="email">email:</label>
+              <label htmlFor="email">{t("welcomePage.email")}:</label>
               <input
                 type="email"
                 name="email"
@@ -59,7 +103,7 @@ function WelcomePage() {
               ></input>
             </div>
             <div className={styles.inputBlock}>
-              <label htmlFor="password">password:</label>
+              <label htmlFor="password">{t("welcomePage.password")}:</label>
               <input
                 type="password"
                 name="password"
@@ -73,10 +117,10 @@ function WelcomePage() {
                 clickHandler={signIn}
                 type="button"
                 buttonStyle={styles.signInButton}
-                content="Sign in"
+                content={t("welcomePage.signIn")}
               />
             </div>
-            <Link to="/signup">Create account</Link>
+            <Link to="/signup">{t("welcomePage.createAccount")}</Link>
           </div>
         </>
       )}

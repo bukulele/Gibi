@@ -1,6 +1,7 @@
 import Button from "../button/button";
 import UserMenu from "../userMenu/userMenu";
 import styles from "./navBar.module.css";
+import { Link } from "react-router-dom";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import HomePageContext from "../../context/HomePageContext";
@@ -41,6 +42,9 @@ function NavBar({ friendsList, showingName }) {
         isItHomePage ? styles.navHome : styles.navGuest
       }`}
     >
+      <Link className={styles.homeLink} to="/">
+        Gibi
+      </Link>
       {user && !isItHomePage && !friendInList ? (
         <Button
           content={<FontAwesomeIcon icon={faUserPlus} pointerEvents="none" />}

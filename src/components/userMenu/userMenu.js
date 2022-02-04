@@ -5,12 +5,15 @@ import { getAuth, signOut } from "firebase/auth";
 import Button from "../button/button";
 import styles from "./userMenu.module.css";
 import UserContext from "../../context/UserContext";
+import { useTranslation } from "react-i18next";
 
 function UserMenu({ showUserMenu, switchUserMenu }) {
   const user = useContext(UserContext);
   const isItHomePage = useContext(HomePageContext);
 
   const menuWrapperRef = useRef();
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -40,15 +43,17 @@ function UserMenu({ showUserMenu, switchUserMenu }) {
       <ul className={styles.userMenu} onClick={switchUserMenu}>
         {isItHomePage ? null : (
           <li>
-            <Link to={`/${user.displayName}`}>Go to my page</Link>
+            <Link to={`/${user.displayName}`}>
+              {t("userArea.navBar.userMenu.myPage")}
+            </Link>
           </li>
         )}
         <li>
-          <Link to="/">Settings</Link>
+          <Link to="/">{t("userArea.navBar.userMenu.settings")}</Link>
         </li>
         <li>
           <Button
-            content="Sign Out"
+            content={t("userArea.navBar.userMenu.signOut")}
             clickHandler={userSignOut}
             type="button"
             buttonStyle={styles.signOutButton}

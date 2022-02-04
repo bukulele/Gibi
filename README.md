@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+#### version 0.6.0
+
+- en-ru localization with [i18next library](https://www.i18next.com/)
+- link to the Welcome Page in navbar
+
 #### version 0.5.2
 
 - bug with warning modal windows fixed

@@ -3,8 +3,8 @@
   width: 100%;
   height: 50px;
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-  grid-template-areas: "addFriend displayName . search userMenu";
+  grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
+  grid-template-areas: "home displayName addFriend . search userMenu";
   justify-items: center;
   align-items: center;
   color: white;
@@ -66,4 +66,19 @@
 
 .addFriendButton:hover {
   background-color: white;
+}
+
+.homeLink {
+  color: white;
+  grid-area: home;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Sneakerhead", sans-serif;
+  border-radius: 10px;
+}
+
+.homeLink:hover {
+  background-color: rgb(234, 217, 190);
 }

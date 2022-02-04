@@ -16,14 +16,12 @@ import {
   faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import calendarActionsReducer from "../../reducer/calendarActionsReducer";
+import { useTranslation } from "react-i18next";
 
 function TodayAction({ todayEvents, chosenDate, date, setHasUnsavedData }) {
   const firestore = useContext(FirestoreContext);
   const user = useContext(UserContext);
   const isItHomePage = useContext(HomePageContext);
-
-  const eventRef = useRef();
-  const newEventRef = useRef();
 
   const [todayEventsArray, changeTodayEventsArray] = useReducer(
     calendarActionsReducer,
@@ -35,6 +33,11 @@ function TodayAction({ todayEvents, chosenDate, date, setHasUnsavedData }) {
   const [showAddEventButton, setShowAddEventButton] = useState(false);
   const [showConfirmChangesButton, setShowConfirmChangesButton] =
     useState(false);
+
+  const eventRef = useRef();
+  const newEventRef = useRef();
+
+  const { t } = useTranslation();
 
   const showEmojiWindow = () => {
     if (isItHomePage) setEmodjiWindowIsVisible(!emodjiWindowIsVisible);
@@ -180,7 +183,7 @@ function TodayAction({ todayEvents, chosenDate, date, setHasUnsavedData }) {
             className={styles.eventInput}
             type="text"
             name="event"
-            placeholder="Something interesting today?"
+            placeholder={t("userArea.calendar.inputAction")}
             value={eventOfTheDay}
             onChange={(event) => setEventOfTheDay(event.target.value)}
           />
@@ -213,7 +216,7 @@ function TodayAction({ todayEvents, chosenDate, date, setHasUnsavedData }) {
             }}
             buttonStyle={styles.removeEmoji}
             type="button"
-            content="Remove emoji"
+            content={t("userArea.calendar.removeEmojiButton")}
           />
           <Button
             clickHandler={showEmojiWindow}
@@ -240,7 +243,7 @@ function TodayAction({ todayEvents, chosenDate, date, setHasUnsavedData }) {
             : styles.confirmChangesHide
         }`}
         type="button"
-        content="Confirm changes"
+        content={t("userArea.calendar.confirmButton")}
       />
     </div>
   );

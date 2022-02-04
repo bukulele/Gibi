@@ -1,0 +1,101 @@
+{
+  "welcomePage": {
+    "greetings": "Привет",
+    "enterButton": "Домой",
+    "email": "электронная почта",
+    "password": "пароль",
+    "signIn": "Войти",
+    "signOutButton": "Выйти",
+    "createAccount": "Создать аккаунт"
+  },
+  "signUpArea": {
+    "email": "электронная почта",
+    "emailMessage": "пожалуйста, введи настоящий адрес электронной почты - мы отправим тебе письмо для подтверждения адреса",
+    "userName": "ник",
+    "userNameMessage": "ник должен содержать как минимум 5 символов и содержать только буквы латинского алфавита и цифры",
+    "password": "пароль",
+    "passwordMessage": "должна быть как минимум одна цифра, одна заглавная и одна строчная буквы, и не менее 8 символов суммарно",
+    "signUp": "Создать"
+  },
+  "userArea": {
+    "navBar": {
+      "userMenu": {
+        "myPage": "На мою страницу",
+        "settings": "Настройки",
+        "signOut": "Выход"
+      }
+    },
+    "calendar": {
+      "months": {
+        "0": "Янв",
+        "1": "Фев",
+        "2": "Мар",
+        "3": "Апр",
+        "4": "Май",
+        "5": "Июн",
+        "6": "Июл",
+        "7": "Авг",
+        "8": "Сен",
+        "9": "Окт",
+        "10": "Ноя",
+        "11": "Дек"
+      },
+      "weekDays": {
+        "0": "Пн",
+        "1": "Вт",
+        "2": "Ср",
+        "3": "Чт",
+        "4": "Пт",
+        "5": "Сб",
+        "6": "Вс"
+      },
+      "headerHome": "Что ты планируешь?",
+      "headerGuest": "Какие планы у {{user}}?",
+      "inputAction": "Что-нибудь интересное сегодня?",
+      "removeEmojiButton": "Убрать emoji",
+      "confirmButton": "Подтвердить изменения"
+    },
+    "calendarActions": {
+      "headerHome": "Твои планы (детально)",
+      "headerGuest": "Планы {{user}} (детально)"
+    },
+    "subscriptions": {
+      "header": "Подписки"
+    },
+    "currentActions": {
+      "headerHome": "Что ты сейчас делаешь?",
+      "headerGuest": "Что {{user}} сейчас делает?",
+      "progress": "Прогресс",
+      "action": "Занятие",
+      "changeAction": {
+        "header": "Напиши здесь свою долгосрочную цель:",
+        "secondHeader": "И текущий прогресс:",
+        "outOf": "из",
+        "units": "единицы",
+        "addNewActionButton": "Добавить занятие",
+        "confirmChangesButton": "Подтвердить изменения"
+      }
+    },
+    "currentActionsInfographics": {
+      "headerHome": "Что ты сейчас делаешь (но красиво)",
+      "headerGuest": "Что {{user}} сейчас делает (но красиво)"
+    },
+    "smallWidgetsArea": {
+      "addSmallWidget": {
+        "header": "Всего одна интересная вещь...",
+        "textArea": "Напиши про неё подробнее здесь!",
+        "addWidgetButton": "Добавить виджет"
+      },
+      "changeSmallWidget": {
+        "header": "Всего одна интересная вещь...",
+        "textArea": "Напиши про неё подробнее здесь!",
+        "changeWidgetButton": "Изменить"
+      }
+    }
+  },
+  "warningModal": {
+    "text": "Осторожнее!\nУ тебя есть несохранённые данные",
+    "comebackButton": "Вернуться",
+    "closeAnywayButton": "Не сохранять"
+  }
+}

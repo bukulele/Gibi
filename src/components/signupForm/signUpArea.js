@@ -16,6 +16,7 @@ import Button from "../button/button";
 import userDataTemplate from "../../templates/userDataTemplate";
 import styles from "./signUpArea.module.css";
 import FirestoreContext from "../../context/FirebaseContext";
+import { useTranslation } from "react-i18next";
 
 function SignUpArea() {
   const [email, setEmail] = useState("");
@@ -28,13 +29,16 @@ function SignUpArea() {
   const firestore = useContext(FirestoreContext);
 
   const userData = { ...userDataTemplate };
+
+  const { t, i18n } = useTranslation();
+
   const navigate = useNavigate();
 
   const emailRegExp =
     /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   const passwordRegExp = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 
-  const usernameRegExp = /^[a-zA-Z0-9]+$/;
+  const usernameRegExp = /^[a-z0-9]+$/;
 
   const signUp = () => {
     const auth = getAuth();
@@ -100,7 +104,7 @@ function SignUpArea() {
     <div className={styles.welcomePage}>
       <div className={styles.signUpForm}>
         <div className={styles.inputBlock}>
-          <label htmlFor="email">email:</label>
+          <label htmlFor="email">{t("signUpArea.email")}:</label>
           <input
             type="email"
             name="email"
@@ -109,12 +113,12 @@ function SignUpArea() {
             onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
             pattern={emailRegExp}
-            title="please enter a valid email, as we will send you a confirmation letter"
+            title={t("signUpArea.emailMessage")}
             required
           ></input>
         </div>
         <div className={styles.inputBlock}>
-          <label htmlFor="userName">user name:</label>
+          <label htmlFor="userName">{t("signUpArea.userName")}:</label>
           <div className={styles.userNameInput}>
             <input
               type="text"
@@ -122,7 +126,8 @@ function SignUpArea() {
               value={userName}
               onChange={(event) => setUserName(event.target.value)}
               autoComplete="nickname"
-              title="user name must be at least 5 symbols long and contain only letters and numbers"
+              title={t("signUpArea.userNameMessage")}
+              pattern={usernameRegExp}
               required
             ></input>
             <FontAwesomeIcon
@@ -144,7 +149,7 @@ function SignUpArea() {
           </div>
         </div>
         <div className={styles.inputBlock}>
-          <label htmlFor="password">password:</label>
+          <label htmlFor="password">{t("signUpArea.password")}:</label>
           <input
             type="password"
             name="password"
@@ -153,7 +158,7 @@ function SignUpArea() {
             onChange={(event) => setPassword(event.target.value)}
             autoComplete="new-password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            title={t("signUpArea.passwordMessage")}
             required
           ></input>
         </div>
@@ -164,7 +169,7 @@ function SignUpArea() {
             buttonStyle={
               readyToSignUp ? styles.signUpButton : styles.signUpButtonInactive
             }
-            content="SignUp"
+            content={t("signUpArea.signUp")}
           />
         </div>
       </div>

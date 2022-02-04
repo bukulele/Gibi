@@ -15,6 +15,10 @@
   z-index: 200;
 }
 
+.warningModal p {
+  text-align: center;
+}
+
 .showWarningModal {
   display: grid;
 }

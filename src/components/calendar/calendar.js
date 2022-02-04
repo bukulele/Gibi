@@ -11,12 +11,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import UserDataContext from "../../context/UserDataContext";
 import HomePageContext from "../../context/HomePageContext";
+import { useTranslation } from "react-i18next";
 
 function Calendar() {
   const userData = useContext(UserDataContext);
   const isItHomePage = useContext(HomePageContext);
   const [currentMonth, setCurrentMonth] = useState(todayIs().getMonth());
   const [currentYear, setCurrentYear] = useState(todayIs().getFullYear());
+
+  const { t } = useTranslation();
 
   const TODAY =
     todayIs().getFullYear() +
@@ -95,7 +98,7 @@ function Calendar() {
         key={weekDays[i]}
         className={styles.weekDay}
       >
-        {weekDays[i]}
+        {t(`userArea.calendar.weekDays.${i}`)}
       </div>
     );
   }
@@ -110,7 +113,7 @@ function Calendar() {
       <CalendarDay
         key={date}
         day={day}
-        date={year + " " + MONTHS[month] + " " + day}
+        date={date.toString()}
         today={{ year: year, month: month, day: day }}
         todayEvents={
           userData?.calendarActions?.[year.toString()]?.[month.toString()]?.[
@@ -146,7 +149,9 @@ function Calendar() {
     <div className={styles.calendar}>
       <div className={styles.calendarHeader}>
         <h4>
-          What are {isItHomePage ? "your" : `${userData.userName}'s`} plans?
+          {isItHomePage
+            ? t("userArea.calendar.headerHome")
+            : t("userArea.calendar.headerGuest", { user: userData.userName })}
         </h4>
         <Button
           content="Today"
@@ -185,7 +190,7 @@ function Calendar() {
           buttonStyle={styles.calendarButton}
           type="button"
         />
-        <div>{MONTHS[currentMonth]}</div>
+        <div>{t(`userArea.calendar.months.${currentMonth}`)}</div>
 
         <Button
           id="increase-month"

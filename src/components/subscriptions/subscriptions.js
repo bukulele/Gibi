@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./subscriptions.module.css";
+import { useTranslation } from "react-i18next";
 
 function Subscriptions({
   showSubscriptionsList,
@@ -8,6 +9,8 @@ function Subscriptions({
   changeSubscriptionsVisibility,
 }) {
   const subscriptionsRef = useRef();
+
+  const { t } = useTranslation();
 
   const clickHandler = (event) => {
     if (event.target === subscriptionsRef.current)
@@ -32,7 +35,7 @@ function Subscriptions({
     >
       <div className={styles.subscriptions}>
         <div className={styles.subscriptionsHeader}>
-          <h4>Subscriptions</h4>
+          <h4>{t("userArea.subscriptions.header")}</h4>
         </div>
         <ul>{friends}</ul>
       </div>

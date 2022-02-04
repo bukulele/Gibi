@@ -10,12 +10,15 @@ import {
   PolarAngleAxis,
 } from "recharts";
 import CustomTooltip from "../customTooltip/customTooltip";
+import { useTranslation } from "react-i18next";
 
 function CurrentActionsInfographics() {
   const userData = useContext(UserDataContext);
   const isItHomePage = useContext(HomePageContext);
   const [currentActions, setCurrentActions] = useState([]);
   const [chartData, setChartData] = useState([]);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (userData?.currentActions)
@@ -43,8 +46,11 @@ function CurrentActionsInfographics() {
     <div className={styles.currentActionsInfographics}>
       <div className={styles.currentActionsInfographicsHeader}>
         <h4>
-          What {isItHomePage ? "are you" : `is ${userData.userName}`} doing (but
-          pretty)
+          {isItHomePage
+            ? t("userArea.currentActionsInfographics.headerHome")
+            : t("userArea.currentActionsInfographics.headerGuest", {
+                user: userData.userName,
+              })}
         </h4>
       </div>
       <div className={styles.graph}>

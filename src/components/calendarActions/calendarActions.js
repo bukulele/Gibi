@@ -3,12 +3,15 @@ import UserDataContext from "../../context/UserDataContext";
 import { Emoji } from "emoji-mart";
 import styles from "./calendarActions.module.css";
 import HomePageContext from "../../context/HomePageContext";
+import { useTranslation } from "react-i18next";
 
 function CalendarActions() {
   const userData = useContext(UserDataContext);
   const isItHomePage = useContext(HomePageContext);
   const [calendarActions, setCalendarActions] = useState({});
   const [indexToFocus, setIndexToFocus] = useState(0);
+
+  const { t } = useTranslation();
 
   const refsArr = useRef([]);
   const today = new Date();
@@ -25,7 +28,7 @@ function CalendarActions() {
           Object.values(value)
             .reverse()
             .map((element, index) => {
-              const date = element.date;
+              const date = new Date(Date.parse(element.date));
               const checkDate = new Date(Date.parse(date));
               const emoji = element.emoji;
               const list = element.events.map((event, index) => (
@@ -41,7 +44,9 @@ function CalendarActions() {
                   className={styles.oneDay}
                   ref={(element) => refsArr.current.push(element)}
                 >
-                  <div className={styles.date}>{date}</div>
+                  <div className={styles.date}>{`${date.getFullYear()} ${t(
+                    `userArea.calendar.months.${date.getMonth()}`
+                  )} ${date.getDate()}`}</div>
                   <div className={styles.emoji}>
                     {emoji ? <Emoji emoji={emoji} size={40} /> : null}
                   </div>
@@ -75,7 +80,11 @@ function CalendarActions() {
     <div className={styles.smallActionsWindow}>
       <div className={styles.calendarActionsHeader}>
         <h4>
-          {isItHomePage ? "Your" : `${userData.userName}'s`} plans (detailed)
+          {isItHomePage
+            ? t("userArea.calendarActions.headerHome")
+            : t("userArea.calendarActions.headerGuest", {
+                user: userData.userName,
+              })}
         </h4>
       </div>
 

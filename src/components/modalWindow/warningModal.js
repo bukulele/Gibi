@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Button from "../button/button";
 import styles from "./warningModal.module.css";
 
@@ -7,6 +8,8 @@ function WarningModal({
   hideWarning,
   warningModalVisibility,
 }) {
+  const { t } = useTranslation();
+
   const comeback = () => {
     hideWarning();
   };
@@ -25,16 +28,16 @@ function WarningModal({
           : styles.hideWarningModal
       }`}
     >
-      <p>Be careful! You have unsaved data.</p>
+      <p>{t("warningModal.text")}</p>
       <div className={styles.buttonsBlock}>
         <Button
-          content="Comeback"
+          content={t("warningModal.comebackButton")}
           clickHandler={comeback}
           buttonStyle={styles.comebackButton}
           type="button"
         />
         <Button
-          content="Close anyway"
+          content={t("warningModal.closeAnywayButton")}
           clickHandler={closeWithoutSaving}
           buttonStyle={styles.closeAnywayButton}
           type="button"

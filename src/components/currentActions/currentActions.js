@@ -9,6 +9,7 @@ import UserDataContext from "../../context/UserDataContext";
 import ModalWindow from "../modalWindow/modalWindow";
 import WarningModal from "../modalWindow/warningModal";
 import HomePageContext from "../../context/HomePageContext";
+import { useTranslation } from "react-i18next";
 
 function CurrentActions() {
   const userData = useContext(UserDataContext);
@@ -17,6 +18,8 @@ function CurrentActions() {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [warningModalVisibility, setWarningModalVisibility] = useState(false);
   const [hasUnsavedData, setHasUnsavedData] = useState(false);
+
+  const { t } = useTranslation();
 
   const closeModal = () => {
     if (modalVisibility && hasUnsavedData) {
@@ -57,7 +60,11 @@ function CurrentActions() {
     <div className={styles.currentActions}>
       <div className={styles.currentActionsHeader}>
         <h4>
-          What {isItHomePage ? "are you" : `is ${userData.userName}`} doing?
+          {isItHomePage
+            ? t("userArea.currentActions.headerHome")
+            : t("userArea.currentActions.headerGuest", {
+                user: userData.userName,
+              })}
         </h4>
       </div>
       <div
@@ -67,8 +74,8 @@ function CurrentActions() {
             : styles.currentActionsHeaderGuest
         }
       >
-        <div>Progress</div>
-        <div>Action</div>
+        <div>{t("userArea.currentActions.progress")}</div>
+        <div>{t("userArea.currentActions.action")}</div>
         {isItHomePage ? (
           <Button
             clickHandler={() => setModalVisibility(true)}

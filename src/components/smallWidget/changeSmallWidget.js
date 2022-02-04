@@ -7,6 +7,7 @@ import Button from "../button/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "./changeSmallWidget.module.css";
+import { useTranslation } from "react-i18next";
 
 function ChangeSmallWidget({
   headerToChange,
@@ -24,6 +25,8 @@ function ChangeSmallWidget({
   const [showChangeWidgetButton, setShowChangeWidgetButton] = useState(false);
   const [widgetsArray, setWidgetsArray] = useState([]);
   const [readyToUpdate, setReadyToUpdate] = useState(false);
+
+  const { t } = useTranslation();
 
   const changeWidget = () => {
     setWidgetsArray((prevArray) => {
@@ -89,18 +92,20 @@ function ChangeSmallWidget({
         name="header"
         value={header}
         onChange={(event) => setHeader(event.target.value)}
-        placeholder="Just one interesting thing"
+        placeholder={t("userArea.smallWidgetsArea.changeSmallWidget.header")}
         maxLength={150}
       ></input>
       <textarea
         maxLength={150}
         value={content}
         onChange={(event) => setContent(event.target.value)}
-        placeholder="Specify it here!"
+        placeholder={t("userArea.smallWidgetsArea.changeSmallWidget.textArea")}
       ></textarea>
       <Button
         clickHandler={changeWidget}
-        content={"Change"}
+        content={t(
+          "userArea.smallWidgetsArea.changeSmallWidget.changeWidgetButton"
+        )}
         buttonStyle={`${styles.changeWidgetButton} ${
           showChangeWidgetButton
             ? styles.changeWidgetButtonShow
