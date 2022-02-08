@@ -1,5 +1,10 @@
 # ACTION TRACKER APP
 
+#### version 0.6.1
+
+- user profile image uploader by [react-dropzone](https://react-dropzone.js.org/) added
+- incorrectness in radial chart of single current action fixed
+
 #### version 0.6.0
 
 - en-ru localization with [i18next library](https://www.i18next.com/)

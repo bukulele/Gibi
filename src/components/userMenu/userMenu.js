@@ -49,7 +49,7 @@ function UserMenu({ showUserMenu, switchUserMenu }) {
           </li>
         )}
         <li>
-          <Link to="/">{t("userArea.navBar.userMenu.settings")}</Link>
+          <Link to="/settings">{t("userArea.navBar.userMenu.settings")}</Link>
         </li>
         <li>
           <Button

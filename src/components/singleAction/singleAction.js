@@ -59,7 +59,7 @@ function SingleAction({ action, total, progress, index, units }) {
           <RadialBarChart
             data={chartData}
             startAngle={90}
-            endAngle={-360}
+            endAngle={-270}
             margin={{ top: 0, bottom: 0, left: 0, right: 0 }}
             innerRadius={"55%"}
             outerRadius={"100%"}

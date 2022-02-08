@@ -3,6 +3,8 @@ import { doc, onSnapshot } from "firebase/firestore";
 import UserContext from "../../context/UserContext";
 import styles from "./userSettings.module.css";
 import FirestoreContext from "../../context/FirebaseContext";
+import ImageUpload from "../imageEditor/imageUpload";
+import ImageEditorArea from "../imageEditor/imageEditorArea";
 
 function UserSettings() {
   const user = useContext(UserContext);
@@ -23,7 +25,9 @@ function UserSettings() {
         {user ? (
           <>
             <h2 className={styles.header}>SETTINGS</h2>
-            <div className={styles.userPhoto}></div>
+            <div className={styles.userPhoto}>
+              <ImageEditorArea />
+            </div>
             <div className={styles.userName}>{user.displayName}</div>
             <div className={styles.userEmail}>{user.email}</div>
             <div className={styles.userSubscriptions}></div>

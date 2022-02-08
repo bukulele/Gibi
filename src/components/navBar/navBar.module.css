@@ -40,10 +40,11 @@
   height: 40px;
   font-size: 25px;
   background-color: rgb(234, 217, 190);
+  box-sizing: content-box;
 }
 
-.logo {
-  width: 70%;
+.userMenuButton:hover {
+  border: 2px solid rgb(234, 222, 206);
 }
 
 .userMenuButton:hover {

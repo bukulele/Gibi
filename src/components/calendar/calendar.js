@@ -28,21 +28,6 @@ function Calendar() {
     " " +
     todayIs().getDate();
 
-  const MONTHS = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
   const changeMonth = (event) => {
     if (event.target.id === "decrease-month") {
       if (currentMonth === 0) {
