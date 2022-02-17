@@ -9,6 +9,7 @@ const userDataTemplate = {
   tutorialIsDone: false,
   smallWidgets: [],
   language: "",
+  photoURL: "",
 };
 
 export default userDataTemplate;

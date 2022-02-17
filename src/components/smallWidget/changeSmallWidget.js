@@ -1,6 +1,6 @@
 import { setDoc, doc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import FirestoreContext from "../../context/FirebaseContext";
+import FirestoreContext from "../../context/FirestoreContext";
 import UserContext from "../../context/UserContext";
 import UserDataContext from "../../context/UserDataContext";
 import Button from "../button/button";

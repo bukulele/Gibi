@@ -30,22 +30,31 @@
   align-items: center;
 }
 
-.friend {
+.subscriptionsList {
+  width: 100%;
+}
+
+.sub {
   list-style-type: none;
   width: 100%;
   height: 30px;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin: 5px 0;
 }
 
-.friend:hover {
+.sub:hover {
   background-color: rgb(234, 217, 190);
 }
 
-.friend a {
+.sub a {
   text-decoration: none;
   color: black;
-  display: block;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-template-rows: 100%;
+  gap: 5px;
   width: 100%;
-  height: 100%;
   line-height: 30px;
 }
 

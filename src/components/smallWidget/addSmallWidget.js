@@ -2,7 +2,7 @@ import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import FirestoreContext from "../../context/FirebaseContext";
+import FirestoreContext from "../../context/FirestoreContext";
 import UserContext from "../../context/UserContext";
 import Button from "../button/button";
 import styles from "./addSmallWidget.module.css";

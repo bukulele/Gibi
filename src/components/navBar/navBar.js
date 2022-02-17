@@ -8,7 +8,7 @@ import HomePageContext from "../../context/HomePageContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
-import FirestoreContext from "../../context/FirebaseContext";
+import FirestoreContext from "../../context/FirestoreContext";
 import UserDataContext from "../../context/UserDataContext";
 import UserImage from "../userImage/userImage";
 
@@ -45,6 +45,9 @@ function NavBar({ friendsList, showingName }) {
       <Link className={styles.homeLink} to="/">
         Gibi
       </Link>
+      {userData.photoURL && !isItHomePage ? (
+        <UserImage userImage={userData.photoURL} />
+      ) : null}
       {user && !isItHomePage && !friendInList ? (
         <Button
           content={<FontAwesomeIcon icon={faUserPlus} pointerEvents="none" />}
@@ -56,7 +59,7 @@ function NavBar({ friendsList, showingName }) {
       <div className={styles.displayName}>{showingName}</div>
       {user ? (
         <Button
-          content={<UserImage />}
+          content={<UserImage userImage={user.photoURL} />}
           clickHandler={switchUserMenu}
           type="button"
           buttonStyle={styles.userMenuButton}

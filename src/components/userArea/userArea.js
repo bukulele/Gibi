@@ -6,7 +6,7 @@ import CurrentActions from "../currentActions/currentActions";
 import CalendarActions from "../calendarActions/calendarActions";
 import CurrentActionsInfographics from "../currentActionsInfographics/currentActionsInfographics";
 import styles from "./userArea.module.css";
-import FirestoreContext from "../../context/FirebaseContext";
+import FirestoreContext from "../../context/FirestoreContext";
 import UserDataContext from "../../context/UserDataContext";
 import NavBar from "../navBar/navBar";
 import Subscriptions from "../subscriptions/subscriptions";
@@ -69,6 +69,10 @@ function UserArea() {
     if (user && !user.emailVerified) setShowVerificationModal(true);
   }, [user]);
 
+  useEffect(() => {
+    setShowSubscriptionsList(false);
+  }, [userData]);
+
   return (
     <div className={styles.userArea}>
       {userData ? (
@@ -78,6 +82,7 @@ function UserArea() {
               friendsList={friendsList}
               showingName={params.displayName}
             />
+            <div className={styles.userLogoBig}></div>
             {user ? (
               <>
                 <Button

@@ -1,8 +1,16 @@
 # ACTION TRACKER APP
 
+#### 0.6.2
+
+- user email change added
+- user password change added
+- user language change added
+- user logos in Subscriptions list added
+
 #### version 0.6.1
 
 - user profile image uploader by [react-dropzone](https://react-dropzone.js.org/) added
+- avatar editor by [react-avatar-editor](https://github.com/mosch/react-avatar-editor#readme)
 - incorrectness in radial chart of single current action fixed
 
 #### version 0.6.0

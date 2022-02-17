@@ -15,7 +15,7 @@ import {
 import Button from "../button/button";
 import userDataTemplate from "../../templates/userDataTemplate";
 import styles from "./signUpArea.module.css";
-import FirestoreContext from "../../context/FirebaseContext";
+import FirestoreContext from "../../context/FirestoreContext";
 import { useTranslation } from "react-i18next";
 
 function SignUpArea() {
@@ -27,10 +27,11 @@ function SignUpArea() {
   const [readyToSignUp, setReadyToSignUp] = useState(false);
 
   const firestore = useContext(FirestoreContext);
+  const auth = getAuth();
 
   const userData = { ...userDataTemplate };
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -41,7 +42,6 @@ function SignUpArea() {
   const usernameRegExp = /^[a-z0-9]+$/;
 
   const signUp = () => {
-    const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         updateProfile(auth.currentUser, {

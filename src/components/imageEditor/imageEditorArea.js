@@ -1,92 +1,52 @@
-import { useState } from "react";
-import AvatarEditor from "react-avatar-editor";
-import Button from "../button/button";
+import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import UserContext from "../../context/UserContext";
+import UserDataContext from "../../context/UserDataContext";
+import ModalWindow from "../modalWindow/modalWindow";
 import UserImage from "../userImage/userImage";
+import ImageEditor from "./imageEditor";
 import styles from "./imageEditorArea.module.css";
-import MyDropZone from "./myDropZone";
 
-function ImageEditorArea() {
-  const [image, setImage] = useState(null);
-  const [scale, setScale] = useState(1);
-  const [rotate, setRotate] = useState(0);
+function ImageEditorArea({ userData }) {
+  const [userImageCoverIsShown, setUserImageCoverIsShown] = useState(false);
+  const [imageEditorIsShown, setImageEditorIsShown] = useState(false);
+  const [userPhotoURL, setUserPhotoURL] = useState(null);
 
-  const handleScaleChange = (event) => {
-    setScale(event.target.value);
+  const { t } = useTranslation();
+
+  const showImageEditor = () => {
+    setImageEditorIsShown(!imageEditorIsShown);
   };
 
-  const handleRotateChange = (event) => {
-    if (event.target.id === "turnRight") {
-      setRotate((rotatePrev) => (rotatePrev === 270 ? 0 : rotatePrev + 90));
-    } else if (event.target.id === "turnLeft") {
-      setRotate((rotatePrev) => (rotatePrev === 90 ? 0 : rotatePrev - 90));
+  useEffect(() => {
+    if (userData) {
+      setUserPhotoURL(userData.photoURL);
     }
-  };
-
-  const closeEditor = () => {
-    setImage(null);
-    setScale(1);
-    setRotate(0);
-  };
+  }, [userData]);
 
   return (
     <div className={styles.imageEditorArea}>
-      <div className={styles.userImage}>
-        <UserImage />
-      </div>
-      <MyDropZone setImage={setImage} />
       <div
-        className={`${styles.editPhoto} ${image ? styles.editPhotoShow : ""}`}
+        className={styles.userImage}
+        onMouseEnter={() => setUserImageCoverIsShown(true)}
       >
-        <AvatarEditor
-          image={image}
-          width={300}
-          height={300}
-          border={0}
-          borderRadius={150}
-          color={[255, 255, 255, 0.6]} // RGBA
-          scale={scale}
-          rotate={rotate}
-        />
-        <input
-          type="range"
-          onChange={handleScaleChange}
-          className={styles.scaleInput}
-          min="1"
-          max="10"
-          value={scale}
-          step="0.1"
-          name="scaleInput"
-        />
-        <div className={styles.editButtons}>
-          <Button
-            id="turnLeft"
-            content="<"
-            clickHandler={handleRotateChange}
-            buttonStyle={styles.rotateButton}
-            type="button"
-          />
-          <Button
-            id="turnRight"
-            content=">"
-            clickHandler={handleRotateChange}
-            buttonStyle={styles.rotateButton}
-            type="button"
-          />
+        <div
+          onClick={showImageEditor}
+          onMouseLeave={() => setUserImageCoverIsShown(false)}
+          className={`${styles.userImageCover} ${
+            userImageCoverIsShown ? styles.userImageCoverShow : ""
+          }`}
+        >
+          <p>{t("settings.imageEditorArea.image")}</p>
         </div>
-        <div className={styles.finishButtons}>
-          <Button
-            content="Close"
-            clickHandler={closeEditor}
-            buttonStyle={styles.closeButton}
-            type="button"
-          />
-          <Button
-            content="Save"
-            buttonStyle={styles.saveButton}
-            type="button"
-          />
-        </div>
+        <UserImage userImage={userPhotoURL} />
       </div>
+      <ModalWindow
+        visibility={imageEditorIsShown}
+        changeModalVisibility={showImageEditor}
+      >
+        <ImageEditor changeModalVisibility={showImageEditor} />
+      </ModalWindow>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import styles from "./addNewAction.module.css";
 import { useContext, useEffect, useState } from "react";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
-import FirestoreContext from "../../context/FirebaseContext";
+import FirestoreContext from "../../context/FirestoreContext";
 import UserContext from "../../context/UserContext";
 import Button from "../button/button";
 import { useTranslation } from "react-i18next";

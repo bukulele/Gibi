@@ -15,15 +15,12 @@ import {
 } from "recharts";
 import CustomTooltip from "../customTooltip/customTooltip";
 import WarningModal from "../modalWindow/warningModal";
-import { useTranslation } from "react-i18next";
 
 function SingleAction({ action, total, progress, index, units }) {
   const isItHomePage = useContext(HomePageContext);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [warningModalVisibility, setWarningModalVisibility] = useState(false);
   const [hasUnsavedData, setHasUnsavedData] = useState(false);
-
-  const { t } = useTranslation();
 
   const closeModal = () => {
     if (modalVisibility && hasUnsavedData) {

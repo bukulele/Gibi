@@ -93,6 +93,42 @@
       }
     }
   },
+  "settings": {
+    "settingsWindow": {
+      "header": "НАСТРОЙКИ",
+      "userName": "ник",
+      "userEmail": "почта",
+      "userSubscriptions": "изменить список подписок",
+      "userLanguage": "сменить язык",
+      "userCursor": "изменить курсор",
+      "userPassword": "поменять пароль"
+    },
+    "imageEditorArea": {
+      "image": "Изменить изображение",
+      "dragNDrop": "Перетащи сюда изображение, или кликни, чтобы выбрать вручную\n(Принимаются только *.jpeg и *.png файлы изображений)",
+      "scale": "Масштабировать",
+      "closeButton": "Закрыть",
+      "saveButton": "Сохранить"
+    },
+    "newEmail": {
+      "currentPassword": "введи свой текущий пароль",
+      "newEmail": "введи новый email",
+      "confirmEmail": "подтверди email",
+      "wrongEmail": "Неправильный email!",
+      "successChange": "email обновлён",
+      "cancelButton": "Отменить",
+      "confirmButton": "Подтвердить"
+    },
+    "newPassword": {
+      "currentPassword": "введи свой текущий пароль",
+      "newPassword": "введи новый пароль",
+      "confirmPassword": "подтверди пароль",
+      "notSamePassword": "Неправильный пароль!",
+      "successChange": "Пароль обновлён",
+      "cancelButton": "Отменить",
+      "confirmButton": "Подтвердить"
+    }
+  },
   "warningModal": {
     "text": "Осторожнее!\nУ тебя есть несохранённые данные",
     "comebackButton": "Вернуться",

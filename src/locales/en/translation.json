@@ -93,6 +93,42 @@
       }
     }
   },
+  "settings": {
+    "settingsWindow": {
+      "header": "SETTINGS",
+      "userName": "user name",
+      "userEmail": "email",
+      "userSubscriptions": "change subscriptions list",
+      "userLanguage": "change language",
+      "userCursor": "change cursor",
+      "userPassword": "change password"
+    },
+    "imageEditorArea": {
+      "image": "Change image",
+      "dragNDrop": "Drag 'n' drop your picture here, or click to select it manually\n(Only *.jpeg and *.png images will be accepted)",
+      "scale": "Scale",
+      "closeButton": "Close",
+      "saveButton": "Save"
+    },
+    "newEmail": {
+      "currentPassword": "enter your current password",
+      "newEmail": "enter new email",
+      "confirmEmail": "confrirm email",
+      "wrongEmail": "Wrong email!",
+      "successChange": "The email updated",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm"
+    },
+    "newPassword": {
+      "currentPassword": "enter your current password",
+      "newPassword": "enter new password",
+      "confirmPassword": "confrirm password",
+      "wrongPassword": "Wrong password!",
+      "successChange": "The password updated",
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm"
+    }
+  },
   "warningModal": {
     "text": "Be careful!\nYou have unsaved data.",
     "comebackButton": "Comeback",

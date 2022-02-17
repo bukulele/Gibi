@@ -3,8 +3,8 @@
   width: 100%;
   height: 50px;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
-  grid-template-areas: "home displayName addFriend . search userMenu";
+  grid-template-columns: 1fr 30px 2fr 30px 1fr 2fr 1fr;
+  grid-template-areas: "home userLogo displayName addFriend . search userMenu";
   justify-items: center;
   align-items: center;
   color: white;
@@ -21,10 +21,19 @@
   background-color: rgb(116, 111, 142);
 }
 
+.userLogo {
+  grid-area: userLogo;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgb(234, 222, 206);
+}
+
 .displayName {
   grid-area: displayName;
   font-family: "Sneakerhead", sans-serif;
   color: white;
+  height: 100%;
   line-height: 50px;
   text-align: center;
 }

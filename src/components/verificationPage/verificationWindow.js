@@ -5,6 +5,8 @@ import styles from "./verificationWindow.module.css";
 
 function VerificationWindow() {
   const auth = getAuth();
+  auth.languageCode = "en";
+
   const navigate = useNavigate();
 
   const verifyEmail = () => {
