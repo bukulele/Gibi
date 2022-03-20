@@ -11,6 +11,7 @@ import Button from "../button/button";
 import ModalWindow from "../modalWindow/modalWindow";
 import ChangeEmailForm from "../changeEmailForm/changeEmailForm";
 import ChangePasswordForm from "../changePasswordForm/changePasswordForm";
+import ChangeSubscriptions from "../subscriptions/changeSubscriptions";
 
 function UserSettings() {
   const user = useContext(UserContext);
@@ -18,12 +19,12 @@ function UserSettings() {
   const [userData, setUserData] = useState(null);
   const [passwordModalVisibility, setPasswordModalVisibility] = useState(false);
   const [emailModalVisibility, setEmailModalVisibility] = useState(false);
+  const [showSubscriptionsListModal, setShowSubscriptionsListModal] =
+    useState(false);
 
   const pensilRef = useRef();
 
   const { t, i18n } = useTranslation();
-
-  const changeSubscriptions = () => {};
 
   // const changeCursor = () => {};
 
@@ -53,6 +54,10 @@ function UserSettings() {
     const userDocsRef = doc(firestore, "users", user.displayName);
     userData.language = lang;
     setDoc(userDocsRef, userData).catch((error) => alert(error.message));
+  };
+
+  const changeSubscriptionsVisibility = () => {
+    setShowSubscriptionsListModal(!showSubscriptionsListModal);
   };
 
   useEffect(() => {
@@ -98,7 +103,7 @@ function UserSettings() {
             <div className={styles.userSubscriptions}>
               <Button
                 content={t("settings.settingsWindow.userSubscriptions")}
-                clickHandler={changeSubscriptions}
+                clickHandler={changeSubscriptionsVisibility}
                 buttonStyle={styles.settingsButton}
                 type="button"
               />
@@ -152,22 +157,30 @@ function UserSettings() {
               />
             </div>
             <div className={styles.buttons}></div>
+            <ModalWindow
+              visibility={emailModalVisibility}
+              changeModalVisibility={changeEmailModalVisibility}
+            >
+              <ChangeEmailForm
+                changeModalVisibility={changeEmailModalVisibility}
+              />
+            </ModalWindow>
+            <ModalWindow
+              visibility={passwordModalVisibility}
+              changeModalVisibility={changePasswordModalVisibility}
+            >
+              <ChangePasswordForm
+                changeModalVisibility={changePasswordModalVisibility}
+              />
+            </ModalWindow>
+            <ModalWindow
+              visibility={showSubscriptionsListModal}
+              changeModalVisibility={changeSubscriptionsVisibility}
+            >
+              <ChangeSubscriptions friendsList={userData.friends} />
+            </ModalWindow>
           </>
         ) : null}
-        <ModalWindow
-          visibility={emailModalVisibility}
-          changeModalVisibility={changeEmailModalVisibility}
-        >
-          <ChangeEmailForm changeModalVisibility={changeEmailModalVisibility} />
-        </ModalWindow>
-        <ModalWindow
-          visibility={passwordModalVisibility}
-          changeModalVisibility={changePasswordModalVisibility}
-        >
-          <ChangePasswordForm
-            changeModalVisibility={changePasswordModalVisibility}
-          />
-        </ModalWindow>
       </div>
     </div>
   );

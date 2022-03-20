@@ -13,6 +13,7 @@ function Subscriptions({
 }) {
   const [friendsObject, setFriendsObject] = useState({});
   const [subscriptionsList, setSubscriptionsList] = useState([]);
+
   const storage = useContext(StorageContext);
   const subscriptionsRef = useRef();
 

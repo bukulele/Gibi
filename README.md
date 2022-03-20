@@ -1,6 +1,8 @@
 # ACTION TRACKER APP
 
-#### 0.6.2
+#### version 0.6.3
+
+#### version 0.6.2
 
 - user email change added
 - user password change added

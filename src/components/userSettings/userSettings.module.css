@@ -18,7 +18,7 @@
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr repeat(2, 2fr) repeat(4, 1fr) 2fr;
+  grid-template-rows: 1fr repeat(2, 2fr) repeat(4, 1fr);
   grid-gap: 10px;
   grid-template-areas:
     ". header header ."
@@ -27,8 +27,7 @@
     ". . changesubscriptions changesubscriptions"
     ". . changelanguage changelanguage"
     ". . changepassword changepassword"
-    ". . changecursor changecursor"
-    ". buttons buttons .";
+    ". . changecursor changecursor";
   place-items: center start;
 }
 
