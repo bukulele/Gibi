@@ -115,7 +115,17 @@
   background-color: red;
 }
 
-.signInButton {
+.buttonsBlock {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.signInButton,
+.restorePasswordButton,
+.cancelButton {
   border: none;
   border-radius: 5px;
   height: 30px;
@@ -125,8 +135,13 @@
   background-color: rgb(137, 142, 111);
 }
 
-.signInButton:hover {
+.signInButton:hover,
+.restorePasswordButton:hover {
   background-color: rgb(116, 111, 142);
+}
+
+.cancelButton:hover {
+  background-color: red;
 }
 
 .langButtons {

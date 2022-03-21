@@ -1,6 +1,14 @@
 # ACTION TRACKER APP
 
+#### version 0.6.4
+
+- hints for signup area added
+- restoring password function added
+- updated logo
+
 #### version 0.6.3
+
+- settings area done
 
 #### version 0.6.2
 

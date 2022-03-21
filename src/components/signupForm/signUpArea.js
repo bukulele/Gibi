@@ -22,7 +22,9 @@ function SignUpArea() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [emailOk, setEmailOk] = useState(false);
   const [userNameOk, setUserNameOk] = useState(false);
+  const [passwordOk, setPasswordOk] = useState(false);
   const [timer, setTimer] = useState(null);
   const [readyToSignUp, setReadyToSignUp] = useState(false);
 
@@ -64,6 +66,14 @@ function SignUpArea() {
       .catch((error) => alert(error.message));
   };
 
+  const checkEmail = () => {
+    if (email.match(emailRegExp)) {
+      setEmailOk(true);
+    } else {
+      setEmailOk(false);
+    }
+  };
+
   const checkUserName = () => {
     if (userName.match(usernameRegExp) && userName.length >= 5) {
       getDoc(doc(firestore, "users", userName)).then((docSnap) => {
@@ -78,6 +88,14 @@ function SignUpArea() {
     }
   };
 
+  const checkPassword = () => {
+    if (password.match(passwordRegExp)) {
+      setPasswordOk(true);
+    } else {
+      setPasswordOk(false);
+    }
+  };
+
   useEffect(() => {
     if (timer) clearTimeout(timer);
     if (userName.length < 5) {
@@ -89,44 +107,56 @@ function SignUpArea() {
   }, [userName]);
 
   useEffect(() => {
-    if (
-      userNameOk === true &&
-      email.match(emailRegExp) &&
-      password.match(passwordRegExp)
-    ) {
+    checkEmail();
+  }, [email]);
+
+  useEffect(() => {
+    checkPassword();
+  }, [password]);
+
+  useEffect(() => {
+    if (userNameOk && emailOk && passwordOk) {
       setReadyToSignUp(true);
     } else {
       setReadyToSignUp(false);
     }
-  }, [userNameOk, email, password]);
+  }, [userNameOk, emailOk, passwordOk]);
 
   return (
     <div className={styles.welcomePage}>
       <div className={styles.signUpForm}>
         <div className={styles.inputBlock}>
           <label htmlFor="email">{t("signUpArea.email")}:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            className={styles.input}
-            onChange={(event) => setEmail(event.target.value)}
-            autoComplete="email"
-            pattern={emailRegExp}
-            title={t("signUpArea.emailMessage")}
-            required
-          ></input>
+          <div className={styles.inputContainer}>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              autoComplete="email"
+              pattern={emailRegExp}
+              title={t("signUpArea.emailHint")}
+              required
+            ></input>
+            <FontAwesomeIcon
+              icon={emailOk ? faCheck : faTimes}
+              color={emailOk ? "rgb(137, 142, 111)" : "rgb(116, 111, 142)"}
+            />
+          </div>
+          {emailOk ? null : <p>{t("signUpArea.emailMessageWrong")}</p>}
         </div>
         <div className={styles.inputBlock}>
           <label htmlFor="userName">{t("signUpArea.userName")}:</label>
-          <div className={styles.userNameInput}>
+          <div className={styles.inputContainer}>
             <input
+              id="userName"
               type="text"
               name="userName"
               value={userName}
               onChange={(event) => setUserName(event.target.value)}
               autoComplete="nickname"
-              title={t("signUpArea.userNameMessage")}
+              title={t("signUpArea.userNameHint")}
               pattern={usernameRegExp}
               required
             ></input>
@@ -147,20 +177,28 @@ function SignUpArea() {
               }
             />
           </div>
+          {userNameOk ? null : <p>{t("signUpArea.userNameMessageWrong")}</p>}
         </div>
         <div className={styles.inputBlock}>
           <label htmlFor="password">{t("signUpArea.password")}:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            className={styles.input}
-            onChange={(event) => setPassword(event.target.value)}
-            autoComplete="new-password"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title={t("signUpArea.passwordMessage")}
-            required
-          ></input>
+          <div className={styles.inputContainer}>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete="new-password"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title={t("signUpArea.passwordHint")}
+              required
+            ></input>
+            <FontAwesomeIcon
+              icon={passwordOk ? faCheck : faTimes}
+              color={passwordOk ? "rgb(137, 142, 111)" : "rgb(116, 111, 142)"}
+            />
+          </div>
+          {passwordOk ? null : <p>{t("signUpArea.passwordMessageWrong")}</p>}
         </div>
         <div className={styles.buttonsBlock}>
           <Button

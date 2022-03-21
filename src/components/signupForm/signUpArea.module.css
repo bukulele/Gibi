@@ -28,22 +28,18 @@
   width: 300px;
 }
 
-.input {
-  margin: 10px auto;
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid rgb(137, 142, 111);
-  background-color: transparent;
-  outline: none;
+.inputBlock p {
+  font-size: 10px;
+  color: red;
 }
 
-.userNameInput {
+.inputContainer {
   display: flex;
   border-bottom: 2px solid rgb(137, 142, 111);
   width: 100%;
 }
 
-.userNameInput input {
+.inputContainer input {
   border: none;
   background-color: transparent;
   outline: none;

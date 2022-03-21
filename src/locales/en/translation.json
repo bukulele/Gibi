@@ -6,15 +6,21 @@
     "password": "password",
     "signIn": "Sign In",
     "signOutButton": "Sign Out",
-    "createAccount": "Create account"
+    "createAccount": "Create account",
+    "restorePasswordWindow": "We are going to send you an email with the link for restoring your password",
+    "restorePassword": "Restore password",
+    "cancelButton": "Cancel"
   },
   "signUpArea": {
     "email": "email",
-    "emailMessage": "please enter a valid email, as we will send you a confirmation letter",
+    "emailHint": "please enter a valid email, as we will send you a confirmation letter",
+    "emailMessageWrong": "it doesn't seem like a valid email",
     "userName": "user name",
-    "userNameMessage": "user name must be at least 5 symbols long and contain only letters and numbers",
+    "userNameHint": "user name must be at least 5 symbols long and contain only letters and numbers",
+    "userNameMessageWrong": "user name must be at least 5 symbols long and contain only letters and numbers",
     "password": "password",
-    "passwordMessage": "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
+    "passwordHint": "must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
+    "passwordMessageWrong": "password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
     "signUp": "Sign Up"
   },
   "userArea": {

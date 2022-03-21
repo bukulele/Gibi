@@ -1,16 +1,23 @@
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import Button from "../button/button";
 import styles from "./welcomePage.module.css";
 import UserContext from "../../context/UserContext";
 import logo from "../../misc/gibi_face.png";
 import { useTranslation } from "react-i18next";
+import ModalWindow from "../modalWindow/modalWindow";
 
 function WelcomePage() {
   const user = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showRestoreModal, setShowRestoreModal] = useState(false);
 
   const { t, i18n } = useTranslation();
 
@@ -39,6 +46,21 @@ function WelcomePage() {
     signOut(auth).catch((error) => {
       alert(error);
     });
+  };
+
+  const showRestoreModalWindow = () => {
+    setShowRestoreModal(!showRestoreModal);
+  };
+
+  const restorePassword = () => {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setShowRestoreModal(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -119,9 +141,49 @@ function WelcomePage() {
                 buttonStyle={styles.signInButton}
                 content={t("welcomePage.signIn")}
               />
+              <Button
+                clickHandler={showRestoreModalWindow}
+                type="button"
+                buttonStyle={styles.restorePasswordButton}
+                content={t("welcomePage.restorePassword")}
+              />
             </div>
             <Link to="/signup">{t("welcomePage.createAccount")}</Link>
           </div>
+          <ModalWindow
+            visibility={showRestoreModal}
+            changeModalVisibility={setShowRestoreModal}
+          >
+            {
+              <>
+                <div className={styles.inputBlock}>
+                  <label htmlFor="email">{t("welcomePage.email")}:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={email}
+                    className={styles.input}
+                    onChange={(event) => setEmail(event.target.value)}
+                  ></input>
+                </div>
+                <p>{t("welcomePage.restorePasswordWindow")}</p>
+                <div className={styles.buttonsBlock}>
+                  <Button
+                    clickHandler={restorePassword}
+                    type="button"
+                    buttonStyle={styles.restorePasswordButton}
+                    content={t("welcomePage.restorePassword")}
+                  />
+                  <Button
+                    clickHandler={showRestoreModalWindow}
+                    type="button"
+                    buttonStyle={styles.cancelButton}
+                    content={t("welcomePage.cancelButton")}
+                  />
+                </div>
+              </>
+            }
+          </ModalWindow>
         </>
       )}
     </div>
