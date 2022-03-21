@@ -98,17 +98,19 @@
       "header": "SETTINGS",
       "userName": "user name",
       "userEmail": "email",
-      "userSubscriptions": "change subscriptions list",
+      "userSubscriptions": "change subscriptions",
       "userLanguage": "change language",
       "userCursor": "change cursor",
-      "userPassword": "change password"
+      "userPassword": "change password",
+      "goHomeButton": "To my page"
     },
     "imageEditorArea": {
       "image": "Change image",
       "dragNDrop": "Drag 'n' drop your picture here, or click to select it manually\n(Only *.jpeg and *.png images will be accepted)",
       "scale": "Scale",
       "closeButton": "Close",
-      "saveButton": "Save"
+      "saveButton": "Save",
+      "deleteButton": "Delete image"
     },
     "newEmail": {
       "currentPassword": "enter your current password",
@@ -127,6 +129,10 @@
       "successChange": "The password updated",
       "cancelButton": "Cancel",
       "confirmButton": "Confirm"
+    },
+    "changeSubscriptions": {
+      "confirmChangesButton": "Save",
+      "cancelChangesButton": "Cancel"
     }
   },
   "warningModal": {

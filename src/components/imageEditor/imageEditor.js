@@ -1,6 +1,11 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import AvatarEditor from "react-avatar-editor";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  deleteObject,
+} from "firebase/storage";
 import Button from "../button/button";
 import MyDropZone from "./myDropZone";
 import styles from "./imageEditor.module.css";
@@ -56,7 +61,8 @@ function ImageEditor({ changeModalVisibility }) {
         )
         .then(() => {
           closeEditor();
-        });
+        })
+        .catch((error) => console.log(error));
     });
   };
 
@@ -65,6 +71,22 @@ function ImageEditor({ changeModalVisibility }) {
     setScale(1);
     setRotate(0);
     changeModalVisibility();
+  };
+
+  const deleteImage = () => {
+    const storageRef = ref(storage, path);
+    deleteObject(storageRef)
+      .then(() => {
+        const auth = getAuth();
+        const collectionRef = doc(firestore, "users", user.displayName);
+        updateProfile(auth.currentUser, {
+          photoURL: null,
+        });
+        setDoc(collectionRef, { photoURL: "" }, { merge: true });
+      })
+      .then(() => {
+        closeEditor();
+      });
   };
 
   useEffect(() => {
@@ -76,6 +98,12 @@ function ImageEditor({ changeModalVisibility }) {
   return (
     <>
       <MyDropZone setImage={setImage} />
+      <Button
+        content={t("settings.imageEditorArea.deleteButton")}
+        clickHandler={deleteImage}
+        buttonStyle={styles.deleteImageButton}
+        type="button"
+      />
       <div
         className={`${styles.editPhoto} ${image ? styles.editPhotoShow : ""}`}
       >

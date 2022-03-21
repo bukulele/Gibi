@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
 import styles from "./userSettings.module.css";
@@ -25,6 +26,8 @@ function UserSettings() {
   const pensilRef = useRef();
 
   const { t, i18n } = useTranslation();
+
+  const navigate = useNavigate();
 
   // const changeCursor = () => {};
 
@@ -58,6 +61,10 @@ function UserSettings() {
 
   const changeSubscriptionsVisibility = () => {
     setShowSubscriptionsListModal(!showSubscriptionsListModal);
+  };
+
+  const goHome = () => {
+    navigate(`/${user.displayName}`);
   };
 
   useEffect(() => {
@@ -156,7 +163,14 @@ function UserSettings() {
                 type="button"
               />
             </div>
-            <div className={styles.buttons}></div>
+            <div className={styles.buttons}>
+              <Button
+                content={t("settings.settingsWindow.goHomeButton")}
+                clickHandler={goHome}
+                buttonStyle={styles.goHomeButton}
+                type="button"
+              />
+            </div>
             <ModalWindow
               visibility={emailModalVisibility}
               changeModalVisibility={changeEmailModalVisibility}
@@ -177,7 +191,10 @@ function UserSettings() {
               visibility={showSubscriptionsListModal}
               changeModalVisibility={changeSubscriptionsVisibility}
             >
-              <ChangeSubscriptions friendsList={userData.friends} />
+              <ChangeSubscriptions
+                friendsList={userData.friends}
+                changeModalVisibility={changeSubscriptionsVisibility}
+              />
             </ModalWindow>
           </>
         ) : null}

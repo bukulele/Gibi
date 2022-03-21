@@ -89,3 +89,20 @@
 .closeButton:hover {
   background-color: red;
 }
+
+.deleteImageButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  padding: 5px;
+  border: none;
+  border-radius: 25px;
+  background-color: rgb(116, 111, 142);
+  font-weight: bold;
+  color: white;
+}
+
+.deleteImageButton:hover {
+  background-color: red;
+}

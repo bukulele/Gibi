@@ -6,7 +6,7 @@ const ChangeSubscriptionsReducer = (state, action) => {
       return { ...newState };
     case "REMOVE":
       delete newState[action.sub];
-      return [...newState];
+      return { ...newState };
     case "CLEAR":
       return {};
     default:

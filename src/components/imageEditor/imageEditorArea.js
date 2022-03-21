@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import UserContext from "../../context/UserContext";
-import UserDataContext from "../../context/UserDataContext";
 import ModalWindow from "../modalWindow/modalWindow";
 import UserImage from "../userImage/userImage";
 import ImageEditor from "./imageEditor";

@@ -70,8 +70,7 @@ function TodayAction({ todayEvents, chosenDate, date, setHasUnsavedData }) {
         [pathToDelete]: deleteField(),
       }).then(() => setHasUnsavedData(false));
     } else {
-      setDoc(collectionRef, data, { merge: true }).then((result) => {
-        console.log(result);
+      setDoc(collectionRef, data, { merge: true }).then(() => {
         setEventOfTheDay("");
         setHasUnsavedData(false);
       });

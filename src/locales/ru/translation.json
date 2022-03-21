@@ -98,17 +98,19 @@
       "header": "НАСТРОЙКИ",
       "userName": "ник",
       "userEmail": "почта",
-      "userSubscriptions": "изменить список подписок",
+      "userSubscriptions": "изменить подписки",
       "userLanguage": "сменить язык",
       "userCursor": "изменить курсор",
-      "userPassword": "поменять пароль"
+      "userPassword": "поменять пароль",
+      "goHomeButton": "На мою страницу"
     },
     "imageEditorArea": {
       "image": "Изменить изображение",
       "dragNDrop": "Перетащи сюда изображение, или кликни, чтобы выбрать вручную\n(Принимаются только *.jpeg и *.png файлы изображений)",
       "scale": "Масштабировать",
       "closeButton": "Закрыть",
-      "saveButton": "Сохранить"
+      "saveButton": "Сохранить",
+      "deleteButton": "Удалить изображение"
     },
     "newEmail": {
       "currentPassword": "введи свой текущий пароль",
@@ -127,6 +129,10 @@
       "successChange": "Пароль обновлён",
       "cancelButton": "Отменить",
       "confirmButton": "Подтвердить"
+    },
+    "changeSubscriptions": {
+      "confirmChangesButton": "Сохранить",
+      "cancelChangesButton": "Отменить"
     }
   },
   "warningModal": {

@@ -18,7 +18,7 @@
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr repeat(2, 2fr) repeat(4, 1fr);
+  grid-template-rows: 1fr repeat(2, 2fr) repeat(5, 1fr);
   grid-gap: 10px;
   grid-template-areas:
     ". header header ."
@@ -27,7 +27,8 @@
     ". . changesubscriptions changesubscriptions"
     ". . changelanguage changelanguage"
     ". . changepassword changepassword"
-    ". . changecursor changecursor";
+    ". . changecursor changecursor"
+    ". buttons buttons .";
   place-items: center start;
 }
 
@@ -77,6 +78,10 @@
 
 .buttons {
   grid-area: buttons;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .langButtons {
@@ -139,4 +144,21 @@
 
 .pencilButton:hover {
   color: black;
+}
+
+.goHomeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  padding: 5px;
+  border: none;
+  border-radius: 25px;
+  background-color: rgb(137, 142, 111);
+  font-weight: bold;
+  color: white;
+}
+
+.goHomeButton:hover {
+  background-color: rgb(116, 111, 142);
 }
